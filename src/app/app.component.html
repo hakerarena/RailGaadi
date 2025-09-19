@@ -1,7 +1,7 @@
 <header class="app-header">
   <h1>IRCTC Clone</h1>
 </header>
-<app-train-search-form (search)="onSearch($event)"></app-train-search-form>
+<app-train-search-form (search)="searchTrains($event)"></app-train-search-form>
 <app-train-search-results
-  [searchResults]="searchResults$ | async"
+  [searchResults]="searchResults"
 ></app-train-search-results>

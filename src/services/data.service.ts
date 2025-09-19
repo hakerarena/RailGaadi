@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Train, StationInfo, Passenger, Booking } from '../interfaces/models';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {
+  SearchCriteria,
+  Station,
+  Train,
+  TrainDetails,
+} from '../interfaces/models';
+import * as trainDetails from '../../assets/data/trains.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private trains$ = new BehaviorSubject<Train[]>([]);
-  private stations$ = new BehaviorSubject<StationInfo[]>([]);
-  private passengers$ = new BehaviorSubject<Passenger[]>([]);
-  private bookings$ = new BehaviorSubject<Booking[]>([]);
+  private stations$ = new BehaviorSubject<Station[]>([]);
+  private _trainDetails: TrainDetails[] = [];
 
   constructor(private http: HttpClient) {
     this.loadInitialData();
@@ -18,110 +23,77 @@ export class DataService {
 
   private loadInitialData(): void {
     // Load trains data
-    this.http.get<Train[]>('/assets/data/trains.json').subscribe({
-      next: (trains) => this.trains$.next(trains),
-      error: (error) => console.error('Error loading trains data:', error),
-    });
-
-    // Load stations data
-    this.http.get<StationInfo[]>('/assets/data/stations.json').subscribe({
-      next: (stations) => this.stations$.next(stations),
-      error: (error) => console.error('Error loading stations data:', error),
-    });
-
-    // Load passengers data
-    this.http.get<Passenger[]>('/assets/data/passengers.json').subscribe({
-      next: (passengers) => this.passengers$.next(passengers),
-      error: (error) => console.error('Error loading passengers data:', error),
-    });
-
-    // Load bookings data
-    this.http.get<Booking[]>('/assets/data/bookings.json').subscribe({
-      next: (bookings) => this.bookings$.next(bookings),
-      error: (error) => console.error('Error loading bookings data:', error),
+    trainDetails.forEach((rawTrain) => {
+      this._trainDetails.push({
+        trainNumber: rawTrain.trainNumber,
+        trainName: rawTrain.trainName,
+        source: rawTrain.source,
+        destination: rawTrain.destination,
+        departureTime: rawTrain.departureTime,
+        arrivalTime: rawTrain.arrivalTime,
+        duration: rawTrain.duration,
+        runningDays: rawTrain.runningDays,
+        availableClasses: rawTrain.availableClasses.map((c) => ({
+          code: c.classCode,
+          name: c.className,
+          fare: c.fare,
+          availableSeats: c.availableSeats,
+        })),
+        stations: rawTrain.stations.map((s) => ({
+          code: s.code,
+          name: s.name,
+          arrivalTime: s.arrivalTime,
+          departureTime: s.departureTime,
+          distance: s.distance,
+        })),
+      });
     });
   }
+
+  // // Load stations data
+  // this.http
+  //   .get<Station[]>('assets/data/stations.json')
+  //   .pipe(catchError(() => of([]))) // On error, return an empty array
+  //   .subscribe((stations) => this.stations$.next(stations));
 
   // Train related methods
-  getTrains(): Observable<Train[]> {
-    return this.trains$.asObservable();
+  getTrains() {
+    return this._trainDetails;
   }
 
-  searchTrains(from: string, to: string, date: string): Observable<Train[]> {
-    return new Observable((observer) => {
-      this.trains$.subscribe((trains) => {
-        const filteredTrains = trains.filter(
-          (train) =>
-            train.source.toLowerCase().includes(from.toLowerCase()) &&
-            train.destination.toLowerCase().includes(to.toLowerCase())
-        );
-        observer.next(filteredTrains);
-      });
-    });
+  searchTrains(searchCriteria: SearchCriteria) {
+    console.log('Searching trains with criteria:', searchCriteria);
+
+    if (!searchCriteria.fromStation || !searchCriteria.toStation) {
+      return [];
+    }
+    return this._trainDetails.filter(
+      (train) =>
+        train.source === searchCriteria.fromStation?.code &&
+        train.destination === searchCriteria.toStation?.code
+    );
   }
 
-  getTrainByNumber(trainNumber: string): Observable<Train | undefined> {
-    return new Observable((observer) => {
-      this.trains$.subscribe((trains) => {
-        const train = trains.find((t) => t.trainNumber === trainNumber);
-        observer.next(train);
-      });
-    });
-  }
+  // getTrainByNumber(trainNumber: string): Observable<Train | undefined> {
+  //   return this.getTrains().pipe(
+  //     map((trains) => trains.find((t) => t.trainNo === trainNumber))
+  //   );
+  // }
 
   // Station related methods
-  getStations(): Observable<StationInfo[]> {
+  getStations(): Observable<Station[]> {
     return this.stations$.asObservable();
   }
 
-  searchStations(query: string): Observable<StationInfo[]> {
-    return new Observable((observer) => {
-      this.stations$.subscribe((stations) => {
-        const filteredStations = stations.filter(
+  searchStations(query: string): Observable<Station[]> {
+    return this.getStations().pipe(
+      map((stations) =>
+        stations.filter(
           (station) =>
             station.name.toLowerCase().includes(query.toLowerCase()) ||
             station.code.toLowerCase().includes(query.toLowerCase())
-        );
-        observer.next(filteredStations);
-      });
-    });
-  }
-
-  // Booking related methods
-  getBookings(): Observable<Booking[]> {
-    return this.bookings$.asObservable();
-  }
-
-  getBookingByPNR(pnr: string): Observable<Booking | undefined> {
-    return new Observable((observer) => {
-      this.bookings$.subscribe((bookings) => {
-        const booking = bookings.find((b) => b.pnr === pnr);
-        observer.next(booking);
-      });
-    });
-  }
-
-  createBooking(booking: Booking): Observable<boolean> {
-    return new Observable((observer) => {
-      const currentBookings = this.bookings$.value;
-      currentBookings.push(booking);
-      this.bookings$.next(currentBookings);
-      observer.next(true);
-    });
-  }
-
-  // Passenger related methods
-  getPassengers(): Observable<Passenger[]> {
-    return this.passengers$.asObservable();
-  }
-
-  getPassengerBookings(passengerId: string): Observable<Booking[]> {
-    return new Observable((observer) => {
-      this.bookings$.subscribe((bookings) => {
-        // In a real application, you would filter by passenger ID
-        // For now, returning all bookings as example
-        observer.next(bookings);
-      });
-    });
+        )
+      )
+    );
   }
 }

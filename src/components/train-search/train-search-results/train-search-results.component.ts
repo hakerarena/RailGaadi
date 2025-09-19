@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTable } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
-import { Train } from '../../../interfaces/models';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatSortModule, MatSort } from '@angular/material/sort';
+import { Train, TrainDetails } from '../../../interfaces/models';
 
 @Component({
   selector: 'app-train-search-results',
@@ -22,16 +22,24 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
   ],
 })
-export class TrainSearchResultsComponent {
-  private _searchResults: Train[] | null = [];
-  dataSource: MatTableDataSource<Train> = new MatTableDataSource<Train>([]);
+export class TrainSearchResultsComponent implements AfterViewInit {
+  private _searchResults: TrainDetails[] | null = [];
+  dataSource: MatTableDataSource<TrainDetails> =
+    new MatTableDataSource<TrainDetails>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   @Input()
-  set searchResults(value: Train[] | null) {
+  set searchResults(value: TrainDetails[] | null) {
     this._searchResults = value;
     this.dataSource = new MatTableDataSource(value || []);
+    if (this.paginator && this.sort) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
-  get searchResults(): Train[] | null {
+  get searchResults(): TrainDetails[] | null {
     return this._searchResults;
   }
 
@@ -42,4 +50,9 @@ export class TrainSearchResultsComponent {
     'arrivalTime',
     'duration',
   ];
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }

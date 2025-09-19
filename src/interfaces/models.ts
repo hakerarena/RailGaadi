@@ -1,5 +1,5 @@
 export interface Train {
-  trainNumber: string;
+  trainNo: string;
   trainName: string;
   source: string;
   destination: string;
@@ -12,8 +12,8 @@ export interface Train {
 }
 
 export interface TrainClass {
-  classCode: string;
-  className: string;
+  code: string;
+  name: string;
   fare: number;
   availableSeats: number;
 }
@@ -29,8 +29,16 @@ export interface Station {
 export interface StationInfo {
   code: string;
   name: string;
-  state: string;
-  zone: string;
+}
+
+export interface SearchCriteria {
+  fromStation: StationInfo;
+  toStation: StationInfo;
+  journeyDate: Date;
+  trainClass?: string;
+  flexibleWithDate?: boolean;
+  personWithDisability?: boolean;
+  availableBerth?: boolean;
 }
 
 export interface Passenger {
@@ -96,4 +104,41 @@ export interface PassengerDetails {
   gender: string;
   seatNumber: string;
   status: string;
+}
+
+/**
+ * Represents the fare and availability for a specific travel class on a train.
+ */
+export interface AvailableClass {
+  code: string;
+  name: string;
+  fare: number;
+  availableSeats: number;
+}
+
+/**
+ * Represents a single stop in a train's route.
+ */
+export interface RouteStation {
+  code: string;
+  name: string;
+  arrivalTime: string | null;
+  departureTime: string | null;
+  distance: number;
+}
+
+/**
+ * Represents the complete, detailed information for a single train.
+ */
+export interface TrainDetails {
+  trainNumber: string;
+  trainName: string;
+  source: string;
+  destination: string;
+  departureTime: string;
+  arrivalTime: string;
+  duration: string;
+  runningDays: string[];
+  availableClasses: AvailableClass[];
+  stations: RouteStation[];
 }
