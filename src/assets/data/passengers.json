@@ -1,0 +1,83 @@
+[
+  {
+    "id": "PASS001",
+    "name": "Rajesh Kumar",
+    "age": 35,
+    "gender": "Male",
+    "mobile": "9876543210",
+    "email": "rajesh.kumar@email.com",
+    "address": {
+      "street": "123 MG Road",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110001"
+    },
+    "bookings": [
+      {
+        "pnr": "2301234567",
+        "trainNumber": "12951",
+        "journeyDate": "2025-09-25",
+        "from": "NDLS",
+        "to": "MMCT",
+        "classCode": "2A",
+        "seatNumber": "A1-25",
+        "fare": 2800,
+        "status": "Confirmed"
+      }
+    ]
+  },
+  {
+    "id": "PASS002",
+    "name": "Priya Sharma",
+    "age": 28,
+    "gender": "Female",
+    "mobile": "9765432109",
+    "email": "priya.sharma@email.com",
+    "address": {
+      "street": "456 Park Street",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400001"
+    },
+    "bookings": [
+      {
+        "pnr": "2301234568",
+        "trainNumber": "12002",
+        "journeyDate": "2025-09-22",
+        "from": "NDLS",
+        "to": "KLK",
+        "classCode": "CC",
+        "seatNumber": "C4-15",
+        "fare": 450,
+        "status": "Confirmed"
+      }
+    ]
+  },
+  {
+    "id": "PASS003",
+    "name": "Amit Patel",
+    "age": 42,
+    "gender": "Male",
+    "mobile": "9654321098",
+    "email": "amit.patel@email.com",
+    "address": {
+      "street": "789 Gandhi Nagar",
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "pincode": "380001"
+    },
+    "bookings": [
+      {
+        "pnr": "2301234569",
+        "trainNumber": "22691",
+        "journeyDate": "2025-09-24",
+        "from": "NDLS",
+        "to": "YPR",
+        "classCode": "3A",
+        "seatNumber": "B2-45",
+        "fare": 3650,
+        "status": "Waitlisted"
+      }
+    ]
+  }
+]

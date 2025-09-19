@@ -21,10 +21,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 // App Data and Models
-import { STATIONS } from '../../../interfaces/Stations';
-import { SearchCriteria } from '../../../interfaces/SearchCriteria.model';
-import { Station } from '../../../interfaces/Station.model';
-import { TRAIN_CLASSES } from '../../../interfaces/train-classes';
 
 @Component({
   selector: 'app-train-search-form',

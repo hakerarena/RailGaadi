@@ -1,0 +1,51 @@
+[
+  {
+    "code": "1A",
+    "name": "First AC",
+    "description": "Air conditioned first class with 2 berths per compartment",
+    "amenities": ["AC", "Bedding", "Meals", "Personal attendant"],
+    "fareMultiplier": 5.5
+  },
+  {
+    "code": "2A",
+    "name": "Second AC",
+    "description": "Air conditioned with 4 berths per compartment",
+    "amenities": ["AC", "Bedding", "Meals"],
+    "fareMultiplier": 3.5
+  },
+  {
+    "code": "3A",
+    "name": "Third AC",
+    "description": "Air conditioned with 6 berths per compartment",
+    "amenities": ["AC", "Bedding"],
+    "fareMultiplier": 2.5
+  },
+  {
+    "code": "SL",
+    "name": "Sleeper",
+    "description": "Non-AC sleeper class with 6 berths per compartment",
+    "amenities": ["Bedding"],
+    "fareMultiplier": 1.0
+  },
+  {
+    "code": "CC",
+    "name": "Chair Car",
+    "description": "Air conditioned chair car seating",
+    "amenities": ["AC", "Reclining seats"],
+    "fareMultiplier": 1.8
+  },
+  {
+    "code": "EC",
+    "name": "Executive Chair Car",
+    "description": "Premium air conditioned chair car with meals",
+    "amenities": ["AC", "Premium seats", "Meals", "Extra legroom"],
+    "fareMultiplier": 3.0
+  },
+  {
+    "code": "2S",
+    "name": "Second Sitting",
+    "description": "Non-AC unreserved seating",
+    "amenities": [],
+    "fareMultiplier": 0.5
+  }
+]

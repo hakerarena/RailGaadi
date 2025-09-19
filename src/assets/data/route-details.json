@@ -1,0 +1,50 @@
+[
+  {
+    "routeId": "ROUTE001",
+    "name": "Golden Quadrilateral - Delhi to Mumbai",
+    "stations": [
+      { "code": "NDLS", "distance": 0, "duration": 0 },
+      { "code": "GWL", "distance": 319, "duration": 225 },
+      { "code": "JHS", "distance": 415, "duration": 290 },
+      { "code": "BPL", "distance": 707, "duration": 495 },
+      { "code": "ET", "distance": 774, "duration": 540 },
+      { "code": "NGP", "distance": 1057, "duration": 735 },
+      { "code": "BSL", "distance": 1156, "duration": 805 },
+      { "code": "MMCT", "distance": 1384, "duration": 965 }
+    ],
+    "totalDistance": 1384,
+    "totalDuration": 965,
+    "zone": "Multiple"
+  },
+  {
+    "routeId": "ROUTE002",
+    "name": "Delhi to Kalka - Himalayan Route",
+    "stations": [
+      { "code": "NDLS", "distance": 0, "duration": 0 },
+      { "code": "PNP", "distance": 90, "duration": 53 },
+      { "code": "KUN", "distance": 125, "duration": 78 },
+      { "code": "UMB", "distance": 200, "duration": 150 },
+      { "code": "CDG", "distance": 258, "duration": 205 },
+      { "code": "KLK", "distance": 296, "duration": 270 }
+    ],
+    "totalDistance": 296,
+    "totalDuration": 270,
+    "zone": "Northern Railway"
+  },
+  {
+    "routeId": "ROUTE003",
+    "name": "Delhi to Bangalore - South Express",
+    "stations": [
+      { "code": "NDLS", "distance": 0, "duration": 0 },
+      { "code": "GWL", "distance": 319, "duration": 195 },
+      { "code": "BPL", "distance": 707, "duration": 410 },
+      { "code": "NGP", "distance": 1057, "duration": 675 },
+      { "code": "HYB", "distance": 1417, "duration": 920 },
+      { "code": "BZA", "distance": 1520, "duration": 980 },
+      { "code": "YPR", "distance": 2478, "duration": 2035 }
+    ],
+    "totalDistance": 2478,
+    "totalDuration": 2035,
+    "zone": "Multiple"
+  }
+]

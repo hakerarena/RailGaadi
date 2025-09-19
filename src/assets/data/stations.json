@@ -1,0 +1,182 @@
+[
+  {
+    "code": "NDLS",
+    "name": "New Delhi",
+    "state": "Delhi",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "MMCT",
+    "name": "Mumbai Central",
+    "state": "Maharashtra",
+    "zone": "Western Railway"
+  },
+  {
+    "code": "MAS",
+    "name": "Chennai Central",
+    "state": "Tamil Nadu",
+    "zone": "Southern Railway"
+  },
+  {
+    "code": "HWH",
+    "name": "Howrah",
+    "state": "West Bengal",
+    "zone": "Eastern Railway"
+  },
+  {
+    "code": "CSMT",
+    "name": "Chhatrapati Shivaji Maharaj Terminus",
+    "state": "Maharashtra",
+    "zone": "Central Railway"
+  },
+  {
+    "code": "SBC",
+    "name": "Bangalore City",
+    "state": "Karnataka",
+    "zone": "South Western Railway"
+  },
+  {
+    "code": "HYB",
+    "name": "Hyderabad Deccan",
+    "state": "Telangana",
+    "zone": "South Central Railway"
+  },
+  {
+    "code": "PUNE",
+    "name": "Pune Junction",
+    "state": "Maharashtra",
+    "zone": "Central Railway"
+  },
+  {
+    "code": "AMU",
+    "name": "Ahmedabad Junction",
+    "state": "Gujarat",
+    "zone": "Western Railway"
+  },
+  {
+    "code": "JP",
+    "name": "Jaipur Junction",
+    "state": "Rajasthan",
+    "zone": "North Western Railway"
+  },
+  {
+    "code": "LKO",
+    "name": "Lucknow Charbagh",
+    "state": "Uttar Pradesh",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "PNBE",
+    "name": "Patna Junction",
+    "state": "Bihar",
+    "zone": "East Central Railway"
+  },
+  {
+    "code": "BBS",
+    "name": "Bhubaneswar",
+    "state": "Odisha",
+    "zone": "East Coast Railway"
+  },
+  {
+    "code": "GWL",
+    "name": "Gwalior Junction",
+    "state": "Madhya Pradesh",
+    "zone": "North Central Railway"
+  },
+  {
+    "code": "JHS",
+    "name": "Jhansi Junction",
+    "state": "Uttar Pradesh",
+    "zone": "North Central Railway"
+  },
+  {
+    "code": "BPL",
+    "name": "Bhopal Junction",
+    "state": "Madhya Pradesh",
+    "zone": "West Central Railway"
+  },
+  {
+    "code": "ET",
+    "name": "Itarsi Junction",
+    "state": "Madhya Pradesh",
+    "zone": "West Central Railway"
+  },
+  {
+    "code": "NGP",
+    "name": "Nagpur Junction",
+    "state": "Maharashtra",
+    "zone": "South East Central Railway"
+  },
+  {
+    "code": "BZA",
+    "name": "Vijayawada Junction",
+    "state": "Andhra Pradesh",
+    "zone": "South Central Railway"
+  },
+  {
+    "code": "TVC",
+    "name": "Thiruvananthapuram Central",
+    "state": "Kerala",
+    "zone": "Southern Railway"
+  },
+  {
+    "code": "ERS",
+    "name": "Ernakulam Junction",
+    "state": "Kerala",
+    "zone": "Southern Railway"
+  },
+  {
+    "code": "CBE",
+    "name": "Coimbatore Junction",
+    "state": "Tamil Nadu",
+    "zone": "Southern Railway"
+  },
+  {
+    "code": "KLK",
+    "name": "Kalka",
+    "state": "Haryana",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "CDG",
+    "name": "Chandigarh Junction",
+    "state": "Chandigarh",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "UMB",
+    "name": "Ambala Cantt",
+    "state": "Haryana",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "PNP",
+    "name": "Panipat Junction",
+    "state": "Haryana",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "KUN",
+    "name": "Karnal",
+    "state": "Haryana",
+    "zone": "Northern Railway"
+  },
+  {
+    "code": "BSL",
+    "name": "Bhusaval Junction",
+    "state": "Maharashtra",
+    "zone": "Central Railway"
+  },
+  {
+    "code": "KNW",
+    "name": "Khandwa Junction",
+    "state": "Madhya Pradesh",
+    "zone": "West Central Railway"
+  },
+  {
+    "code": "IGP",
+    "name": "Igatpuri",
+    "state": "Maharashtra",
+    "zone": "Central Railway"
+  }
+]

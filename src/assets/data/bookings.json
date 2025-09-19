@@ -1,0 +1,118 @@
+[
+  {
+    "pnr": "2301234567",
+    "bookingDate": "2025-09-15T10:30:00Z",
+    "journeyDate": "2025-09-25",
+    "trainNumber": "12951",
+    "trainName": "Mumbai Rajdhani Express",
+    "from": {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "departureTime": "16:55"
+    },
+    "to": {
+      "code": "MMCT",
+      "name": "Mumbai Central",
+      "arrivalTime": "08:35"
+    },
+    "passengers": [
+      {
+        "name": "Rajesh Kumar",
+        "age": 35,
+        "gender": "Male",
+        "seatNumber": "A1-25",
+        "status": "Confirmed"
+      },
+      {
+        "name": "Sunita Kumar",
+        "age": 32,
+        "gender": "Female",
+        "seatNumber": "A1-26",
+        "status": "Confirmed"
+      }
+    ],
+    "classCode": "2A",
+    "className": "Second AC",
+    "totalFare": 5600,
+    "bookingStatus": "Confirmed",
+    "contactDetails": {
+      "mobile": "9876543210",
+      "email": "rajesh.kumar@email.com"
+    }
+  },
+  {
+    "pnr": "2301234568",
+    "bookingDate": "2025-09-18T14:20:00Z",
+    "journeyDate": "2025-09-22",
+    "trainNumber": "12002",
+    "trainName": "Shatabdi Express",
+    "from": {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "departureTime": "07:40"
+    },
+    "to": {
+      "code": "KLK",
+      "name": "Kalka",
+      "arrivalTime": "12:10"
+    },
+    "passengers": [
+      {
+        "name": "Priya Sharma",
+        "age": 28,
+        "gender": "Female",
+        "seatNumber": "C4-15",
+        "status": "Confirmed"
+      }
+    ],
+    "classCode": "CC",
+    "className": "Chair Car",
+    "totalFare": 450,
+    "bookingStatus": "Confirmed",
+    "contactDetails": {
+      "mobile": "9765432109",
+      "email": "priya.sharma@email.com"
+    }
+  },
+  {
+    "pnr": "2301234569",
+    "bookingDate": "2025-09-20T09:15:00Z",
+    "journeyDate": "2025-09-24",
+    "trainNumber": "22691",
+    "trainName": "Rajdhani Express",
+    "from": {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "departureTime": "20:00"
+    },
+    "to": {
+      "code": "YPR",
+      "name": "Bangalore",
+      "arrivalTime": "05:55"
+    },
+    "passengers": [
+      {
+        "name": "Amit Patel",
+        "age": 42,
+        "gender": "Male",
+        "seatNumber": "WL-15",
+        "status": "Waitlisted"
+      },
+      {
+        "name": "Kavita Patel",
+        "age": 38,
+        "gender": "Female",
+        "seatNumber": "WL-16",
+        "status": "Waitlisted"
+      }
+    ],
+    "classCode": "3A",
+    "className": "Third AC",
+    "totalFare": 7300,
+    "bookingStatus": "Waitlisted",
+    "contactDetails": {
+      "mobile": "9654321098",
+      "email": "amit.patel@email.com"
+    }
+  }
+]
