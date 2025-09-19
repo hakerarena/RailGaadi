@@ -1,4 +1,4 @@
-import { Station } from '../interfaces/Station.model';
+import { Station } from './Station.model';
 
 export const STATIONS: Station[] = [
   { name: 'New Delhi', code: 'NDLS' },
