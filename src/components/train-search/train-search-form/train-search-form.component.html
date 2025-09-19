@@ -1,0 +1,100 @@
+<div class="search-container" [formGroup]="searchForm">
+  <div class="form-row">
+    <!-- From Station -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>From</mat-label>
+      <input
+        type="text"
+        placeholder="From Station"
+        aria-label="From Station"
+        matInput
+        formControlName="fromStation"
+        [matAutocomplete]="fromAuto"
+      />
+      <mat-autocomplete
+        #fromAuto="matAutocomplete"
+        [displayWith]="displayStation"
+      >
+        <mat-option
+          *ngFor="let station of fromFilteredStations | async"
+          [value]="station"
+        >
+          {{ station.name }} ({{ station.code }})
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Swap Button -->
+    <button mat-icon-button class="swap-button" aria-label="Swap stations">
+      <mat-icon>swap_horiz</mat-icon>
+    </button>
+
+    <!-- To Station -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>To</mat-label>
+      <input
+        type="text"
+        placeholder="To Station"
+        aria-label="To Station"
+        matInput
+        formControlName="toStation"
+        [matAutocomplete]="toAuto"
+      />
+      <mat-autocomplete
+        #toAuto="matAutocomplete"
+        [displayWith]="displayStation"
+      >
+        <mat-option
+          *ngFor="let station of toFilteredStations | async"
+          [value]="station"
+        >
+          {{ station.name }} ({{ station.code }})
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Journey Date -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Journey Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="journeyDate" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Train Class -->
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>All Classes</mat-label>
+      <mat-select formControlName="trainClass">
+        <mat-option *ngFor="let class of trainClasses" [value]="class">
+          {{ class }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-row checkboxes-row">
+    <mat-checkbox formControlName="flexibleWithDate"
+      >Flexible with Date</mat-checkbox
+    >
+    <mat-checkbox formControlName="disabilityConcession"
+      >Person With Disability Concession</mat-checkbox
+    >
+    <mat-checkbox formControlName="availableBerth"
+      >Train with Available Berth</mat-checkbox
+    >
+  </div>
+
+  <div class="form-row button-row">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onSearch()"
+      [disabled]="!searchForm.valid"
+    >
+      Search
+    </button>
+  </div>
+</div>
