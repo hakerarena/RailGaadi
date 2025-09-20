@@ -10,6 +10,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+// Services
+import { AuthService } from '../../services/auth.service';
+
 // Material Modules
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -73,7 +76,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -157,14 +161,12 @@ export class LoginComponent implements OnInit {
   private handleLoginSuccess(response: LoginResponse): void {
     this.isLoading = false;
 
-    // Store user data and token (in real app, use proper storage service)
-    if (this.loginForm.get('rememberMe')?.value) {
-      localStorage.setItem('irctc_token', response.token || '');
-      localStorage.setItem('irctc_user', JSON.stringify(response.user));
-    } else {
-      sessionStorage.setItem('irctc_token', response.token || '');
-      sessionStorage.setItem('irctc_user', JSON.stringify(response.user));
-    }
+    // Use AuthService to handle login
+    this.authService.login(
+      response.token || '',
+      response.user!,
+      this.loginForm.get('rememberMe')?.value || false
+    );
 
     this.snackBar.open('Login successful! Welcome back.', 'Close', {
       duration: 3000,

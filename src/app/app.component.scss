@@ -83,6 +83,40 @@ $accent-color: #ff6b6b;
   .auth-buttons {
     display: flex;
     gap: 1rem;
+    align-items: center;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: white;
+
+      .welcome-text {
+        font-size: 0.9rem;
+        font-weight: 500;
+        white-space: nowrap;
+
+        @media (max-width: 768px) {
+          display: none; // Hide welcome text on mobile
+        }
+      }
+
+      .logout-btn {
+        color: white;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          transform: scale(1.05);
+        }
+
+        ::ng-deep .mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
   }
 }
 

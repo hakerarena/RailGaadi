@@ -28,20 +28,45 @@
           <a routerLink="/pnr-status" routerLinkActive="active">{{
             constants.NAV_LINKS.PNR_STATUS
           }}</a>
-          <a routerLink="/my-transactions" routerLinkActive="active">{{
-            constants.NAV_LINKS.MY_TRANSACTIONS
-          }}</a>
-          <a routerLink="/my-profile" routerLinkActive="active">{{
-            constants.NAV_LINKS.MY_PROFILE
-          }}</a>
+          <!-- Protected navigation items - only show when authenticated -->
+          <ng-container *ngIf="isAuthenticated$ | async">
+            <a routerLink="/my-transactions" routerLinkActive="active">{{
+              constants.NAV_LINKS.MY_TRANSACTIONS
+            }}</a>
+            <a routerLink="/my-profile" routerLinkActive="active">{{
+              constants.NAV_LINKS.MY_PROFILE
+            }}</a>
+          </ng-container>
         </nav>
+
+        <!-- Authentication buttons -->
         <div class="auth-buttons">
-          <button mat-button routerLink="/login">
-            {{ constants.BUTTONS.LOGIN }}
-          </button>
-          <button mat-raised-button color="primary">
-            {{ constants.BUTTONS.REGISTER }}
-          </button>
+          <!-- Show login/register when not authenticated -->
+          <ng-container *ngIf="!(isAuthenticated$ | async)">
+            <button mat-button routerLink="/login">
+              {{ constants.BUTTONS.LOGIN }}
+            </button>
+            <button mat-raised-button color="primary">
+              {{ constants.BUTTONS.REGISTER }}
+            </button>
+          </ng-container>
+
+          <!-- Show user info and logout when authenticated -->
+          <ng-container *ngIf="isAuthenticated$ | async">
+            <div class="user-info">
+              <span class="welcome-text"
+                >Welcome, {{ (currentUser$ | async)?.firstName }}!</span
+              >
+              <button
+                mat-icon-button
+                (click)="logout()"
+                title="Logout"
+                class="logout-btn"
+              >
+                <mat-icon>logout</mat-icon>
+              </button>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

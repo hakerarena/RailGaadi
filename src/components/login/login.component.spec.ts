@@ -5,14 +5,17 @@ import { Router } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { LoginComponent } from './login.component';
+import { AuthService } from '../../services/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let mockRouter: jasmine.SpyObj<Router>;
+  let mockAuthService: jasmine.SpyObj<AuthService>;
 
   beforeEach(async () => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['login']);
 
     await TestBed.configureTestingModule({
       imports: [
@@ -21,12 +24,18 @@ describe('LoginComponent', () => {
         NoopAnimationsModule,
         MatSnackBarModule,
       ],
-      providers: [{ provide: Router, useValue: routerSpy }],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+        { provide: AuthService, useValue: authServiceSpy },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     mockRouter = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    mockAuthService = TestBed.inject(
+      AuthService
+    ) as jasmine.SpyObj<AuthService>;
     fixture.detectChanges();
   });
 

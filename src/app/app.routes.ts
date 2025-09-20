@@ -8,12 +8,15 @@ import { MyProfileComponent } from '../components/my-profile/my-profile.componen
 import { LoginComponent } from '../components/login/login.component';
 import { SearchGuard } from '../guards/search.guard';
 import { RefreshGuard } from '../guards/refresh.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { GuestGuard } from '../guards/guest.guard';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [GuestGuard],
   },
   {
     path: 'search',
@@ -28,12 +31,12 @@ export const routes: Routes = [
   {
     path: 'my-transactions',
     component: MyTransactionsComponent,
-    canActivate: [RefreshGuard],
+    canActivate: [RefreshGuard, AuthGuard],
   },
   {
     path: 'my-profile',
     component: MyProfileComponent,
-    canActivate: [RefreshGuard],
+    canActivate: [RefreshGuard, AuthGuard],
   },
   {
     path: 'test',
