@@ -167,6 +167,22 @@ export class TrainSearchFormComponent implements OnInit {
 
       console.log('Search criteria:', searchCriteria);
       this.search.emit(searchCriteria);
+
+      // Clear form after search
+      this.resetForm();
     }
+  }
+
+  resetForm(): void {
+    this.searchForm.reset({
+      fromStation: '',
+      toStation: '',
+      journeyDate: new Date(),
+      travelClass: this.travelClasses[0].code,
+      quota: 'GN',
+      flexibleWithDate: false,
+      divyaangConcession: false,
+      railwayPass: false,
+    });
   }
 }

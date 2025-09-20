@@ -1,0 +1,39 @@
+<div class="home-page">
+  <div class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>{{ constants.HERO.TITLE }}</h1>
+        <p>{{ constants.HERO.SUBTITLE }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-section">
+    <div class="container">
+      <app-train-search-form (search)="onSearch($event)">
+      </app-train-search-form>
+    </div>
+  </div>
+
+  <div class="features-section">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>{{ constants.FEATURES.EASY_BOOKING }}</h3>
+          <p>
+            Book train tickets in just a few clicks with our intuitive
+            interface.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>{{ constants.FEATURES.REAL_TIME_STATUS }}</h3>
+          <p>Check live train status and PNR details instantly.</p>
+        </div>
+        <div class="feature-card">
+          <h3>{{ constants.FEATURES.SECURE_PAYMENTS }}</h3>
+          <p>Safe and secure payment options for hassle-free transactions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

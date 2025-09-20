@@ -4,7 +4,7 @@
     <div class="container">
       <div class="top-links">
         <a href="#">{{ constants.TOP_BAR_LINKS.CONTACT_US }}</a>
-        <a href="#">{{ constants.TOP_BAR_LINKS.ASK_DISHA }}</a>
+        <a href="#">{{ constants.TOP_BAR_LINKS.ASK_HOBBIT }}</a>
         <a href="#">{{ constants.TOP_BAR_LINKS.ALERTS }}</a>
         <a href="#">{{ constants.TOP_BAR_LINKS.HELP }}</a>
       </div>
@@ -36,10 +36,7 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <div class="container">
-      <!-- Train Search Container - handles all search logic -->
-      <app-train-search-container></app-train-search-container>
-    </div>
+    <router-outlet></router-outlet>
   </main>
 
   <!-- Footer -->

@@ -14,7 +14,7 @@ export const APP_CONSTANTS = {
   // Top Bar Links
   TOP_BAR_LINKS: {
     CONTACT_US: 'Contact Us',
-    ASK_DISHA: 'Ask Disha',
+    ASK_HOBBIT: 'Ask Hobbit',
     ALERTS: 'Alerts',
     HELP: 'Help',
   },
@@ -42,6 +42,8 @@ export const APP_CONSTANTS = {
     BOOK_NOW: 'Book Now',
     VIEW_ROUTE: 'View Route',
     TRAIN_SCHEDULE: 'Train Schedule',
+    NEW_SEARCH: 'New Search',
+    TRY_DIFFERENT_SEARCH: 'Try Different Search',
   },
 
   // Form Labels
@@ -76,6 +78,23 @@ export const APP_CONSTANTS = {
     NO_TRAINS_FOUND: 'No trains found for this route',
     TRY_DIFFERENT_SEARCH: 'Try searching with different dates or stations',
     RUNS_ON: 'Runs on:',
+  },
+
+  // Hero Section
+  HERO: {
+    TITLE: 'Book Train Tickets Online',
+    SUBTITLE: 'Fast, secure, and convenient train booking experience',
+  },
+
+  // Features Section
+  FEATURES: {
+    EASY_BOOKING: 'Easy Booking',
+    REAL_TIME_STATUS: 'Real-time Status',
+    SECURE_PAYMENTS: 'Secure Payments',
+  },
+
+  // Train Status Labels
+  STATUS_LABELS: {
     DAY: 'Day',
     SEATS: 'seats',
     WAITING_LIST: 'Waiting List',
@@ -125,11 +144,25 @@ export const APP_CONSTANTS = {
   MOCK_DATA: {
     STATIONS: [
       { code: 'NDLS', name: 'New Delhi' },
-      { code: 'BCT', name: 'Mumbai Central' },
+      { code: 'MMCT', name: 'Mumbai Central' },
+      { code: 'MAS', name: 'Chennai Central' },
       { code: 'HWH', name: 'Howrah' },
-      { code: 'CSMT', name: 'Mumbai CSMT' },
-      { code: 'BPL', name: 'Bhopal' },
-      { code: 'PNBE', name: 'Patna' },
+      { code: 'CSMT', name: 'Chhatrapati Shivaji Maharaj Terminus' },
+      { code: 'SBC', name: 'Bangalore City' },
+      { code: 'HYB', name: 'Hyderabad Deccan' },
+      { code: 'PUNE', name: 'Pune Junction' },
+      { code: 'AMD', name: 'Ahmedabad Junction' },
+      { code: 'JAT', name: 'Jammu Tawi' },
+      { code: 'VSKP', name: 'Visakhapatnam' },
+      { code: 'KOL', name: 'Kolkata' },
+      { code: 'TVC', name: 'Trivandrum Central' },
+      { code: 'PNBE', name: 'Patna Junction' },
+      { code: 'BBS', name: 'Bhubaneswar' },
+      { code: 'RNC', name: 'Ranchi Junction' },
+      { code: 'GWL', name: 'Gwalior Junction' },
+      { code: 'JBP', name: 'Jabalpur Junction' },
+      { code: 'INDB', name: 'Indore Junction' },
+      { code: 'UJN', name: 'Ujjain Junction' },
     ],
   },
 

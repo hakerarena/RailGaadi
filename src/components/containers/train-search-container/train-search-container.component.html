@@ -1,11 +1,6 @@
 <div class="train-search-container">
   <!-- Search Form -->
-  <div class="search-section">
-    <div class="booking-card">
-      <app-train-search-form (search)="onSearch($event)">
-      </app-train-search-form>
-    </div>
-  </div>
+  <app-train-search-form (search)="onSearch($event)"> </app-train-search-form>
 
   <!-- Loading State -->
   <div class="loading-section" *ngIf="isSearching">
