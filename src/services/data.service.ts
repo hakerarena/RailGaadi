@@ -4,10 +4,12 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   SearchCriteria,
+  RouteStation,
   Station,
   Train,
-  TrainDetails,
-} from '../interfaces/models';
+  StationInfo,
+} from '../interfaces';
+import { APP_CONSTANTS } from '../constants/app.constants';
 import trainsData from '../../assets/data/trains.json';
 
 @Injectable({
@@ -15,7 +17,7 @@ import trainsData from '../../assets/data/trains.json';
 })
 export class DataService {
   private stations$ = new BehaviorSubject<Station[]>([]);
-  private _trainDetails: TrainDetails[] = [];
+  private _trainDetails: Train[] = [];
 
   constructor(private http: HttpClient) {
     this.loadInitialData();
@@ -62,6 +64,8 @@ export class DataService {
           name: c.className,
           fare: c.fare,
           availableSeats: c.availableSeats,
+          status:
+            c.availableSeats > 0 ? ('available' as const) : ('full' as const),
         })),
         stations: rawTrain.stations.map((s) => ({
           code: s.code,

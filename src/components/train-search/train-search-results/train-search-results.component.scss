@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $primary-color: #213d77;
 $secondary-color: #f2f2f2;
 $accent-color: #ff6b6b;
@@ -11,13 +13,13 @@ $accent-color: #ff6b6b;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-  
+
   h2 {
     margin: 0;
     color: $primary-color;
     font-size: 1.5rem;
   }
-  
+
   .filter-options {
     .sort-field {
       min-width: 150px;
@@ -30,32 +32,32 @@ $accent-color: #ff6b6b;
     margin-bottom: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    
+
     .train-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      
+
       .train-basic-info {
         h3 {
           margin: 0 0 0.5rem;
           color: $primary-color;
           font-size: 1.2rem;
         }
-        
+
         .running-days {
           display: flex;
           gap: 0.5rem;
           align-items: center;
           color: #666;
           font-size: 0.875rem;
-          
+
           .day-indicator {
             padding: 2px 6px;
             background-color: $secondary-color;
             border-radius: 4px;
             font-size: 0.75rem;
-            
+
             &.active {
               background-color: $primary-color;
               color: white;
@@ -64,61 +66,61 @@ $accent-color: #ff6b6b;
         }
       }
     }
-    
+
     .journey-info {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin: 1.5rem 0;
-      
+
       .time-info {
         text-align: center;
-        
+
         .time {
           font-size: 1.25rem;
           font-weight: 600;
           color: $primary-color;
         }
-        
+
         .station {
           font-size: 0.875rem;
           color: #666;
           margin: 0.25rem 0;
         }
-        
+
         .date {
           font-size: 0.75rem;
           color: #999;
         }
       }
-      
+
       .journey-duration {
         flex: 1;
         text-align: center;
-        
+
         .duration-line {
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 0.5rem;
-          
+
           mat-icon {
             color: $primary-color;
           }
         }
-        
+
         .duration-text {
           font-size: 0.875rem;
           color: #666;
         }
       }
     }
-    
+
     .class-availability {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      
+
       .class-card {
         flex: 1;
         min-width: 150px;
@@ -126,51 +128,51 @@ $accent-color: #ff6b6b;
         border: 1px solid #e0e0e0;
         border-radius: 6px;
         background-color: #fafafa;
-        
+
         .class-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 0.5rem;
-          
+
           .class-name {
             font-weight: 500;
             color: $primary-color;
           }
-          
+
           .class-code {
             color: #666;
             font-size: 0.875rem;
           }
         }
-        
+
         .availability {
           font-size: 0.875rem;
           margin-bottom: 0.5rem;
-          
+
           &.available {
             color: #4caf50;
           }
-          
+
           &:not(.available) {
             color: #f44336;
           }
         }
-        
+
         .fare {
           font-size: 1.1rem;
           font-weight: 600;
           color: $primary-color;
           margin-bottom: 0.75rem;
         }
-        
+
         .book-button {
           width: 100%;
           background-color: $primary-color;
           color: white;
-          
+
           &:hover {
-            background-color: darken($primary-color, 10%);
+            background-color: color.adjust($primary-color, $lightness: -10%);
           }
         }
       }
@@ -184,7 +186,7 @@ $accent-color: #ff6b6b;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  
+
   mat-icon {
     font-size: 3rem;
     height: 3rem;
@@ -192,12 +194,12 @@ $accent-color: #ff6b6b;
     color: #ccc;
     margin-bottom: 1rem;
   }
-  
+
   h3 {
     margin: 0 0 0.5rem;
     color: #666;
   }
-  
+
   p {
     margin: 0;
     color: #999;

@@ -18,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
-import { TrainDetails } from '../../../interfaces/models';
+import { Train, SortOption } from '../../../interfaces';
+import { APP_CONSTANTS } from '../../../constants/app.constants';
 
 @Component({
   selector: 'app-train-search-results',
@@ -41,10 +42,11 @@ import { TrainDetails } from '../../../interfaces/models';
   ],
 })
 export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
-  @Input() searchResults: TrainDetails[] | null = null;
+  @Input() searchResults: Train[] | null = null;
 
-  dataSource = new MatTableDataSource<TrainDetails>([]);
+  dataSource = new MatTableDataSource<Train>([]);
   sortBy: 'departure' | 'duration' | 'fare' = 'departure';
+  sortOptions = APP_CONSTANTS.FORM_LABELS.SORT_OPTIONS;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -87,8 +89,12 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
             const bDur = this.getDurationMinutes(b.duration);
             return aDur - bDur;
           case 'fare':
-            const aFare = Math.min(...a.availableClasses.map((c) => c.fare));
-            const bFare = Math.min(...b.availableClasses.map((c) => c.fare));
+            const aFare = Math.min(
+              ...a.availableClasses.map((c: any) => c.fare)
+            );
+            const bFare = Math.min(
+              ...b.availableClasses.map((c: any) => c.fare)
+            );
             return aFare - bFare;
           default:
             return 0;
@@ -107,7 +113,7 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
     return 0;
   }
 
-  trackByTrainNumber(_: number, train: TrainDetails): string {
+  trackByTrainNumber(_: number, train: Train): string {
     return train.trainNumber;
   }
 }

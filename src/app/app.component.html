@@ -3,10 +3,10 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-links">
-        <a href="#">Contact Us</a>
-        <a href="#">Ask Hobbit</a>
-        <a href="#">Alerts</a>
-        <a href="#">Help</a>
+        <a href="#">{{ constants.TOP_BAR_LINKS.CONTACT_US }}</a>
+        <a href="#">{{ constants.TOP_BAR_LINKS.ASK_DISHA }}</a>
+        <a href="#">{{ constants.TOP_BAR_LINKS.ALERTS }}</a>
+        <a href="#">{{ constants.TOP_BAR_LINKS.HELP }}</a>
       </div>
     </div>
   </div>
@@ -16,17 +16,19 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">
-          <h1>Optimized IRCTC</h1>
+          <h1>{{ constants.APP_NAME }}</h1>
         </div>
         <nav class="main-nav">
-          <a href="#" class="active">Book Ticket</a>
-          <a href="#">PNR Status</a>
-          <a href="#">My Transactions</a>
-          <a href="#">My Profile</a>
+          <a href="#" class="active">{{ constants.NAV_LINKS.BOOK_TICKET }}</a>
+          <a href="#">{{ constants.NAV_LINKS.PNR_STATUS }}</a>
+          <a href="#">{{ constants.NAV_LINKS.MY_TRANSACTIONS }}</a>
+          <a href="#">{{ constants.NAV_LINKS.MY_PROFILE }}</a>
         </nav>
         <div class="auth-buttons">
-          <button mat-button>Login</button>
-          <button mat-raised-button color="primary">Register</button>
+          <button mat-button>{{ constants.BUTTONS.LOGIN }}</button>
+          <button mat-raised-button color="primary">
+            {{ constants.BUTTONS.REGISTER }}
+          </button>
         </div>
       </div>
     </div>
@@ -35,21 +37,8 @@
   <!-- Main Content -->
   <main class="main-content">
     <div class="container">
-      <!-- Booking Section -->
-      <section class="booking-section">
-        <div class="booking-card">
-          <app-train-search-form
-            (search)="searchTrains($event)"
-          ></app-train-search-form>
-        </div>
-      </section>
-
-      <!-- Results Section -->
-      <section class="results-section" *ngIf="searchResults?.length">
-        <app-train-search-results
-          [searchResults]="searchResults"
-        ></app-train-search-results>
-      </section>
+      <!-- Train Search Container - handles all search logic -->
+      <app-train-search-container></app-train-search-container>
     </div>
   </main>
 
@@ -58,22 +47,21 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h3>About Us</h3>
-          <a href="#">About IRCTC</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Privacy Policy</a>
+          <h3>{{ constants.FOOTER_LINKS.ABOUT_US }}</h3>
+          <a href="#">{{ constants.FOOTER_LINKS.ABOUT_IRCTC }}</a>
+          <a href="#">{{ constants.FOOTER_LINKS.TERMS_OF_SERVICE }}</a>
+          <a href="#">{{ constants.FOOTER_LINKS.PRIVACY_POLICY }}</a>
         </div>
         <div class="footer-section">
-          <h3>Popular Services</h3>
-          <a href="#">Train Ticket Booking</a>
-          <a href="#">Check PNR Status</a>
-          <a href="#">Train Schedule</a>
+          <h3>{{ constants.FOOTER_LINKS.POPULAR_SERVICES }}</h3>
+          <a href="#">{{ constants.FOOTER_LINKS.TRAIN_TICKET_BOOKING }}</a>
+          <a href="#">{{ constants.FOOTER_LINKS.CHECK_PNR_STATUS }}</a>
+          <a href="#">{{ constants.FOOTER_LINKS.TRAIN_SCHEDULE }}</a>
         </div>
         <div class="footer-section">
-          <h3>Support</h3>
-          <a href="#">FAQs</a>
-          <a href="#">Contact Us</a>
-          <a href="#">Feedback</a>
+          <h3>{{ constants.FOOTER_LINKS.SUPPORT }}</h3>
+          <a href="#">{{ constants.FOOTER_LINKS.FAQS }}</a>
+          <a href="#">{{ constants.FOOTER_LINKS.FEEDBACK }}</a>
         </div>
       </div>
     </div>

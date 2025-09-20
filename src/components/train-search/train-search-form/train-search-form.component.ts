@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
+  FormControl,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -20,51 +21,27 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+// Form field components
+import { StationAutocompleteComponent } from './form-fields/station-autocomplete/station-autocomplete.component';
+import { DatePickerComponent } from './form-fields/date-picker/date-picker.component';
+import { ClassQuotaSelectorComponent } from './form-fields/class-quota-selector/class-quota-selector.component';
+
 // Mock Data and Models
 import {
   SearchCriteria,
   Station,
   StationInfo,
-} from '../../../interfaces/models';
+  TravelClass,
+  Quota,
+} from '../../../interfaces';
+import { APP_CONSTANTS } from '../../../constants/app.constants';
 
 // Mock station data (replace with real data or import as needed)
-const STATIONS: StationInfo[] = [
-  { code: 'NDLS', name: 'New Delhi' },
-  { code: 'BCT', name: 'Mumbai Central' },
-  { code: 'HWH', name: 'Howrah' },
-  { code: 'CSMT', name: 'Mumbai CSMT' },
-  { code: 'BPL', name: 'Bhopal' },
-  { code: 'PNBE', name: 'Patna' },
-];
+const STATIONS: StationInfo[] = APP_CONSTANTS.MOCK_DATA.STATIONS;
 
-interface TravelClass {
-  code: string;
-  name: string;
-}
+const TRAVEL_CLASSES: TravelClass[] = APP_CONSTANTS.FORM_DATA.TRAVEL_CLASSES;
 
-interface Quota {
-  code: string;
-  name: string;
-}
-
-const TRAVEL_CLASSES: TravelClass[] = [
-  { code: 'SL', name: 'Sleeper (SL)' },
-  { code: '3A', name: 'AC 3 Tier (3A)' },
-  { code: '2A', name: 'AC 2 Tier (2A)' },
-  { code: '1A', name: 'AC First Class (1A)' },
-  { code: '2S', name: 'Second Sitting (2S)' },
-  { code: 'CC', name: 'Chair Car (CC)' },
-  { code: '3E', name: 'Third AC Economy (3E)' },
-];
-
-const QUOTAS: Quota[] = [
-  { code: 'GN', name: 'General' },
-  { code: 'TQ', name: 'Tatkal' },
-  { code: 'LD', name: 'Ladies' },
-  { code: 'SS', name: 'Senior Citizen' },
-  { code: 'PH', name: 'Divyaang' },
-  { code: 'DF', name: 'Duty Pass' },
-];
+const QUOTAS: Quota[] = APP_CONSTANTS.FORM_DATA.QUOTAS;
 
 @Component({
   selector: 'app-train-search-form',
@@ -83,6 +60,9 @@ const QUOTAS: Quota[] = [
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    StationAutocompleteComponent,
+    DatePickerComponent,
+    ClassQuotaSelectorComponent,
   ],
 })
 export class TrainSearchFormComponent implements OnInit {
@@ -101,6 +81,27 @@ export class TrainSearchFormComponent implements OnInit {
   toFilteredStations!: Observable<StationInfo[]>;
 
   constructor(private fb: FormBuilder) {}
+
+  // Getter methods for form controls
+  get fromStationControl(): FormControl {
+    return this.searchForm.get('fromStation') as FormControl;
+  }
+
+  get toStationControl(): FormControl {
+    return this.searchForm.get('toStation') as FormControl;
+  }
+
+  get journeyDateControl(): FormControl {
+    return this.searchForm.get('journeyDate') as FormControl;
+  }
+
+  get travelClassControl(): FormControl {
+    return this.searchForm.get('travelClass') as FormControl;
+  }
+
+  get quotaControl(): FormControl {
+    return this.searchForm.get('quota') as FormControl;
+  }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({

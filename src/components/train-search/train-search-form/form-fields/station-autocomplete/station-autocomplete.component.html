@@ -1,0 +1,30 @@
+<mat-form-field class="station-field" appearance="outline">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [matAutocomplete]="auto"
+  />
+  <button
+    *ngIf="showSwapButton"
+    mat-icon-button
+    matSuffix
+    type="button"
+    (click)="onSwapClick()"
+    class="swap-button"
+    title="Swap stations"
+  >
+    <mat-icon>swap_horiz</mat-icon>
+  </button>
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayStation">
+    <mat-option
+      *ngFor="let station of filteredStations | async"
+      [value]="station"
+    >
+      <span class="station-name">{{ station.name }}</span>
+      <span class="station-code">({{ station.code }})</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

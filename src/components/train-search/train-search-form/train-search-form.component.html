@@ -1,32 +1,14 @@
 <div class="search-container" [formGroup]="searchForm">
   <div class="form-row stations-row">
     <!-- From Station -->
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>From</mat-label>
-      <input
-        type="text"
-        placeholder="From Station"
-        aria-label="From Station"
-        matInput
-        formControlName="fromStation"
-        [matAutocomplete]="fromAuto"
-      />
-      <mat-icon matPrefix>location_on</mat-icon>
-      <mat-autocomplete
-        #fromAuto="matAutocomplete"
-        [displayWith]="displayStation"
-      >
-        <mat-option
-          *ngFor="let station of fromFilteredStations | async"
-          [value]="station"
-        >
-          {{ station.name }} ({{ station.code }})
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="searchForm.get('fromStation')?.errors?.['required']">
-        Please select a station
-      </mat-error>
-    </mat-form-field>
+    <app-station-autocomplete
+      [control]="fromStationControl"
+      [stations]="stations"
+      [label]="'From'"
+      [placeholder]="'From Station'"
+      class="form-field"
+    >
+    </app-station-autocomplete>
 
     <!-- Swap Button -->
     <button
@@ -39,75 +21,38 @@
     </button>
 
     <!-- To Station -->
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>To</mat-label>
-      <input
-        type="text"
-        placeholder="To Station"
-        aria-label="To Station"
-        matInput
-        formControlName="toStation"
-        [matAutocomplete]="toAuto"
-      />
-      <mat-icon matPrefix>location_on</mat-icon>
-      <mat-autocomplete
-        #toAuto="matAutocomplete"
-        [displayWith]="displayStation"
-      >
-        <mat-option
-          *ngFor="let station of toFilteredStations | async"
-          [value]="station"
-        >
-          {{ station.name }} ({{ station.code }})
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="searchForm.get('toStation')?.errors?.['required']">
-        Please select a station
-      </mat-error>
-    </mat-form-field>
+    <app-station-autocomplete
+      [control]="toStationControl"
+      [stations]="stations"
+      [label]="'To'"
+      [placeholder]="'To Station'"
+      [showSwapButton]="false"
+      class="form-field"
+    >
+    </app-station-autocomplete>
   </div>
 
   <div class="form-row details-row">
     <!-- Journey Date -->
-    <mat-form-field appearance="outline">
-      <mat-label>Journey Date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        formControlName="journeyDate"
-        [min]="minDate"
-        [max]="maxDate"
-        placeholder="Choose a date"
-      />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="searchForm.get('journeyDate')?.errors?.['required']">
-        Please select a date
-      </mat-error>
-    </mat-form-field>
+    <app-date-picker
+      [control]="journeyDateControl"
+      [label]="'Journey Date'"
+      [placeholder]="'Choose a date'"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+    >
+    </app-date-picker>
 
-    <!-- Travel Class -->
-    <mat-form-field appearance="outline">
-      <mat-label>Travel Class</mat-label>
-      <mat-select formControlName="travelClass">
-        <mat-option *ngFor="let class of travelClasses" [value]="class.code">
-          {{ class.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Quota -->
-    <mat-form-field appearance="outline">
-      <mat-label>Quota</mat-label>
-      <mat-select formControlName="quota">
-        <mat-option *ngFor="let quota of quotas" [value]="quota.code">
-          {{ quota.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- Travel Class and Quota -->
+    <app-class-quota-selector
+      [classControl]="travelClassControl"
+      [quotaControl]="quotaControl"
+      [travelClasses]="travelClasses"
+      [quotas]="quotas"
+      [classLabel]="'Travel Class'"
+      [quotaLabel]="'Quota'"
+    >
+    </app-class-quota-selector>
   </div>
 
   <div class="form-row options-row">
