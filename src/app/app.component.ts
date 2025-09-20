@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import {
+  RouterOutlet,
+  RouterModule,
+  Router,
+  NavigationEnd,
+} from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { APP_CONSTANTS } from '../constants/app.constants';
 import { NavigationService } from '../services/navigation.service';
@@ -11,7 +16,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatButtonModule],
+  imports: [CommonModule, RouterOutlet, RouterModule, MatButtonModule],
 })
 export class AppComponent implements OnInit {
   readonly constants = APP_CONSTANTS;

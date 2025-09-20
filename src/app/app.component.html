@@ -19,9 +19,18 @@
           <h1>{{ constants.APP_NAME }}</h1>
         </div>
         <nav class="main-nav">
-          <a href="#" class="active">{{ constants.NAV_LINKS.BOOK_TICKET }}</a>
-          <a href="#">{{ constants.NAV_LINKS.PNR_STATUS }}</a>
-          <a href="#">{{ constants.NAV_LINKS.MY_TRANSACTIONS }}</a>
+          <a
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >{{ constants.NAV_LINKS.BOOK_TICKET }}</a
+          >
+          <a routerLink="/pnr-status" routerLinkActive="active">{{
+            constants.NAV_LINKS.PNR_STATUS
+          }}</a>
+          <a routerLink="/my-transactions" routerLinkActive="active">{{
+            constants.NAV_LINKS.MY_TRANSACTIONS
+          }}</a>
           <a href="#">{{ constants.NAV_LINKS.MY_PROFILE }}</a>
         </nav>
         <div class="auth-buttons">

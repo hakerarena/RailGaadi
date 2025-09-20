@@ -1,0 +1,129 @@
+<div class="pnr-status-container">
+  <div class="pnr-header">
+    <h2>PNR Status Check</h2>
+    <p>Enter your 10-digit PNR number to check booking status</p>
+  </div>
+
+  <form [formGroup]="pnrForm" (ngSubmit)="onSubmit()" class="pnr-form">
+    <mat-form-field appearance="outline" class="pnr-input">
+      <mat-label>PNR Number</mat-label>
+      <input
+        matInput
+        formControlName="pnr"
+        placeholder="Enter 10-digit PNR"
+        maxlength="10"
+      />
+      <mat-error *ngIf="pnrForm.get('pnr')?.hasError('required')">
+        PNR number is required
+      </mat-error>
+      <mat-error *ngIf="pnrForm.get('pnr')?.hasError('pattern')">
+        PNR must be exactly 10 digits
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="pnrForm.invalid || isLoading"
+      class="search-button"
+    >
+      <mat-icon *ngIf="isLoading">hourglass_empty</mat-icon>
+      <mat-icon *ngIf="!isLoading">search</mat-icon>
+      {{ isLoading ? "Searching..." : "Check Status" }}
+    </button>
+  </form>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Fetching PNR status...</p>
+  </div>
+
+  <!-- PNR Status Result -->
+  <div *ngIf="pnrStatus && !isLoading" class="pnr-result">
+    <mat-card class="status-card">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="pnr-number">PNR: {{ pnrStatus.pnr }}</span>
+          <span
+            class="status-badge"
+            [ngClass]="getStatusColor(pnrStatus.status)"
+          >
+            {{ pnrStatus.status }}
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="journey-info">
+          <h3>Journey Details</h3>
+          <div class="journey-row">
+            <div class="station-info">
+              <div class="station">
+                <span class="station-code">{{ pnrStatus.from }}</span>
+                <span class="station-name">{{
+                  pnrStatus.fromStationName
+                }}</span>
+              </div>
+              <mat-icon>arrow_forward</mat-icon>
+              <div class="station">
+                <span class="station-code">{{ pnrStatus.to }}</span>
+                <span class="station-name">{{ pnrStatus.toStationName }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="train-info">
+            <p>
+              <strong>Train:</strong> {{ pnrStatus.trainNumber }} -
+              {{ pnrStatus.trainName }}
+            </p>
+            <p>
+              <strong>Journey Date:</strong>
+              {{ pnrStatus.journeyDate | date : "mediumDate" }}
+            </p>
+            <p><strong>Class:</strong> {{ pnrStatus.classCode }}</p>
+            <p><strong>Seat/Berth:</strong> {{ pnrStatus.seatNumber }}</p>
+            <p><strong>Fare:</strong> ₹{{ pnrStatus.fare }}</p>
+          </div>
+        </div>
+
+        <div class="passenger-info">
+          <h3>Passenger Details</h3>
+          <div class="passenger-card">
+            <p><strong>Name:</strong> {{ pnrStatus.passenger.name }}</p>
+            <p><strong>Age:</strong> {{ pnrStatus.passenger.age }}</p>
+            <p><strong>Gender:</strong> {{ pnrStatus.passenger.gender }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- No Result Found -->
+  <div *ngIf="!pnrStatus && !isLoading && searchAttempted" class="no-result">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon color="warn">error_outline</mat-icon>
+        <h3>PNR Not Found</h3>
+        <p>
+          No booking found with the provided PNR number. Please check and try
+          again.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <h3>Error</h3>
+        <p>{{ errorMessage }}</p>
+        <button mat-stroked-button (click)="clearError()">Try Again</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -338,4 +338,10 @@ export class DataService {
 
     return dates;
   }
+
+  getTrainByNumber(trainNumber: string): Train | undefined {
+    return this._trainDetails.find(
+      (train) => train.trainNumber === trainNumber
+    );
+  }
 }

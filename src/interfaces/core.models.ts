@@ -79,3 +79,91 @@ export interface Quota {
   name: string;
   description?: string;
 }
+
+// PNR related interfaces
+export interface Address {
+  street: string;
+  city: string;
+  state: string;
+  pincode: string;
+}
+
+export interface Booking {
+  pnr: string;
+  trainNumber: string;
+  journeyDate: string;
+  from: string;
+  to: string;
+  classCode: string;
+  seatNumber: string;
+  fare: number;
+  status: string;
+}
+
+export interface Passenger {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  mobile: string;
+  email: string;
+  address: Address;
+  bookings: Booking[];
+}
+
+export interface PNRStatus {
+  pnr: string;
+  trainNumber: string;
+  trainName?: string;
+  journeyDate: string;
+  from: string;
+  to: string;
+  fromStationName?: string;
+  toStationName?: string;
+  classCode: string;
+  seatNumber: string;
+  fare: number;
+  status: string;
+  passenger: {
+    name: string;
+    age: number;
+    gender: string;
+  };
+}
+
+// My Transactions related interfaces
+export interface BookingStation {
+  code: string;
+  name: string;
+  departureTime?: string;
+  arrivalTime?: string;
+}
+
+export interface BookingPassenger {
+  name: string;
+  age: number;
+  gender: string;
+  seatNumber: string;
+  status: string;
+}
+
+export interface ContactDetails {
+  mobile: string;
+  email: string;
+}
+
+export interface TransactionBooking {
+  pnr: string;
+  bookingDate: string;
+  journeyDate: string;
+  trainNumber: string;
+  trainName: string;
+  from: BookingStation;
+  to: BookingStation;
+  passengers: BookingPassenger[];
+  classCode: string;
+  className: string;
+  totalFare: number;
+  bookingStatus: string;
+  contactDetails: ContactDetails;
+}

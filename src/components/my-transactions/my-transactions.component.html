@@ -1,0 +1,268 @@
+<div class="my-transactions-container">
+  <div class="transactions-header">
+    <h2>My Transactions</h2>
+    <p>View and manage your train booking history</p>
+  </div>
+
+  <!-- Search and Filter Section -->
+  <div class="filter-section">
+    <div class="filter-row">
+      <form [formGroup]="searchForm" class="search-form">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search bookings</mat-label>
+          <input
+            matInput
+            formControlName="searchTerm"
+            placeholder="Search by PNR, train name, station, or passenger name..."
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </form>
+
+      <mat-form-field appearance="outline" class="status-filter">
+        <mat-label>Filter by Status</mat-label>
+        <mat-select
+          [value]="selectedStatus"
+          (selectionChange)="onStatusChange($event.value)"
+        >
+          <mat-option
+            *ngFor="let status of statusOptions"
+            [value]="status.value"
+          >
+            {{ status.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="sort-filter">
+        <mat-label>Sort by</mat-label>
+        <mat-select
+          [value]="selectedSort"
+          (selectionChange)="onSortChange($event.value)"
+        >
+          <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
+            {{ sort.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="refreshBookings()"
+        class="refresh-button"
+      >
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading your bookings...</p>
+  </div>
+
+  <!-- Bookings List -->
+  <div *ngIf="!isLoading && filteredBookings.length > 0" class="bookings-list">
+    <div class="results-summary">
+      <span class="results-count"
+        >{{ filteredBookings.length }} booking(s) found</span
+      >
+    </div>
+
+    <mat-accordion class="bookings-accordion">
+      <mat-expansion-panel
+        *ngFor="let booking of filteredBookings; trackBy: trackByPNR"
+        class="booking-panel"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="booking-title">
+              <div class="booking-primary">
+                <span class="pnr">PNR: {{ booking.pnr }}</span>
+                <span
+                  class="status-chip"
+                  [ngClass]="getStatusColor(booking.bookingStatus)"
+                >
+                  {{ booking.bookingStatus }}
+                </span>
+              </div>
+              <div class="booking-secondary">
+                <span class="train-info"
+                  >{{ booking.trainNumber }} - {{ booking.trainName }}</span
+                >
+                <span class="journey-date">{{
+                  formatJourneyDate(booking.journeyDate)
+                }}</span>
+              </div>
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+            <div class="booking-summary">
+              <div class="route">
+                <span class="station">{{ booking.from.code }}</span>
+                <mat-icon class="route-arrow">arrow_forward</mat-icon>
+                <span class="station">{{ booking.to.code }}</span>
+              </div>
+              <div class="fare">₹{{ booking.totalFare }}</div>
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="booking-details">
+          <!-- Journey Information -->
+          <div class="detail-section">
+            <h4>Journey Details</h4>
+            <div class="journey-info">
+              <div class="route-detail">
+                <div class="station-detail">
+                  <strong
+                    >{{ booking.from.name }} ({{ booking.from.code }})</strong
+                  >
+                  <div class="time" *ngIf="booking.from.departureTime">
+                    Departure: {{ booking.from.departureTime }}
+                  </div>
+                </div>
+                <mat-icon class="large-arrow">arrow_forward</mat-icon>
+                <div class="station-detail">
+                  <strong>{{ booking.to.name }} ({{ booking.to.code }})</strong>
+                  <div class="time" *ngIf="booking.to.arrivalTime">
+                    Arrival: {{ booking.to.arrivalTime }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="journey-meta">
+                <div class="meta-item">
+                  <strong>Train:</strong> {{ booking.trainNumber }} -
+                  {{ booking.trainName }}
+                </div>
+                <div class="meta-item">
+                  <strong>Journey Date:</strong>
+                  {{ formatJourneyDate(booking.journeyDate) }}
+                </div>
+                <div class="meta-item">
+                  <strong>Class:</strong> {{ booking.className }} ({{
+                    booking.classCode
+                  }})
+                </div>
+                <div class="meta-item">
+                  <strong>Booking Date:</strong>
+                  {{ formatDate(booking.bookingDate) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Passenger Information -->
+          <div class="detail-section">
+            <h4>Passenger Details</h4>
+            <div class="passengers-list">
+              <div
+                *ngFor="let passenger of booking.passengers; let i = index"
+                class="passenger-item"
+              >
+                <div class="passenger-info">
+                  <div class="passenger-name">
+                    <strong>{{ passenger.name }}</strong>
+                    <span class="passenger-details">
+                      {{ passenger.age }} years, {{ passenger.gender }}
+                    </span>
+                  </div>
+                  <div class="seat-info">
+                    <span class="seat-number">{{ passenger.seatNumber }}</span>
+                    <span
+                      class="passenger-status"
+                      [ngClass]="getStatusColor(passenger.status)"
+                    >
+                      {{ passenger.status }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Booking Summary -->
+          <div class="detail-section">
+            <h4>Booking Summary</h4>
+            <div class="booking-summary-details">
+              <div class="summary-row">
+                <span>Total Passengers:</span>
+                <span>{{ getTotalPassengers(booking) }}</span>
+              </div>
+              <div class="summary-row">
+                <span>Confirmed Seats:</span>
+                <span>{{ getConfirmedPassengers(booking) }}</span>
+              </div>
+              <div class="summary-row">
+                <span>Total Fare:</span>
+                <span class="fare-amount">₹{{ booking.totalFare }}</span>
+              </div>
+              <div class="summary-row">
+                <span>Booking Status:</span>
+                <span
+                  class="status-badge"
+                  [ngClass]="getStatusColor(booking.bookingStatus)"
+                >
+                  {{ booking.bookingStatus }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Contact Information -->
+          <div class="detail-section">
+            <h4>Contact Details</h4>
+            <div class="contact-info">
+              <div class="contact-item">
+                <mat-icon>phone</mat-icon>
+                <span>{{ booking.contactDetails.mobile }}</span>
+              </div>
+              <div class="contact-item">
+                <mat-icon>email</mat-icon>
+                <span>{{ booking.contactDetails.email }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="!isLoading && filteredBookings.length === 0" class="no-results">
+    <mat-card class="empty-state">
+      <mat-card-content>
+        <mat-icon class="empty-icon">receipt</mat-icon>
+        <h3>No bookings found</h3>
+        <p
+          *ngIf="
+            selectedStatus !== 'all' || searchForm.get('searchTerm')?.value
+          "
+        >
+          Try adjusting your search criteria or filters.
+        </p>
+        <p
+          *ngIf="
+            selectedStatus === 'all' && !searchForm.get('searchTerm')?.value
+          "
+        >
+          You haven't made any train bookings yet.
+        </p>
+        <button mat-raised-button color="primary" (click)="refreshBookings()">
+          <mat-icon>refresh</mat-icon>
+          Refresh
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
