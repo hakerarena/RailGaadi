@@ -5,6 +5,8 @@ import {
   FormControl,
   ReactiveFormsModule,
   Validators,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 // Form field components
 import { StationAutocompleteComponent } from './form-fields/station-autocomplete/station-autocomplete.component';
@@ -44,6 +47,7 @@ const QUOTAS: Quota[] = APP_CONSTANTS.FORM_DATA.QUOTAS;
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
     StationAutocompleteComponent,
     DatePickerComponent,
     ClassQuotaSelectorComponent,
@@ -62,6 +66,37 @@ export class TrainSearchFormComponent implements OnInit {
   maxDate = new Date(new Date().setMonth(new Date().getMonth() + 4));
 
   constructor(private fb: FormBuilder, private dataService: DataService) {}
+
+  // Custom validator for station validation
+  private stationValidator = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    if (!control.value || !this.stations || this.stations.length === 0) {
+      return null; // Let required validator handle empty values
+    }
+
+    // Handle both string inputs and object selections
+    if (typeof control.value === 'string') {
+      // If it's a string, it means user typed something but didn't select from dropdown
+      const matchingStation = this.stations.find(
+        (station) =>
+          station.name.toLowerCase() === control.value.toLowerCase() ||
+          station.code.toLowerCase() === control.value.toLowerCase()
+      );
+      return matchingStation
+        ? null
+        : { invalidStation: { value: control.value } };
+    }
+
+    // If it's an object, validate it exists in stations list
+    const isValidStation = this.stations.some(
+      (station) =>
+        station.code === control.value.code &&
+        station.name === control.value.name
+    );
+
+    return isValidStation ? null : { invalidStation: { value: control.value } };
+  };
 
   // Getter methods for form controls
   get fromStationControl(): FormControl {
@@ -84,10 +119,37 @@ export class TrainSearchFormComponent implements OnInit {
     return this.searchForm.get('quota') as FormControl;
   }
 
+  // Error checking methods
+  get fromStationError(): string | null {
+    const control = this.fromStationControl;
+    if (control.errors && control.touched) {
+      if (control.errors['required']) {
+        return 'From station is required';
+      }
+      if (control.errors['invalidStation']) {
+        return 'Please select a valid station from the dropdown';
+      }
+    }
+    return null;
+  }
+
+  get toStationError(): string | null {
+    const control = this.toStationControl;
+    if (control.errors && control.touched) {
+      if (control.errors['required']) {
+        return 'To station is required';
+      }
+      if (control.errors['invalidStation']) {
+        return 'Please select a valid station from the dropdown';
+      }
+    }
+    return null;
+  }
+
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      fromStation: [null, Validators.required],
-      toStation: [null, Validators.required],
+      fromStation: [null, [Validators.required, this.stationValidator]],
+      toStation: [null, [Validators.required, this.stationValidator]],
       journeyDate: [new Date(), Validators.required],
       travelClass: [''],
       quota: ['GN'],
@@ -99,9 +161,15 @@ export class TrainSearchFormComponent implements OnInit {
     this.dataService.getStations().subscribe({
       next: (stations) => {
         this.stations = stations;
+        // Re-validate station controls after stations are loaded
+        this.fromStationControl.updateValueAndValidity();
+        this.toStationControl.updateValueAndValidity();
       },
       error: (error) => {
         this.stations = APP_CONSTANTS.MOCK_DATA.STATIONS;
+        // Re-validate station controls after stations are loaded
+        this.fromStationControl.updateValueAndValidity();
+        this.toStationControl.updateValueAndValidity();
       },
     });
   }
@@ -117,8 +185,19 @@ export class TrainSearchFormComponent implements OnInit {
   }
 
   canSubmit(): boolean {
+    const fromStation = this.searchForm.get('fromStation')?.value;
+    const toStation = this.searchForm.get('toStation')?.value;
     const journeyDate = this.searchForm.get('journeyDate')?.value;
-    return !!journeyDate;
+
+    // Check if all required fields are filled and form is valid
+    return (
+      !!fromStation &&
+      !!toStation &&
+      !!journeyDate &&
+      this.fromStationControl.valid &&
+      this.toStationControl.valid &&
+      this.journeyDateControl.valid
+    );
   }
 
   onSubmit(): void {

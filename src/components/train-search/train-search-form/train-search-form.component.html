@@ -1,14 +1,19 @@
 <div class="search-container" [formGroup]="searchForm">
   <div class="form-row stations-row">
     <!-- From Station -->
-    <app-station-autocomplete
-      [control]="fromStationControl"
-      [stations]="stations"
-      [label]="'From'"
-      [placeholder]="'From Station'"
-      class="form-field"
-    >
-    </app-station-autocomplete>
+    <div class="station-wrapper">
+      <app-station-autocomplete
+        [control]="fromStationControl"
+        [stations]="stations"
+        [label]="'From'"
+        [placeholder]="'From Station'"
+        class="form-field"
+      >
+      </app-station-autocomplete>
+      <mat-error *ngIf="fromStationError" class="station-error">
+        {{ fromStationError }}
+      </mat-error>
+    </div>
 
     <!-- Swap Button -->
     <button
@@ -21,15 +26,20 @@
     </button>
 
     <!-- To Station -->
-    <app-station-autocomplete
-      [control]="toStationControl"
-      [stations]="stations"
-      [label]="'To'"
-      [placeholder]="'To Station'"
-      [showSwapButton]="false"
-      class="form-field"
-    >
-    </app-station-autocomplete>
+    <div class="station-wrapper">
+      <app-station-autocomplete
+        [control]="toStationControl"
+        [stations]="stations"
+        [label]="'To'"
+        [placeholder]="'To Station'"
+        [showSwapButton]="false"
+        class="form-field"
+      >
+      </app-station-autocomplete>
+      <mat-error *ngIf="toStationError" class="station-error">
+        {{ toStationError }}
+      </mat-error>
+    </div>
   </div>
 
   <div class="form-row details-row">
