@@ -98,6 +98,30 @@ export class TrainSearchFormComponent implements OnInit {
     return isValidStation ? null : { invalidStation: { value: control.value } };
   };
 
+  // Cross-field validator to check if from and to stations are different
+  private stationsDifferentValidator = (
+    formGroup: AbstractControl
+  ): ValidationErrors | null => {
+    const fromStation = formGroup.get('fromStation')?.value;
+    const toStation = formGroup.get('toStation')?.value;
+
+    if (!fromStation || !toStation) {
+      return null; // Don't validate if either station is empty
+    }
+
+    // Compare stations based on their code or name
+    const fromCode =
+      typeof fromStation === 'object' ? fromStation.code : fromStation;
+    const toCode = typeof toStation === 'object' ? toStation.code : toStation;
+    const fromName =
+      typeof fromStation === 'object' ? fromStation.name : fromStation;
+    const toName = typeof toStation === 'object' ? toStation.name : toStation;
+
+    const isSameStation = fromCode === toCode || fromName === toName;
+
+    return isSameStation ? { sameStation: true } : null;
+  };
+
   // Getter methods for form controls
   get fromStationControl(): FormControl {
     return this.searchForm.get('fromStation') as FormControl;
@@ -130,6 +154,15 @@ export class TrainSearchFormComponent implements OnInit {
         return 'Please select a valid station from the dropdown';
       }
     }
+
+    // Check for cross-field validation error
+    if (
+      this.searchForm.errors?.['sameStation'] &&
+      (control.touched || this.toStationControl.touched)
+    ) {
+      return 'From and To stations cannot be the same';
+    }
+
     return null;
   }
 
@@ -143,20 +176,32 @@ export class TrainSearchFormComponent implements OnInit {
         return 'Please select a valid station from the dropdown';
       }
     }
+
+    // Check for cross-field validation error
+    if (
+      this.searchForm.errors?.['sameStation'] &&
+      (control.touched || this.fromStationControl.touched)
+    ) {
+      return 'From and To stations cannot be the same';
+    }
+
     return null;
   }
 
   ngOnInit(): void {
-    this.searchForm = this.fb.group({
-      fromStation: [null, [Validators.required, this.stationValidator]],
-      toStation: [null, [Validators.required, this.stationValidator]],
-      journeyDate: [new Date(), Validators.required],
-      travelClass: [''],
-      quota: ['GN'],
-      flexibleWithDate: [false],
-      divyaangConcession: [false],
-      railwayPass: [false],
-    });
+    this.searchForm = this.fb.group(
+      {
+        fromStation: [null, [Validators.required, this.stationValidator]],
+        toStation: [null, [Validators.required, this.stationValidator]],
+        journeyDate: [new Date(), Validators.required],
+        travelClass: [''],
+        quota: ['GN'],
+        flexibleWithDate: [false],
+        divyaangConcession: [false],
+        railwayPass: [false],
+      },
+      { validators: [this.stationsDifferentValidator] }
+    );
 
     this.dataService.getStations().subscribe({
       next: (stations) => {
@@ -182,6 +227,9 @@ export class TrainSearchFormComponent implements OnInit {
       fromStation: toStation,
       toStation: fromStation,
     });
+
+    // Trigger validation after swapping
+    this.searchForm.updateValueAndValidity();
   }
 
   canSubmit(): boolean {
@@ -189,14 +237,15 @@ export class TrainSearchFormComponent implements OnInit {
     const toStation = this.searchForm.get('toStation')?.value;
     const journeyDate = this.searchForm.get('journeyDate')?.value;
 
-    // Check if all required fields are filled and form is valid
+    // Check if all required fields are filled and form is valid (including cross-field validation)
     return (
       !!fromStation &&
       !!toStation &&
       !!journeyDate &&
       this.fromStationControl.valid &&
       this.toStationControl.valid &&
-      this.journeyDateControl.valid
+      this.journeyDateControl.valid &&
+      !this.searchForm.errors?.['sameStation']
     );
   }
 
