@@ -21,6 +21,12 @@
           →
           <strong>{{ searchCriteria.toStation.name }}</strong>
           | {{ searchCriteria.journeyDate | date : "dd MMM yyyy" }}
+          <span
+            *ngIf="searchCriteria.flexibleWithDate"
+            class="flexible-indicator"
+          >
+            (±3 days flexible)
+          </span>
           <span *ngIf="searchCriteria.trainClass">
             | {{ searchCriteria.trainClass }}</span
           >
@@ -38,7 +44,11 @@
   <!-- Search Results -->
   <div class="results-section" *ngIf="showResults && searchResults.length > 0">
     <div class="container">
-      <app-train-search-results [searchResults]="searchResults">
+      <app-train-search-results
+        [searchResults]="searchResults"
+        [isFlexibleSearch]="searchCriteria?.flexibleWithDate || false"
+        [searchDate]="searchCriteria?.journeyDate || null"
+      >
       </app-train-search-results>
     </div>
   </div>

@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { Train, SortOption } from '../../../interfaces';
 import { APP_CONSTANTS } from '../../../constants/app.constants';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-train-search-results',
@@ -43,6 +44,8 @@ import { APP_CONSTANTS } from '../../../constants/app.constants';
 })
 export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
   @Input() searchResults: Train[] | null = null;
+  @Input() isFlexibleSearch: boolean = false;
+  @Input() searchDate: Date | null = null;
 
   dataSource = new MatTableDataSource<Train>([]);
   sortBy: 'departure' | 'duration' | 'fare' = 'departure';
@@ -50,6 +53,8 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private dataService: DataService) {}
 
   ngOnChanges() {
     if (this.searchResults) {
@@ -115,5 +120,30 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
 
   trackByTrainNumber(_: number, train: Train): string {
     return train.trainNumber;
+  }
+
+  getAvailableDatesForTrain(train: Train): Date[] {
+    if (!this.isFlexibleSearch || !this.searchDate) {
+      return [];
+    }
+
+    return this.dataService.getAvailableDatesForTrain(
+      train,
+      this.searchDate,
+      true
+    );
+  }
+
+  formatDate(date: Date): string {
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+    });
+  }
+
+  getClassAvailabilityForDate(train: Train, date: Date): any[] {
+    // For calendar-based availability, we always return the train's available classes
+    // since the train either runs or doesn't run on that date
+    return train.availableClasses;
   }
 }

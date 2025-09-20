@@ -189,11 +189,20 @@ export class DataService {
     console.log('Available trains:', this._trainDetails.length);
     console.log('From station:', searchCriteria.fromStation?.name);
     console.log('To station:', searchCriteria.toStation?.name);
+    console.log('Journey date:', searchCriteria.journeyDate);
+    console.log('Flexible with date:', searchCriteria.flexibleWithDate);
 
     if (!searchCriteria.fromStation || !searchCriteria.toStation) {
       console.log('Missing station criteria, returning empty array');
       return [];
     }
+
+    // Get date range for flexible search
+    const searchDates = this.getSearchDates(
+      searchCriteria.journeyDate,
+      searchCriteria.flexibleWithDate
+    );
+    console.log('Search dates:', searchDates);
 
     console.log('Available train routes:');
     this._trainDetails.forEach((train, index) => {
@@ -209,17 +218,124 @@ export class DataService {
       const sourceMatch = train.source === searchCriteria.fromStation?.name;
       const destMatch = train.destination === searchCriteria.toStation?.name;
 
-      if (sourceMatch || destMatch) {
-        console.log(
-          `Checking ${train.trainNumber}: Source match: ${sourceMatch}, Dest match: ${destMatch}`
-        );
+      if (!sourceMatch || !destMatch) {
+        return false;
       }
 
-      return sourceMatch && destMatch;
+      // Check if train has the selected class (if a specific class is selected)
+      if (searchCriteria.trainClass && searchCriteria.trainClass !== '') {
+        const hasSelectedClass = train.availableClasses.some(
+          (cls) => cls.code === searchCriteria.trainClass
+        );
+        if (!hasSelectedClass) {
+          console.log(
+            `${train.trainNumber}: Does not have class ${searchCriteria.trainClass}`
+          );
+          return false;
+        }
+      }
+
+      // Check date availability based on runningDays
+      if (searchCriteria.flexibleWithDate) {
+        const hasAvailableDates = searchDates.some((date) => {
+          return this.isTrainRunningOnDate(train, date);
+        });
+
+        if (hasAvailableDates) {
+          console.log(`${train.trainNumber}: Available on flexible dates`);
+        }
+
+        return hasAvailableDates;
+      } else {
+        // Regular search - check specific date
+        const isRunning = this.isTrainRunningOnDate(
+          train,
+          searchCriteria.journeyDate
+        );
+        console.log(
+          `${
+            train.trainNumber
+          }: Running on ${searchCriteria.journeyDate.toDateString()}: ${isRunning}`
+        );
+        return isRunning;
+      }
     });
 
-    console.log('Search results:', results.length, 'trains found');
+    // Filter available classes if a specific class is selected
+    const filteredResults = results.map((train) => {
+      if (searchCriteria.trainClass && searchCriteria.trainClass !== '') {
+        // Only show the selected class
+        return {
+          ...train,
+          availableClasses: train.availableClasses.filter(
+            (cls) => cls.code === searchCriteria.trainClass
+          ),
+        };
+      }
+      // Show all classes if no specific class is selected
+      return train;
+    });
+
+    console.log('Search results:', filteredResults.length, 'trains found');
+    console.log(
+      'Class filter applied:',
+      searchCriteria.trainClass || 'All Classes'
+    );
     console.log('========================');
-    return results;
+    return filteredResults;
+  }
+
+  private getSearchDates(baseDate: Date, flexible: boolean = false): Date[] {
+    if (!flexible) {
+      return [baseDate];
+    }
+
+    const dates: Date[] = [];
+    const baseTime = new Date(baseDate).getTime();
+
+    // Add ±3 days for flexible search
+    for (let i = -3; i <= 3; i++) {
+      const date = new Date(baseTime + i * 24 * 60 * 60 * 1000);
+      dates.push(date);
+    }
+
+    return dates;
+  }
+
+  private formatDateString(date: Date): string {
+    return date.toISOString().split('T')[0];
+  }
+
+  private isTrainRunningOnDate(train: Train, date: Date): boolean {
+    const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const currentDay = dayNames[dayOfWeek];
+
+    const isRunning = train.runningDays.includes(currentDay);
+    console.log(
+      `Train ${train.trainNumber} on ${date.toDateString()} (${currentDay}): ${
+        isRunning ? 'Running' : 'Not Running'
+      }`
+    );
+    console.log(`Train running days: [${train.runningDays.join(', ')}]`);
+
+    return isRunning;
+  }
+
+  getAvailableDatesForTrain(
+    train: Train,
+    baseDate: Date,
+    flexible: boolean = false
+  ): Date[] {
+    const dates: Date[] = [];
+    const searchDates = this.getSearchDates(baseDate, flexible);
+
+    for (const date of searchDates) {
+      if (this.isTrainRunningOnDate(train, date)) {
+        dates.push(date);
+      }
+    }
+
+    return dates;
   }
 }

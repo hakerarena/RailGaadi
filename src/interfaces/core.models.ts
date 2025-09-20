@@ -16,6 +16,19 @@ export interface RouteStation extends Station {
 }
 
 // Train related interfaces
+export interface TrainClassAvailability {
+  classCode: string;
+  className: string;
+  fare: number;
+  availableSeats: number;
+}
+
+export interface DateAvailability {
+  available: boolean;
+  availableClasses?: TrainClassAvailability[];
+  reason?: string; // For when train is not available
+}
+
 export interface Train {
   trainNumber: string;
   trainName: string;

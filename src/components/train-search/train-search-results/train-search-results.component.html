@@ -3,7 +3,7 @@
   *ngIf="searchResults && searchResults.length > 0"
 >
   <div class="results-header">
-    <h2>Available Trains</h2>
+    <!-- <h2>Available Trains</h2> -->
     <div class="filter-options">
       <mat-form-field appearance="outline" class="sort-field">
         <mat-label>Sort By</mat-label>
@@ -64,25 +64,83 @@
         </div>
 
         <div class="class-availability">
-          <div class="class-card" *ngFor="let class of train.availableClasses">
-            <div class="class-header">
-              <span class="class-name">{{ class.name }}</span>
-              <span class="class-code">({{ class.code }})</span>
+          <!-- Show flexible date options if enabled -->
+          <div
+            *ngIf="
+              isFlexibleSearch && getAvailableDatesForTrain(train).length > 0
+            "
+            class="flexible-dates"
+          >
+            <h4>Available Dates</h4>
+            <div class="date-options">
+              <div
+                *ngFor="let date of getAvailableDatesForTrain(train)"
+                class="date-option"
+              >
+                <div class="date-header">
+                  <span class="date-label">{{ formatDate(date) }}</span>
+                  <span class="date-full">{{ date.toDateString() }}</span>
+                </div>
+                <div class="class-grid">
+                  <div
+                    class="class-card"
+                    *ngFor="
+                      let class of getClassAvailabilityForDate(train, date)
+                    "
+                  >
+                    <div class="class-header">
+                      <span class="class-name">{{ class.name }}</span>
+                      <span class="class-code">({{ class.code }})</span>
+                    </div>
+                    <div
+                      class="availability"
+                      [class.available]="class.availableSeats > 0"
+                    >
+                      {{
+                        class.availableSeats > 0
+                          ? class.availableSeats + " seats"
+                          : "Waiting List"
+                      }}
+                    </div>
+                    <div class="fare">₹{{ class.fare }}</div>
+                    <button
+                      mat-stroked-button
+                      color="primary"
+                      class="book-button"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Regular class availability for non-flexible search -->
+          <div *ngIf="!isFlexibleSearch" class="regular-classes">
             <div
-              class="availability"
-              [class.available]="class.availableSeats > 0"
+              class="class-card"
+              *ngFor="let class of train.availableClasses"
             >
-              {{
-                class.availableSeats > 0
-                  ? class.availableSeats + " seats"
-                  : "Waiting List"
-              }}
+              <div class="class-header">
+                <span class="class-name">{{ class.name }}</span>
+                <span class="class-code">({{ class.code }})</span>
+              </div>
+              <div
+                class="availability"
+                [class.available]="class.availableSeats > 0"
+              >
+                {{
+                  class.availableSeats > 0
+                    ? class.availableSeats + " seats"
+                    : "Waiting List"
+                }}
+              </div>
+              <div class="fare">₹{{ class.fare }}</div>
+              <button mat-stroked-button color="primary" class="book-button">
+                Book Now
+              </button>
             </div>
-            <div class="fare">₹{{ class.fare }}</div>
-            <button mat-stroked-button color="primary" class="book-button">
-              Book Now
-            </button>
           </div>
         </div>
       </mat-card-content>

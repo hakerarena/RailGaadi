@@ -90,7 +90,7 @@ export class TrainSearchFormComponent implements OnInit {
       fromStation: [null, Validators.required],
       toStation: [null, Validators.required],
       journeyDate: [new Date(), Validators.required],
-      travelClass: [this.travelClasses[0].code],
+      travelClass: [''], // Default to "All Classes"
       quota: ['GN'],
       flexibleWithDate: [false],
       divyaangConcession: [false],

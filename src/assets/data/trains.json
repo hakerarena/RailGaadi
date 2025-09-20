@@ -7,7 +7,7 @@
     "departureTime": "16:55",
     "arrivalTime": "08:35",
     "duration": "15h 40m",
-    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "runningDays": ["MON", "TUE", "FRI", "SAT", "SUN"],
     "availableClasses": [
       {
         "classCode": "1A",
@@ -24,7 +24,7 @@
       {
         "classCode": "3A",
         "className": "Third AC",
-        "fare": 1950,
+        "fare": 1950, 
         "availableSeats": 45
       }
     ],
@@ -39,44 +39,37 @@
       {
         "code": "GWL",
         "name": "Gwalior",
-        "arrivalTime": "20:38",
-        "departureTime": "20:40",
+        "arrivalTime": "21:23",
+        "departureTime": "21:25",
         "distance": 319
       },
       {
         "code": "JHS",
         "name": "Jhansi",
-        "arrivalTime": "21:48",
-        "departureTime": "21:53",
+        "arrivalTime": "22:30",
+        "departureTime": "22:35",
         "distance": 415
       },
       {
         "code": "BPL",
         "name": "Bhopal",
-        "arrivalTime": "00:15",
-        "departureTime": "00:20",
+        "arrivalTime": "01:15",
+        "departureTime": "01:20",
         "distance": 707
       },
       {
         "code": "ET",
         "name": "Itarsi",
-        "arrivalTime": "01:05",
-        "departureTime": "01:10",
+        "arrivalTime": "02:03",
+        "departureTime": "02:05",
         "distance": 774
       },
       {
-        "code": "KNW",
-        "name": "Khandwa",
-        "arrivalTime": "02:38",
-        "departureTime": "02:40",
-        "distance": 922
-      },
-      {
-        "code": "BSL",
-        "name": "Bhusaval",
-        "arrivalTime": "04:05",
-        "departureTime": "04:10",
-        "distance": 1056
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "05:35",
+        "departureTime": "05:45",
+        "distance": 1089
       },
       {
         "code": "NK",
@@ -141,30 +134,23 @@
       {
         "code": "IGP",
         "name": "Igatpuri",
-        "arrivalTime": "19:08",
-        "departureTime": "19:10",
+        "arrivalTime": "18:40",
+        "departureTime": "18:42",
         "distance": 69
       },
       {
         "code": "NK",
         "name": "Nashik Road",
-        "arrivalTime": "19:53",
-        "departureTime": "19:55",
+        "arrivalTime": "19:25",
+        "departureTime": "19:27",
         "distance": 146
       },
       {
-        "code": "BSL",
-        "name": "Bhusaval",
-        "arrivalTime": "21:25",
-        "departureTime": "21:30",
-        "distance": 328
-      },
-      {
-        "code": "KNW",
-        "name": "Khandwa",
-        "arrivalTime": "22:52",
-        "departureTime": "22:54",
-        "distance": 462
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "01:35",
+        "departureTime": "01:45",
+        "distance": 295
       },
       {
         "code": "ET",
@@ -221,9 +207,9 @@
       },
       {
         "classCode": "EC",
-        "className": "Executive Chair Car",
-        "fare": 850,
-        "availableSeats": 18
+        "className": "Executive Chair",
+        "fare": 750,
+        "availableSeats": 12
       }
     ],
     "stations": [
@@ -290,28 +276,28 @@
     "trainName": "Rajdhani Express",
     "source": "New Delhi",
     "destination": "Bangalore",
-    "departureTime": "20:00",
-    "arrivalTime": "05:55",
-    "duration": "33h 55m",
+    "departureTime": "20:30",
+    "arrivalTime": "06:00",
+    "duration": "33h 30m",
     "runningDays": ["TUE", "FRI"],
     "availableClasses": [
       {
         "classCode": "1A",
         "className": "First AC",
-        "fare": 8500,
+        "fare": 6500,
         "availableSeats": 5
       },
       {
         "classCode": "2A",
         "className": "Second AC",
-        "fare": 5200,
-        "availableSeats": 22
+        "fare": 4200,
+        "availableSeats": 15
       },
       {
         "classCode": "3A",
         "className": "Third AC",
-        "fare": 3650,
-        "availableSeats": 38
+        "fare": 2900,
+        "availableSeats": 35
       }
     ],
     "stations": [
@@ -319,100 +305,233 @@
         "code": "NDLS",
         "name": "New Delhi",
         "arrivalTime": null,
-        "departureTime": "20:00",
+        "departureTime": "20:30",
         "distance": 0
       },
       {
-        "code": "MTJ",
-        "name": "Mathura",
-        "arrivalTime": "21:33",
-        "departureTime": "21:35",
-        "distance": 145
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "22:45",
+        "departureTime": "22:50",
+        "distance": 199
       },
       {
         "code": "GWL",
         "name": "Gwalior",
-        "arrivalTime": "23:13",
-        "departureTime": "23:15",
+        "arrivalTime": "00:23",
+        "departureTime": "00:25",
         "distance": 319
       },
       {
         "code": "JHS",
         "name": "Jhansi",
-        "arrivalTime": "00:23",
-        "departureTime": "00:28",
+        "arrivalTime": "01:30",
+        "departureTime": "01:35",
         "distance": 415
       },
       {
         "code": "BPL",
         "name": "Bhopal",
-        "arrivalTime": "02:50",
-        "departureTime": "02:55",
+        "arrivalTime": "04:15",
+        "departureTime": "04:20",
         "distance": 707
+      },
+      {
+        "code": "HBJ",
+        "name": "Habibganj",
+        "arrivalTime": "04:35",
+        "departureTime": "04:37",
+        "distance": 720
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "05:03",
+        "departureTime": "05:05",
+        "distance": 774
+      },
+      {
+        "code": "HD",
+        "name": "Harda",
+        "arrivalTime": "05:45",
+        "departureTime": "05:47",
+        "distance": 833
+      },
+      {
+        "code": "KNW",
+        "name": "Khandwa",
+        "arrivalTime": "07:10",
+        "departureTime": "07:15",
+        "distance": 935
+      },
+      {
+        "code": "BSL",
+        "name": "Bhusaval",
+        "arrivalTime": "08:45",
+        "departureTime": "08:55",
+        "distance": 1057
+      },
+      {
+        "code": "MMR",
+        "name": "Manmad",
+        "arrivalTime": "10:35",
+        "departureTime": "10:40",
+        "distance": 1200
+      },
+      {
+        "code": "AK",
+        "name": "Akola",
+        "arrivalTime": "12:15",
+        "departureTime": "12:17",
+        "distance": 1345
+      },
+      {
+        "code": "BD",
+        "name": "Badnera",
+        "arrivalTime": "13:25",
+        "departureTime": "13:30",
+        "distance": 1420
+      },
+      {
+        "code": "WR",
+        "name": "Wardha",
+        "arrivalTime": "14:10",
+        "departureTime": "14:12",
+        "distance": 1475
       },
       {
         "code": "NGP",
         "name": "Nagpur",
-        "arrivalTime": "07:15",
-        "departureTime": "07:25",
-        "distance": 1057
+        "arrivalTime": "15:35",
+        "departureTime": "15:45",
+        "distance": 1554
       },
       {
-        "code": "BZA",
-        "name": "Vijayawada",
-        "arrivalTime": "16:20",
-        "departureTime": "16:30",
-        "distance": 1520
+        "code": "G",
+        "name": "Gondia",
+        "arrivalTime": "17:25",
+        "departureTime": "17:27",
+        "distance": 1684
       },
       {
-        "code": "KPD",
-        "name": "Katpadi",
-        "arrivalTime": "22:18",
-        "departureTime": "22:20",
-        "distance": 1876
+        "code": "DURG",
+        "name": "Durg",
+        "arrivalTime": "19:45",
+        "departureTime": "19:50",
+        "distance": 1897
       },
       {
-        "code": "YPR",
+        "code": "R",
+        "name": "Raipur",
+        "arrivalTime": "20:25",
+        "departureTime": "20:30",
+        "distance": 1928
+      },
+      {
+        "code": "BYT",
+        "name": "Bhatapara",
+        "arrivalTime": "21:05",
+        "departureTime": "21:07",
+        "distance": 1968
+      },
+      {
+        "code": "BSP",
+        "name": "Bilaspur",
+        "arrivalTime": "22:15",
+        "departureTime": "22:25",
+        "distance": 2040
+      },
+      {
+        "code": "SBP",
+        "name": "Sambalpur",
+        "arrivalTime": "01:15",
+        "departureTime": "01:20",
+        "distance": 2298
+      },
+      {
+        "code": "ANGL",
+        "name": "Angul",
+        "arrivalTime": "02:35",
+        "departureTime": "02:37",
+        "distance": 2384
+      },
+      {
+        "code": "TLHD",
+        "name": "Talcher Road",
+        "arrivalTime": "03:05",
+        "departureTime": "03:07",
+        "distance": 2415
+      },
+      {
+        "code": "DNKL",
+        "name": "Dhenkanal",
+        "arrivalTime": "03:45",
+        "departureTime": "03:47",
+        "distance": 2468
+      },
+      {
+        "code": "CTC",
+        "name": "Cuttack",
+        "arrivalTime": "04:35",
+        "departureTime": "04:40",
+        "distance": 2535
+      },
+      {
+        "code": "BBS",
+        "name": "Bhubaneswar",
+        "arrivalTime": "05:15",
+        "departureTime": "05:20",
+        "distance": 2563
+      },
+      {
+        "code": "KUR",
+        "name": "Khurda Road",
+        "arrivalTime": "05:45",
+        "departureTime": "05:50",
+        "distance": 2588
+      },
+      {
+        "code": "SBB",
         "name": "Bangalore",
-        "arrivalTime": "05:55",
+        "arrivalTime": "06:00",
         "departureTime": null,
-        "distance": 2478
+        "distance": 2650
       }
     ]
   },
   {
-    "trainNumber": "12626",
-    "trainName": "Kerala Express",
+    "trainNumber": "12259",
+    "trainName": "Duronto Express",
     "source": "New Delhi",
-    "destination": "Thiruvananthapuram",
-    "departureTime": "11:45",
-    "arrivalTime": "10:15",
-    "duration": "46h 30m",
+    "destination": "Kolkata",
+    "departureTime": "22:25",
+    "arrivalTime": "18:30",
+    "duration": "20h 05m",
     "runningDays": ["MON", "THU"],
     "availableClasses": [
       {
         "classCode": "1A",
         "className": "First AC",
-        "fare": 9500,
-        "availableSeats": 3
+        "fare": 5200,
+        "availableSeats": 10
       },
       {
         "classCode": "2A",
         "className": "Second AC",
-        "fare": 5800,
-        "availableSeats": 18
+        "fare": 3100,
+        "availableSeats": 28
       },
       {
         "classCode": "3A",
         "className": "Third AC",
-        "fare": 4100,
-        "availableSeats": 28
+        "fare": 2200,
+        "availableSeats": 52
       },
       {
         "classCode": "SL",
         "className": "Sleeper",
-        "fare": 1450,
-        "availableSeats": 85
+        "fare": 1200,
+        "availableSeats": 75
       }
     ],
     "stations": [
@@ -420,92 +539,71 @@
         "code": "NDLS",
         "name": "New Delhi",
         "arrivalTime": null,
-        "departureTime": "11:45",
+        "departureTime": "22:25",
         "distance": 0
       },
       {
-        "code": "GWL",
-        "name": "Gwalior",
-        "arrivalTime": "15:28",
+        "code": "CNB",
+        "name": "Kanpur Central",
+        "arrivalTime": "02:40",
+        "departureTime": "02:45",
+        "distance": 441
+      },
+      {
+        "code": "ALD",
+        "name": "Allahabad",
+        "arrivalTime": "05:15",
+        "departureTime": "05:20",
+        "distance": 634
+      },
+      {
+        "code": "MGS",
+        "name": "Mughal Sarai",
+        "arrivalTime": "07:45",
+        "departureTime": "07:50",
+        "distance": 764
+      },
+      {
+        "code": "PNBE",
+        "name": "Patna",
+        "arrivalTime": "11:15",
+        "departureTime": "11:20",
+        "distance": 998
+      },
+      {
+        "code": "DHN",
+        "name": "Dhanbad",
+        "arrivalTime": "15:25",
         "departureTime": "15:30",
-        "distance": 319
+        "distance": 1304
       },
       {
-        "code": "BPL",
-        "name": "Bhopal",
-        "arrivalTime": "18:45",
-        "departureTime": "18:50",
-        "distance": 707
+        "code": "ASN",
+        "name": "Asansol",
+        "arrivalTime": "16:45",
+        "departureTime": "16:47",
+        "distance": 1369
       },
       {
-        "code": "ET",
-        "name": "Itarsi",
-        "arrivalTime": "19:35",
-        "departureTime": "19:40",
-        "distance": 774
+        "code": "DGR",
+        "name": "Durgapur",
+        "arrivalTime": "17:20",
+        "departureTime": "17:22",
+        "distance": 1407
       },
       {
-        "code": "NGP",
-        "name": "Nagpur",
-        "arrivalTime": "00:15",
-        "departureTime": "00:25",
-        "distance": 1057
+        "code": "BWN",
+        "name": "Barddhaman",
+        "arrivalTime": "18:05",
+        "departureTime": "18:07",
+        "distance": 1458
       },
       {
-        "code": "HYB",
-        "name": "Hyderabad",
-        "arrivalTime": "08:40",
-        "departureTime": "08:50",
-        "distance": 1417
-      },
-      {
-        "code": "BZA",
-        "name": "Vijayawada",
-        "arrivalTime": "12:45",
-        "departureTime": "12:55",
-        "distance": 1520
-      },
-      {
-        "code": "MAS",
-        "name": "Chennai Central",
-        "arrivalTime": "19:45",
-        "departureTime": "20:15",
-        "distance": 1760
-      },
-      {
-        "code": "CBE",
-        "name": "Coimbatore",
-        "arrivalTime": "03:15",
-        "departureTime": "03:20",
-        "distance": 2266
-      },
-      {
-        "code": "TCR",
-        "name": "Thrissur",
-        "arrivalTime": "06:45",
-        "departureTime": "06:48",
-        "distance": 2568
-      },
-      {
-        "code": "ERS",
-        "name": "Ernakulam",
-        "arrivalTime": "07:35",
-        "departureTime": "07:40",
-        "distance": 2642
-      },
-      {
-        "code": "ALLP",
-        "name": "Alappuzha",
-        "arrivalTime": "08:28",
-        "departureTime": "08:30",
-        "distance": 2705
-      },
-      {
-        "code": "TVC",
-        "name": "Thiruvananthapuram",
-        "arrivalTime": "10:15",
+        "code": "KOAA",
+        "name": "Kolkata",
+        "arrivalTime": "18:30",
         "departureTime": null,
-        "distance": 2784
+        "distance": 1472
       }
     ]
   }
