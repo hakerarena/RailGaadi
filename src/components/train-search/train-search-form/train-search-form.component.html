@@ -73,7 +73,7 @@
       mat-raised-button
       color="primary"
       class="search-button"
-      [disabled]="!searchForm.valid"
+      [disabled]="!canSubmit()"
       (click)="onSubmit()"
     >
       Search

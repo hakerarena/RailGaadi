@@ -33,17 +33,82 @@ export class SearchResultsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Get search criteria from route state
-    const navigation = this.router.getCurrentNavigation();
-    this.searchCriteria = navigation?.extras?.state?.['searchCriteria'] || null;
+    console.log('SearchResultsPage: Component initialized');
+    console.log('Current URL:', window.location.href);
+    console.log('Router URL:', this.router.url);
 
-    if (!this.searchCriteria) {
-      // If no search criteria, redirect back to home
-      this.router.navigate(['/']);
-      return;
+    // Try multiple ways to get search criteria
+    const navigation = this.router.getCurrentNavigation();
+    console.log('Navigation object:', navigation);
+
+    // Method 1: Current navigation state
+    let searchCriteria = navigation?.extras?.state?.['searchCriteria'];
+    console.log('Method 1 - Current navigation state:', searchCriteria);
+
+    // Method 2: History state
+    if (!searchCriteria && window.history.state) {
+      searchCriteria = window.history.state.searchCriteria;
+      console.log('Method 2 - History state:', searchCriteria);
     }
 
-    this.performSearch();
+    // Method 3: localStorage
+    if (!searchCriteria) {
+      const storedCriteria = localStorage.getItem('searchCriteria');
+      if (storedCriteria) {
+        try {
+          searchCriteria = JSON.parse(storedCriteria);
+          // Convert date string back to Date object
+          if (searchCriteria.journeyDate) {
+            searchCriteria.journeyDate = new Date(searchCriteria.journeyDate);
+          }
+          console.log('Method 3 - localStorage criteria:', searchCriteria);
+          localStorage.removeItem('searchCriteria'); // Clean up
+        } catch (e) {
+          console.error('Error parsing stored criteria:', e);
+        }
+      }
+    }
+
+    // Method 4: Query parameters
+    if (!searchCriteria) {
+      this.route.queryParams.subscribe((params) => {
+        console.log('Query params:', params);
+        if (params['from'] && params['to'] && params['date']) {
+          searchCriteria = {
+            fromStation: { code: params['from'], name: params['from'] },
+            toStation: { code: params['to'], name: params['to'] },
+            journeyDate: new Date(params['date']),
+            trainClass: params['class'] || 'SL',
+            flexibleWithDate: false,
+            personWithDisability: false,
+            availableBerth: true,
+          };
+          console.log('Method 4 - Query params criteria:', searchCriteria);
+          this.searchCriteria = searchCriteria;
+          this.performSearch();
+        }
+      });
+    }
+
+    this.searchCriteria = searchCriteria;
+
+    console.log('Final search criteria:', this.searchCriteria);
+
+    if (this.searchCriteria) {
+      console.log('Starting search with criteria');
+      this.performSearch();
+    } else {
+      console.log(
+        'No search criteria found, waiting for query params or redirecting'
+      );
+      // Small delay to allow query params to be processed
+      setTimeout(() => {
+        if (!this.searchCriteria) {
+          console.log('Still no criteria after delay, redirecting to home');
+          // this.router.navigate(['/']);
+        }
+      }, 1000);
+    }
   }
 
   performSearch(): void {

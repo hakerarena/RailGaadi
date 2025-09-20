@@ -38,13 +38,17 @@ export class StationAutocompleteComponent implements OnInit {
 
   ngOnInit() {
     this.filteredStations = this.control.valueChanges.pipe(
-      startWith(''),
+      startWith(null),
       map((value) => this._filterStations(value || ''))
     );
   }
 
-  private _filterStations(value: string): StationInfo[] {
-    if (typeof value !== 'string') {
+  private _filterStations(value: string | StationInfo): StationInfo[] {
+    if (typeof value === 'object' && value !== null) {
+      return this.stations;
+    }
+
+    if (!value || typeof value !== 'string') {
       return this.stations;
     }
 

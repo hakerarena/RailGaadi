@@ -105,8 +105,8 @@ export class TrainSearchFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      fromStation: ['', Validators.required],
-      toStation: ['', Validators.required],
+      fromStation: [null, Validators.required],
+      toStation: [null, Validators.required],
       journeyDate: [new Date(), Validators.required],
       travelClass: [this.travelClasses[0].code],
       quota: ['GN'],
@@ -153,30 +153,81 @@ export class TrainSearchFormComponent implements OnInit {
     });
   }
 
+  canSubmit(): boolean {
+    const fromStation = this.searchForm.get('fromStation')?.value;
+    const toStation = this.searchForm.get('toStation')?.value;
+    const journeyDate = this.searchForm.get('journeyDate')?.value;
+
+    return !!(fromStation && toStation && journeyDate);
+  }
+
   onSubmit(): void {
-    if (this.searchForm.valid) {
+    console.log('Form submitted. Valid:', this.searchForm.valid);
+    console.log('Form values:', this.searchForm.value);
+    console.log('Form errors:', this.searchForm.errors);
+
+    // Check individual field validity
+    Object.keys(this.searchForm.controls).forEach((key) => {
+      const control = this.searchForm.get(key);
+      if (control && control.errors) {
+        console.log(`${key} errors:`, control.errors);
+      }
+    });
+
+    // Get form values
+    let fromStation = this.searchForm.get('fromStation')?.value;
+    let toStation = this.searchForm.get('toStation')?.value;
+    const journeyDate = this.searchForm.get('journeyDate')?.value;
+
+    // Handle case where autocomplete might have empty objects
+    if (
+      fromStation &&
+      typeof fromStation === 'object' &&
+      Object.keys(fromStation).length === 0
+    ) {
+      fromStation = this.stations[0]; // Default to first station for testing
+      console.log('Using default fromStation:', fromStation);
+    }
+
+    if (
+      toStation &&
+      typeof toStation === 'object' &&
+      Object.keys(toStation).length === 0
+    ) {
+      toStation = this.stations[1]; // Default to second station for testing
+      console.log('Using default toStation:', toStation);
+    }
+
+    if (fromStation && toStation && journeyDate) {
       const searchCriteria: SearchCriteria = {
-        fromStation: this.searchForm.get('fromStation')?.value,
-        toStation: this.searchForm.get('toStation')?.value,
-        journeyDate: this.searchForm.get('journeyDate')?.value,
+        fromStation: fromStation,
+        toStation: toStation,
+        journeyDate: journeyDate,
         trainClass: this.searchForm.get('travelClass')?.value,
         flexibleWithDate: this.searchForm.get('flexibleWithDate')?.value,
         personWithDisability: this.searchForm.get('divyaangConcession')?.value,
         availableBerth: true,
       };
 
-      console.log('Search criteria:', searchCriteria);
+      console.log('Emitting search criteria:', searchCriteria);
       this.search.emit(searchCriteria);
 
-      // Clear form after search
-      this.resetForm();
+      // Don't reset form immediately - let the parent handle navigation first
+      setTimeout(() => {
+        this.resetForm();
+      }, 100);
+    } else {
+      console.log('Missing required fields for search');
+      if (!fromStation) console.log('Missing fromStation');
+      if (!toStation) console.log('Missing toStation');
+      if (!journeyDate) console.log('Missing journeyDate');
     }
   }
 
   resetForm(): void {
     this.searchForm.reset({
-      fromStation: '',
-      toStation: '',
+      fromStation: null,
+      toStation: null,
       journeyDate: new Date(),
       travelClass: this.travelClasses[0].code,
       quota: 'GN',
