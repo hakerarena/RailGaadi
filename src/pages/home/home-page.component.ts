@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TrainSearchFormComponent } from '../../components/train-search/train-search-form/train-search-form.component';
 import { SearchCriteria } from '../../interfaces';
 import { APP_CONSTANTS } from '../../constants/app.constants';
-import { SearchGuard } from '../../guards/search.guard';
 import { NavigationService } from '../../services/navigation.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { NavigationService } from '../../services/navigation.service';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   standalone: true,
-  imports: [CommonModule, TrainSearchFormComponent],
+  imports: [CommonModule, TrainSearchFormComponent, RouterModule],
 })
 export class HomePageComponent {
   readonly constants = APP_CONSTANTS;
@@ -27,7 +26,8 @@ export class HomePageComponent {
       return;
     }
 
-    SearchGuard.markValidNavigation();
+    // Mark navigation as valid for all guards
+    this.navigationService.markValidNavigation();
     this.navigationService.markSearchSession();
 
     this.router

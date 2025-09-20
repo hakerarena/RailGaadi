@@ -6,6 +6,9 @@
     [formControl]="control"
     [placeholder]="placeholder"
     [matAutocomplete]="auto"
+    (click)="onInputClick()"
+    (focus)="onInputClick()"
+    #autoCompleteInput
   />
   <button
     *ngIf="showSwapButton"
@@ -18,7 +21,11 @@
   >
     <mat-icon>swap_horiz</mat-icon>
   </button>
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayStation">
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayStation"
+    autoActiveFirstOption="true"
+  >
     <mat-option
       *ngFor="let station of filteredStations | async"
       [value]="station"

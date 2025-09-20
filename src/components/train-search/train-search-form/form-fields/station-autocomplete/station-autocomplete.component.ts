@@ -1,11 +1,22 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteTrigger,
+} from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { StationInfo } from '../../../../../interfaces';
@@ -33,14 +44,24 @@ export class StationAutocompleteComponent implements OnInit {
   @Input() stations: StationInfo[] = [];
   @Input() showSwapButton: boolean = false;
   @Output() swapStations = new EventEmitter<void>();
+  @ViewChild('autoCompleteInput', { read: MatAutocompleteTrigger })
+  autocompleteTrigger!: MatAutocompleteTrigger;
 
   filteredStations!: Observable<StationInfo[]>;
 
   ngOnInit() {
     this.filteredStations = this.control.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       map((value) => this._filterStations(value || ''))
     );
+  }
+
+  onInputClick() {
+    if (this.autocompleteTrigger) {
+      if (!this.autocompleteTrigger.panelOpen) {
+        this.autocompleteTrigger.openPanel();
+      }
+    }
   }
 
   private _filterStations(value: string | StationInfo): StationInfo[] {
@@ -48,7 +69,7 @@ export class StationAutocompleteComponent implements OnInit {
       return this.stations;
     }
 
-    if (!value || typeof value !== 'string') {
+    if (!value || typeof value !== 'string' || value.trim() === '') {
       return this.stations;
     }
 

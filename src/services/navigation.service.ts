@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { SearchGuard } from '../guards/search.guard';
+import { RefreshGuard } from '../guards/refresh.guard';
 
 @Injectable({
   providedIn: 'root',
@@ -6,6 +8,12 @@ import { Injectable } from '@angular/core';
 export class NavigationService {
   private static readonly SEARCH_SESSION_KEY = 'irctc_search_session';
   private static readonly SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+
+  // Mark navigation as valid for all guards
+  markValidNavigation(): void {
+    SearchGuard.markValidNavigation();
+    RefreshGuard.markValidNavigation();
+  }
 
   // Mark that a valid search session has started
   markSearchSession(): void {
