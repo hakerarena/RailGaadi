@@ -114,5 +114,121 @@
       "mobile": "9654321098",
       "email": "amit.patel@email.com"
     }
+  },
+  {
+    "pnr": "2301234570",
+    "bookingDate": "2024-02-01T16:20:00.000Z",
+    "journeyDate": "2024-02-28",
+    "trainNumber": "12626",
+    "trainName": "Kerala Express",
+    "from": {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "departureTime": "11:00"
+    },
+    "to": {
+      "code": "TVC",
+      "name": "Trivandrum Central",
+      "arrivalTime": "15:20"
+    },
+    "passengers": [
+      {
+        "name": "Sarah Wilson",
+        "age": 45,
+        "gender": "Female",
+        "seatNumber": "B1-22",
+        "status": "Confirmed"
+      }
+    ],
+    "classCode": "2A",
+    "className": "Second AC",
+    "totalFare": 2890,
+    "bookingStatus": "Confirmed",
+    "contactDetails": {
+      "mobile": "9876543210",
+      "email": "user@irctc.com"
+    }
+  },
+  {
+    "pnr": "2301234571",
+    "bookingDate": "2024-01-10T08:45:00.000Z",
+    "journeyDate": "2024-01-30",
+    "trainNumber": "12229",
+    "trainName": "Lucknow Mail",
+    "from": {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "departureTime": "22:30"
+    },
+    "to": {
+      "code": "LKO",
+      "name": "Lucknow",
+      "arrivalTime": "06:15"
+    },
+    "passengers": [
+      {
+        "name": "Emma Davis",
+        "age": 31,
+        "gender": "Female",
+        "seatNumber": "S8-25",
+        "status": "Cancelled"
+      }
+    ],
+    "classCode": "SL",
+    "className": "Sleeper",
+    "totalFare": 365,
+    "bookingStatus": "Cancelled",
+    "contactDetails": {
+      "mobile": "9876543210",
+      "email": "user@irctc.com"
+    }
+  },
+  {
+    "pnr": "2301234572",
+    "bookingDate": "2024-02-12T15:20:00.000Z",
+    "journeyDate": "2024-03-15",
+    "trainNumber": "12019",
+    "trainName": "Dehradun Shatabdi",
+    "from": {
+      "code": "NDLS",
+      "name": "New Delhi",
+      "departureTime": "06:50"
+    },
+    "to": {
+      "code": "DDN",
+      "name": "Dehradun",
+      "arrivalTime": "12:50"
+    },
+    "passengers": [
+      {
+        "name": "Chris Taylor",
+        "age": 39,
+        "gender": "Male",
+        "seatNumber": "CC-78",
+        "status": "Confirmed"
+      },
+      {
+        "name": "Anna Taylor",
+        "age": 36,
+        "gender": "Female",
+        "seatNumber": "CC-79",
+        "status": "Confirmed"
+      },
+      {
+        "name": "Tommy Taylor",
+        "age": 8,
+        "gender": "Male",
+        "seatNumber": "CC-80",
+        "status": "Confirmed"
+      }
+    ],
+    "classCode": "CC",
+    "className": "Chair Car",
+    "totalFare": 1485,
+    "bookingStatus": "Confirmed",
+    "contactDetails": {
+      "mobile": "9876543210",
+      "email": "user@irctc.com"
+    }
   }
 ]

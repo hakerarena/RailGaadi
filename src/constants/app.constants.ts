@@ -1,6 +1,6 @@
 // Application Constants
 export const APP_CONSTANTS = {
-  APP_NAME: 'Chakr AI',
+  APP_NAME: 'RAILGAADI',
   APP_VERSION: '1.0.0',
 
   // Navigation Links
