@@ -27,9 +27,7 @@ import {
   Quota,
 } from '../../../interfaces';
 import { APP_CONSTANTS } from '../../../constants/app.constants';
-
-// Mock station data (replace with real data or import as needed)
-const STATIONS: StationInfo[] = APP_CONSTANTS.MOCK_DATA.STATIONS;
+import { DataService } from '../../../services/data.service';
 
 const TRAVEL_CLASSES: TravelClass[] = APP_CONSTANTS.FORM_DATA.TRAVEL_CLASSES;
 
@@ -55,7 +53,7 @@ export class TrainSearchFormComponent implements OnInit {
   @Output() search = new EventEmitter<SearchCriteria>();
 
   searchForm!: FormGroup;
-  stations: StationInfo[] = STATIONS;
+  stations: StationInfo[] = [];
   travelClasses: TravelClass[] = TRAVEL_CLASSES;
   quotas: Quota[] = QUOTAS;
 
@@ -63,7 +61,7 @@ export class TrainSearchFormComponent implements OnInit {
   minDate = new Date();
   maxDate = new Date(new Date().setMonth(new Date().getMonth() + 4));
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private dataService: DataService) {}
 
   // Getter methods for form controls
   get fromStationControl(): FormControl {
@@ -87,6 +85,7 @@ export class TrainSearchFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Initialize the form
     this.searchForm = this.fb.group({
       fromStation: [null, Validators.required],
       toStation: [null, Validators.required],
@@ -96,6 +95,19 @@ export class TrainSearchFormComponent implements OnInit {
       flexibleWithDate: [false],
       divyaangConcession: [false],
       railwayPass: [false],
+    });
+
+    // Load stations from DataService
+    this.dataService.getStations().subscribe({
+      next: (stations) => {
+        this.stations = stations;
+        console.log('Stations loaded in component:', this.stations.length);
+      },
+      error: (error) => {
+        console.error('Error loading stations:', error);
+        // Fallback to mock data if service fails
+        this.stations = APP_CONSTANTS.MOCK_DATA.STATIONS;
+      },
     });
   }
 

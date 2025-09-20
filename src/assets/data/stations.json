@@ -178,5 +178,11 @@
     "name": "Igatpuri",
     "state": "Maharashtra",
     "zone": "Central Railway"
+  },
+  {
+    "code": "PRYJ",
+    "name": "Prayagraj Junction",
+    "state": "Uttar Pradesh",
+    "zone": "North Central Railway"
   }
 ]
