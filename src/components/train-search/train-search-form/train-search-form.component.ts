@@ -6,17 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
-// Material Modules
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
+// Material Modules (only used directly in template)
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -51,12 +43,6 @@ const QUOTAS: Quota[] = APP_CONSTANTS.FORM_DATA.QUOTAS;
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
@@ -76,9 +62,6 @@ export class TrainSearchFormComponent implements OnInit {
   // Date limits (4 months from today)
   minDate = new Date();
   maxDate = new Date(new Date().setMonth(new Date().getMonth() + 4));
-
-  fromFilteredStations!: Observable<StationInfo[]>;
-  toFilteredStations!: Observable<StationInfo[]>;
 
   constructor(private fb: FormBuilder) {}
 
@@ -114,33 +97,6 @@ export class TrainSearchFormComponent implements OnInit {
       divyaangConcession: [false],
       railwayPass: [false],
     });
-
-    this.fromFilteredStations = this.searchForm
-      .get('fromStation')!
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => (typeof value === 'string' ? value : value.name)),
-        map((name) => (name ? this._filter(name) : this.stations.slice()))
-      );
-
-    this.toFilteredStations = this.searchForm
-      .get('toStation')!
-      .valueChanges.pipe(
-        startWith(''),
-        map((value) => (typeof value === 'string' ? value : value.name)),
-        map((name) => (name ? this._filter(name) : this.stations.slice()))
-      );
-  }
-
-  private _filter(name: string): StationInfo[] {
-    const filterValue = name.toLowerCase();
-    return this.stations.filter((station) =>
-      station.name.toLowerCase().includes(filterValue)
-    );
-  }
-
-  displayStation(station: Station): string {
-    return station && station.name ? station.name : '';
   }
 
   swapStations(): void {

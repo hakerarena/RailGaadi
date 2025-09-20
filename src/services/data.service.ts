@@ -1,14 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import {
-  SearchCriteria,
-  RouteStation,
-  Station,
-  Train,
-  StationInfo,
-} from '../interfaces';
+import { SearchCriteria, RouteStation, Train } from '../interfaces';
 import { APP_CONSTANTS } from '../constants/app.constants';
 import trainsData from '../../assets/data/trains.json';
 
@@ -16,10 +7,9 @@ import trainsData from '../../assets/data/trains.json';
   providedIn: 'root',
 })
 export class DataService {
-  private stations$ = new BehaviorSubject<Station[]>([]);
   private _trainDetails: Train[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.loadInitialData();
   }
 
@@ -78,12 +68,6 @@ export class DataService {
     });
   }
 
-  // // Load stations data
-  // this.http
-  //   .get<Station[]>('assets/data/stations.json')
-  //   .pipe(catchError(() => of([]))) // On error, return an empty array
-  //   .subscribe((stations) => this.stations$.next(stations));
-
   // Train related methods
   getTrains() {
     return this._trainDetails;
@@ -125,28 +109,5 @@ export class DataService {
 
     console.log('Found trains:', results);
     return results;
-  }
-
-  // getTrainByNumber(trainNumber: string): Observable<Train | undefined> {
-  //   return this.getTrains().pipe(
-  //     map((trains) => trains.find((t) => t.trainNo === trainNumber))
-  //   );
-  // }
-
-  // Station related methods
-  getStations(): Observable<Station[]> {
-    return this.stations$.asObservable();
-  }
-
-  searchStations(query: string): Observable<Station[]> {
-    return this.getStations().pipe(
-      map((stations) =>
-        stations.filter(
-          (station) =>
-            station.name.toLowerCase().includes(query.toLowerCase()) ||
-            station.code.toLowerCase().includes(query.toLowerCase())
-        )
-      )
-    );
   }
 }
