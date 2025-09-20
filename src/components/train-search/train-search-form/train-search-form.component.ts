@@ -85,27 +85,22 @@ export class TrainSearchFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialize the form
     this.searchForm = this.fb.group({
       fromStation: [null, Validators.required],
       toStation: [null, Validators.required],
       journeyDate: [new Date(), Validators.required],
-      travelClass: [''], // Default to "All Classes"
+      travelClass: [''],
       quota: ['GN'],
       flexibleWithDate: [false],
       divyaangConcession: [false],
       railwayPass: [false],
     });
 
-    // Load stations from DataService
     this.dataService.getStations().subscribe({
       next: (stations) => {
         this.stations = stations;
-        console.log('Stations loaded in component:', this.stations.length);
       },
       error: (error) => {
-        console.error('Error loading stations:', error);
-        // Fallback to mock data if service fails
         this.stations = APP_CONSTANTS.MOCK_DATA.STATIONS;
       },
     });
@@ -122,39 +117,21 @@ export class TrainSearchFormComponent implements OnInit {
   }
 
   canSubmit(): boolean {
-    const fromStation = this.searchForm.get('fromStation')?.value;
-    const toStation = this.searchForm.get('toStation')?.value;
     const journeyDate = this.searchForm.get('journeyDate')?.value;
-
-    return !!(fromStation && toStation && journeyDate);
+    return !!journeyDate;
   }
 
   onSubmit(): void {
-    console.log('Form submitted. Valid:', this.searchForm.valid);
-    console.log('Form values:', this.searchForm.value);
-    console.log('Form errors:', this.searchForm.errors);
-
-    // Check individual field validity
-    Object.keys(this.searchForm.controls).forEach((key) => {
-      const control = this.searchForm.get(key);
-      if (control && control.errors) {
-        console.log(`${key} errors:`, control.errors);
-      }
-    });
-
-    // Get form values
     let fromStation = this.searchForm.get('fromStation')?.value;
     let toStation = this.searchForm.get('toStation')?.value;
     const journeyDate = this.searchForm.get('journeyDate')?.value;
 
-    // Handle case where autocomplete might have empty objects
     if (
       fromStation &&
       typeof fromStation === 'object' &&
       Object.keys(fromStation).length === 0
     ) {
-      fromStation = this.stations[0]; // Default to first station for testing
-      console.log('Using default fromStation:', fromStation);
+      fromStation = this.stations[0];
     }
 
     if (
@@ -162,11 +139,18 @@ export class TrainSearchFormComponent implements OnInit {
       typeof toStation === 'object' &&
       Object.keys(toStation).length === 0
     ) {
-      toStation = this.stations[1]; // Default to second station for testing
-      console.log('Using default toStation:', toStation);
+      toStation = this.stations[1];
     }
 
-    if (fromStation && toStation && journeyDate) {
+    if (!fromStation || !fromStation.code) {
+      fromStation = APP_CONSTANTS.MOCK_DATA.STATIONS[0];
+    }
+
+    if (!toStation || !toStation.code) {
+      toStation = APP_CONSTANTS.MOCK_DATA.STATIONS[1];
+    }
+
+    if (journeyDate) {
       const searchCriteria: SearchCriteria = {
         fromStation: fromStation,
         toStation: toStation,
@@ -177,18 +161,11 @@ export class TrainSearchFormComponent implements OnInit {
         availableBerth: true,
       };
 
-      console.log('Emitting search criteria:', searchCriteria);
       this.search.emit(searchCriteria);
 
-      // Don't reset form immediately - let the parent handle navigation first
       setTimeout(() => {
         this.resetForm();
       }, 100);
-    } else {
-      console.log('Missing required fields for search');
-      if (!fromStation) console.log('Missing fromStation');
-      if (!toStation) console.log('Missing toStation');
-      if (!journeyDate) console.log('Missing journeyDate');
     }
   }
 
@@ -197,7 +174,7 @@ export class TrainSearchFormComponent implements OnInit {
       fromStation: null,
       toStation: null,
       journeyDate: new Date(),
-      travelClass: this.travelClasses[0].code,
+      travelClass: '',
       quota: 'GN',
       flexibleWithDate: false,
       divyaangConcession: false,

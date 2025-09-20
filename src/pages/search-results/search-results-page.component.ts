@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { SearchCriteria, Train } from '../../interfaces';
 import { DataService } from '../../services/data.service';
 import { APP_CONSTANTS } from '../../constants/app.constants';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'app-search-results-page',
@@ -20,7 +21,7 @@ import { APP_CONSTANTS } from '../../constants/app.constants';
     LoadingSpinnerComponent,
   ],
 })
-export class SearchResultsPageComponent implements OnInit {
+export class SearchResultsPageComponent implements OnInit, OnDestroy {
   searchResults: Train[] = [];
   isSearching: boolean = true;
   searchCriteria: SearchCriteria | null = null;
@@ -29,50 +30,35 @@ export class SearchResultsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit(): void {
-    console.log('SearchResultsPage: Component initialized');
-    console.log('Current URL:', window.location.href);
-    console.log('Router URL:', this.router.url);
-
-    // Try multiple ways to get search criteria
     const navigation = this.router.getCurrentNavigation();
-    console.log('Navigation object:', navigation);
-
-    // Method 1: Current navigation state
     let searchCriteria = navigation?.extras?.state?.['searchCriteria'];
-    console.log('Method 1 - Current navigation state:', searchCriteria);
 
-    // Method 2: History state
     if (!searchCriteria && window.history.state) {
       searchCriteria = window.history.state.searchCriteria;
-      console.log('Method 2 - History state:', searchCriteria);
     }
 
-    // Method 3: localStorage
     if (!searchCriteria) {
       const storedCriteria = localStorage.getItem('searchCriteria');
       if (storedCriteria) {
         try {
           searchCriteria = JSON.parse(storedCriteria);
-          // Convert date string back to Date object
           if (searchCriteria.journeyDate) {
             searchCriteria.journeyDate = new Date(searchCriteria.journeyDate);
           }
-          console.log('Method 3 - localStorage criteria:', searchCriteria);
-          localStorage.removeItem('searchCriteria'); // Clean up
+          localStorage.removeItem('searchCriteria');
         } catch (e) {
           console.error('Error parsing stored criteria:', e);
         }
       }
     }
 
-    // Method 4: Query parameters
     if (!searchCriteria) {
       this.route.queryParams.subscribe((params) => {
-        console.log('Query params:', params);
         if (params['from'] && params['to'] && params['date']) {
           searchCriteria = {
             fromStation: { code: params['from'], name: params['from'] },
@@ -83,7 +69,6 @@ export class SearchResultsPageComponent implements OnInit {
             personWithDisability: false,
             availableBerth: true,
           };
-          console.log('Method 4 - Query params criteria:', searchCriteria);
           this.searchCriteria = searchCriteria;
           this.performSearch();
         }
@@ -92,41 +77,24 @@ export class SearchResultsPageComponent implements OnInit {
 
     this.searchCriteria = searchCriteria;
 
-    console.log('Final search criteria:', this.searchCriteria);
-
     if (this.searchCriteria) {
-      console.log('Starting search with criteria');
       this.performSearch();
-    } else {
-      console.log(
-        'No search criteria found, waiting for query params or redirecting'
-      );
-      // Small delay to allow query params to be processed
-      setTimeout(() => {
-        if (!this.searchCriteria) {
-          console.log('Still no criteria after delay, redirecting to home');
-          // this.router.navigate(['/']);
-        }
-      }, 1000);
     }
   }
 
   performSearch(): void {
     if (!this.searchCriteria) return;
 
-    console.log('Performing search with criteria:', this.searchCriteria);
     this.isSearching = true;
 
     try {
       const results = this.dataService.searchTrains(this.searchCriteria);
 
-      // Simulate async operation for better UX
       setTimeout(() => {
         this.searchResults = results;
         this.isSearching = false;
       }, 800);
     } catch (error) {
-      console.error('Search error:', error);
       this.isSearching = false;
       this.searchResults = [];
     }
@@ -134,6 +102,15 @@ export class SearchResultsPageComponent implements OnInit {
 
   onNewSearch(): void {
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy(): void {
+    this.navigationService.clearSearchSession();
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event: BeforeUnloadEvent): void {
+    this.navigationService.clearSearchSession();
   }
 
   get showResults(): boolean {
