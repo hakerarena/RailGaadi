@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { CommonModule, AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 // Material Modules
 import { MatInputModule } from '@angular/material/input';
@@ -31,19 +31,39 @@ import {
 const STATIONS: StationInfo[] = [
   { code: 'NDLS', name: 'New Delhi' },
   { code: 'BCT', name: 'Mumbai Central' },
-  { code: 'HWH', name: 'Howrah Junction' },
-  { code: 'MAS', name: 'Chennai Central' },
-  { code: 'SBC', name: 'KSR Bengaluru' },
+  { code: 'HWH', name: 'Howrah' },
+  { code: 'CSMT', name: 'Mumbai CSMT' },
+  { code: 'BPL', name: 'Bhopal' },
+  { code: 'PNBE', name: 'Patna' },
 ];
 
-const TRAIN_CLASSES: string[] = [
-  'Sleeper (SL)',
-  'AC 3 Tier (3A)',
-  'AC 2 Tier (2A)',
-  'AC First Class (1A)',
-  'Second Sitting (2S)',
-  'Chair Car (CC)',
-  'Third AC Economy (3E)',
+interface TravelClass {
+  code: string;
+  name: string;
+}
+
+interface Quota {
+  code: string;
+  name: string;
+}
+
+const TRAVEL_CLASSES: TravelClass[] = [
+  { code: 'SL', name: 'Sleeper (SL)' },
+  { code: '3A', name: 'AC 3 Tier (3A)' },
+  { code: '2A', name: 'AC 2 Tier (2A)' },
+  { code: '1A', name: 'AC First Class (1A)' },
+  { code: '2S', name: 'Second Sitting (2S)' },
+  { code: 'CC', name: 'Chair Car (CC)' },
+  { code: '3E', name: 'Third AC Economy (3E)' },
+];
+
+const QUOTAS: Quota[] = [
+  { code: 'GN', name: 'General' },
+  { code: 'TQ', name: 'Tatkal' },
+  { code: 'LD', name: 'Ladies' },
+  { code: 'SS', name: 'Senior Citizen' },
+  { code: 'PH', name: 'Divyaang' },
+  { code: 'DF', name: 'Duty Pass' },
 ];
 
 @Component({
@@ -57,7 +77,6 @@ const TRAIN_CLASSES: string[] = [
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
-    AsyncPipe,
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
@@ -71,7 +90,12 @@ export class TrainSearchFormComponent implements OnInit {
 
   searchForm!: FormGroup;
   stations: StationInfo[] = STATIONS;
-  trainClasses: string[] = TRAIN_CLASSES;
+  travelClasses: TravelClass[] = TRAVEL_CLASSES;
+  quotas: Quota[] = QUOTAS;
+
+  // Date limits (4 months from today)
+  minDate = new Date();
+  maxDate = new Date(new Date().setMonth(new Date().getMonth() + 4));
 
   fromFilteredStations!: Observable<StationInfo[]>;
   toFilteredStations!: Observable<StationInfo[]>;
@@ -83,10 +107,11 @@ export class TrainSearchFormComponent implements OnInit {
       fromStation: ['', Validators.required],
       toStation: ['', Validators.required],
       journeyDate: [new Date(), Validators.required],
-      trainClass: [this.trainClasses[0]],
+      travelClass: [this.travelClasses[0].code],
+      quota: ['GN'],
       flexibleWithDate: [false],
-      disabilityConcession: [false],
-      availableBerth: [false],
+      divyaangConcession: [false],
+      railwayPass: [false],
     });
 
     this.fromFilteredStations = this.searchForm
@@ -117,9 +142,30 @@ export class TrainSearchFormComponent implements OnInit {
     return station && station.name ? station.name : '';
   }
 
-  onSearch(): void {
+  swapStations(): void {
+    const fromStation = this.searchForm.get('fromStation')?.value;
+    const toStation = this.searchForm.get('toStation')?.value;
+
+    this.searchForm.patchValue({
+      fromStation: toStation,
+      toStation: fromStation,
+    });
+  }
+
+  onSubmit(): void {
     if (this.searchForm.valid) {
-      this.search.emit(this.searchForm.value);
+      const searchCriteria: SearchCriteria = {
+        fromStation: this.searchForm.get('fromStation')?.value,
+        toStation: this.searchForm.get('toStation')?.value,
+        journeyDate: this.searchForm.get('journeyDate')?.value,
+        trainClass: this.searchForm.get('travelClass')?.value,
+        flexibleWithDate: this.searchForm.get('flexibleWithDate')?.value,
+        personWithDisability: this.searchForm.get('divyaangConcession')?.value,
+        availableBerth: true,
+      };
+
+      console.log('Search criteria:', searchCriteria);
+      this.search.emit(searchCriteria);
     }
   }
 }

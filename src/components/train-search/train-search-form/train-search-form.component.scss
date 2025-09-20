@@ -1,31 +1,109 @@
+@use "sass:color";
+
+$primary-color: #213d77;
+$secondary-color: #f2f2f2;
+$accent-color: #ff6b6b;
+
 .search-container {
   background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 2rem auto;
-  max-width: 1200px;
-  width: 90%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .form-row {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
+  margin-bottom: 1.5rem;
 
-.form-field {
-  flex: 1;
-  min-width: 200px;
-  max-width: 300px;
+  &.stations-row {
+    align-items: center;
+
+    .form-field {
+      flex: 1;
+
+      ::ng-deep {
+        .mat-form-field-prefix {
+          margin-right: 8px;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  &.details-row {
+    flex-wrap: wrap;
+
+    mat-form-field {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+
+  &.options-row {
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 1rem 0;
+
+    mat-checkbox {
+      color: #666;
+    }
+  }
+
+  &.button-row {
+    justify-content: center;
+    margin-top: 2rem;
+  }
 }
 
 .swap-button {
-  margin: 0 0.5rem;
-  color: #3f51b5;
+  background-color: $secondary-color;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  mat-icon {
+    color: $primary-color;
+  }
+
+  &:hover {
+    background-color: color.adjust($secondary-color, $lightness: -5%);
+    transform: scale(1.05);
+  }
+}
+
+.search-button {
+  padding: 0.75rem 3rem;
+  font-size: 1.1rem;
+  background-color: $primary-color;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -10%);
+  }
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline {
+      color: #ddd;
+    }
+
+    &.mat-focused .mat-form-field-outline-thick {
+      color: $primary-color;
+    }
+  }
+
+  .mat-datepicker-toggle {
+    color: $primary-color;
+  }
+
+  .mat-checkbox-checked .mat-checkbox-background {
+    background-color: $primary-color !important;
+  }
 }
 
 // Class Selector Row

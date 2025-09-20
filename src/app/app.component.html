@@ -1,7 +1,81 @@
-<header class="app-header">
-  <h1>IRCTC Clone</h1>
-</header>
-<app-train-search-form (search)="searchTrains($event)"></app-train-search-form>
-<app-train-search-results
-  [searchResults]="searchResults"
-></app-train-search-results>
+<div class="app-container">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Ask Hobbit</a>
+        <a href="#">Alerts</a>
+        <a href="#">Help</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="app-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <h1>Optimized IRCTC</h1>
+        </div>
+        <nav class="main-nav">
+          <a href="#" class="active">Book Ticket</a>
+          <a href="#">PNR Status</a>
+          <a href="#">My Transactions</a>
+          <a href="#">My Profile</a>
+        </nav>
+        <div class="auth-buttons">
+          <button mat-button>Login</button>
+          <button mat-raised-button color="primary">Register</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Booking Section -->
+      <section class="booking-section">
+        <div class="booking-card">
+          <app-train-search-form
+            (search)="searchTrains($event)"
+          ></app-train-search-form>
+        </div>
+      </section>
+
+      <!-- Results Section -->
+      <section class="results-section" *ngIf="searchResults?.length">
+        <app-train-search-results
+          [searchResults]="searchResults"
+        ></app-train-search-results>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About Us</h3>
+          <a href="#">About IRCTC</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+        <div class="footer-section">
+          <h3>Popular Services</h3>
+          <a href="#">Train Ticket Booking</a>
+          <a href="#">Check PNR Status</a>
+          <a href="#">Train Schedule</a>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="#">FAQs</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Feedback</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

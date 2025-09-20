@@ -1,5 +1,5 @@
 export interface Train {
-  trainNo: string;
+  trainNumber: string;
   trainName: string;
   source: string;
   destination: string;
@@ -7,8 +7,8 @@ export interface Train {
   arrivalTime: string;
   duration: string;
   runningDays: string[];
-  availableClasses: TrainClass[];
-  stations: Station[];
+  availableClasses: AvailableClass[];
+  stations: RouteStation[];
 }
 
 export interface TrainClass {

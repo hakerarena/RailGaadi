@@ -1,5 +1,5 @@
 <div class="search-container" [formGroup]="searchForm">
-  <div class="form-row">
+  <div class="form-row stations-row">
     <!-- From Station -->
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>From</mat-label>
@@ -11,6 +11,7 @@
         formControlName="fromStation"
         [matAutocomplete]="fromAuto"
       />
+      <mat-icon matPrefix>location_on</mat-icon>
       <mat-autocomplete
         #fromAuto="matAutocomplete"
         [displayWith]="displayStation"
@@ -22,10 +23,18 @@
           {{ station.name }} ({{ station.code }})
         </mat-option>
       </mat-autocomplete>
+      <mat-error *ngIf="searchForm.get('fromStation')?.errors?.['required']">
+        Please select a station
+      </mat-error>
     </mat-form-field>
 
     <!-- Swap Button -->
-    <button mat-icon-button class="swap-button" aria-label="Swap stations">
+    <button
+      mat-icon-button
+      class="swap-button"
+      (click)="swapStations()"
+      aria-label="Swap stations"
+    >
       <mat-icon>swap_horiz</mat-icon>
     </button>
 
@@ -40,6 +49,7 @@
         formControlName="toStation"
         [matAutocomplete]="toAuto"
       />
+      <mat-icon matPrefix>location_on</mat-icon>
       <mat-autocomplete
         #toAuto="matAutocomplete"
         [displayWith]="displayStation"
@@ -51,48 +61,75 @@
           {{ station.name }} ({{ station.code }})
         </mat-option>
       </mat-autocomplete>
+      <mat-error *ngIf="searchForm.get('toStation')?.errors?.['required']">
+        Please select a station
+      </mat-error>
     </mat-form-field>
+  </div>
 
+  <div class="form-row details-row">
     <!-- Journey Date -->
-    <mat-form-field appearance="outline" class="form-field">
+    <mat-form-field appearance="outline">
       <mat-label>Journey Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="journeyDate" />
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="journeyDate"
+        [min]="minDate"
+        [max]="maxDate"
+        placeholder="Choose a date"
+      />
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="searchForm.get('journeyDate')?.errors?.['required']">
+        Please select a date
+      </mat-error>
     </mat-form-field>
 
-    <!-- Train Class -->
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>All Classes</mat-label>
-      <mat-select formControlName="trainClass">
-        <mat-option *ngFor="let class of trainClasses" [value]="class">
-          {{ class }}
+    <!-- Travel Class -->
+    <mat-form-field appearance="outline">
+      <mat-label>Travel Class</mat-label>
+      <mat-select formControlName="travelClass">
+        <mat-option *ngFor="let class of travelClasses" [value]="class.code">
+          {{ class.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Quota -->
+    <mat-form-field appearance="outline">
+      <mat-label>Quota</mat-label>
+      <mat-select formControlName="quota">
+        <mat-option *ngFor="let quota of quotas" [value]="quota.code">
+          {{ quota.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 
-  <div class="form-row checkboxes-row">
-    <mat-checkbox formControlName="flexibleWithDate"
-      >Flexible with Date</mat-checkbox
-    >
-    <mat-checkbox formControlName="disabilityConcession"
-      >Person With Disability Concession</mat-checkbox
-    >
-    <mat-checkbox formControlName="availableBerth"
-      >Train with Available Berth</mat-checkbox
-    >
+  <div class="form-row options-row">
+    <!-- Additional Options -->
+    <mat-checkbox formControlName="flexibleWithDate">
+      Flexible with date
+    </mat-checkbox>
+    <mat-checkbox formControlName="divyaangConcession">
+      Person with disability concession
+    </mat-checkbox>
+    <mat-checkbox formControlName="railwayPass">
+      Railway pass concession
+    </mat-checkbox>
   </div>
 
   <div class="form-row button-row">
     <button
       mat-raised-button
       color="primary"
-      (click)="onSearch()"
+      class="search-button"
       [disabled]="!searchForm.valid"
+      (click)="onSubmit()"
     >
       Search
     </button>

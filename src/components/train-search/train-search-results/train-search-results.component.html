@@ -2,50 +2,104 @@
   class="results-container"
   *ngIf="searchResults && searchResults.length > 0"
 >
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-    <!-- Train No Column -->
-    <ng-container matColumnDef="trainNo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Train No.</th>
-      <td mat-cell *matCellDef="let train">{{ train.trainNo }}</td>
-    </ng-container>
+  <div class="results-header">
+    <h2>Available Trains</h2>
+    <div class="filter-options">
+      <mat-form-field appearance="outline" class="sort-field">
+        <mat-label>Sort By</mat-label>
+        <mat-select [(value)]="sortBy" (selectionChange)="onSort(sortBy)">
+          <mat-option value="departure">Departure Time</mat-option>
+          <mat-option value="duration">Duration</mat-option>
+          <mat-option value="fare">Fare</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 
-    <!-- Train Name Column -->
-    <ng-container matColumnDef="trainName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Train Name</th>
-      <td mat-cell *matCellDef="let train">{{ train.trainName }}</td>
-    </ng-container>
+  <div class="train-cards">
+    <mat-card class="train-card" *ngFor="let train of dataSource.data">
+      <mat-card-header>
+        <div class="train-header">
+          <div class="train-basic-info">
+            <h3>{{ train.trainNumber }} · {{ train.trainName }}</h3>
+            <div class="running-days">
+              Runs on:
+              <span
+                *ngFor="let day of train.runningDays"
+                [class.active]="day"
+                class="day-indicator"
+              >
+                {{ day }}
+              </span>
+            </div>
+          </div>
+          <button mat-icon-button disabled>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
 
-    <!-- Departure Column -->
-    <ng-container matColumnDef="departureTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Departure</th>
-      <td mat-cell *matCellDef="let train">{{ train.departureTime }}</td>
-    </ng-container>
+      <mat-card-content>
+        <div class="journey-info">
+          <div class="time-info departure">
+            <div class="time">{{ train.departureTime }}</div>
+            <div class="station">{{ train.source }}</div>
+            <div class="date">Day 1</div>
+          </div>
 
-    <!-- Arrival Column -->
-    <ng-container matColumnDef="arrivalTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival</th>
-      <td mat-cell *matCellDef="let train">{{ train.arrivalTime }}</td>
-    </ng-container>
+          <div class="journey-duration">
+            <div class="duration-line">
+              <mat-icon>arrow_forward</mat-icon>
+            </div>
+            <div class="duration-text">{{ train.duration }}</div>
+          </div>
 
-    <!-- Duration Column -->
-    <ng-container matColumnDef="duration">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
-      <td mat-cell *matCellDef="let train">{{ train.duration }}</td>
-    </ng-container>
+          <div class="time-info arrival">
+            <div class="time">{{ train.arrivalTime }}</div>
+            <div class="station">{{ train.destination }}</div>
+            <div class="date">
+              Day {{ getDayDifference(train.departureTime, train.arrivalTime) }}
+            </div>
+          </div>
+        </div>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <div class="class-availability">
+          <div class="class-card" *ngFor="let class of train.availableClasses">
+            <div class="class-header">
+              <span class="class-name">{{ class.name }}</span>
+              <span class="class-code">({{ class.code }})</span>
+            </div>
+            <div
+              class="availability"
+              [class.available]="class.availableSeats > 0"
+            >
+              {{
+                class.availableSeats > 0
+                  ? class.availableSeats + " seats"
+                  : "Waiting List"
+              }}
+            </div>
+            <div class="fare">₹{{ class.fare }}</div>
+            <button mat-stroked-button color="primary" class="book-button">
+              Book Now
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="5">
-        No trains found for the selected route.
-      </td>
-    </tr>
-  </table>
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSizeOptions]="[5, 10, 25]"
+    [pageSize]="10"
     aria-label="Select page of trains"
   ></mat-paginator>
+</div>
+
+<div class="no-results" *ngIf="searchResults && searchResults.length === 0">
+  <mat-icon>train</mat-icon>
+  <h3>No trains found for this route</h3>
+  <p>Try searching with different dates or stations</p>
 </div>
 
 <div *ngIf="searchResults?.length === 0" class="no-results">
