@@ -5,11 +5,16 @@ import { TestPageComponent } from '../pages/test/test-page.component';
 import { PNRStatusComponent } from '../components/pnr-status/pnr-status.component';
 import { MyTransactionsComponent } from '../components/my-transactions/my-transactions.component';
 import { MyProfileComponent } from '../components/my-profile/my-profile.component';
+import { LoginComponent } from '../components/login/login.component';
 import { SearchGuard } from '../guards/search.guard';
 import { RefreshGuard } from '../guards/refresh.guard';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'search',
     component: SearchResultsPageComponent,
