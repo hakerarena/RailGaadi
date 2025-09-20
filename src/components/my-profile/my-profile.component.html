@@ -1,0 +1,298 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="header-content">
+      <div class="title-section">
+        <mat-icon class="profile-icon">account_circle</mat-icon>
+        <div class="title-text">
+          <h1>My Profile</h1>
+          <p>Manage your personal information and preferences</p>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button
+          mat-raised-button
+          [color]="isEditing ? 'warn' : 'primary'"
+          (click)="toggleEdit()"
+          class="edit-btn"
+        >
+          <mat-icon>{{ isEditing ? "cancel" : "edit" }}</mat-icon>
+          {{ isEditing ? "Cancel" : "Edit Profile" }}
+        </button>
+
+        <button
+          *ngIf="isEditing"
+          mat-raised-button
+          color="primary"
+          (click)="onSubmit()"
+          [disabled]="!profileForm.valid"
+          class="save-btn"
+        >
+          <mat-icon>save</mat-icon>
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <!-- Personal Information Section -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>person</mat-icon>
+        <mat-card-title>Personal Information</mat-card-title>
+        <mat-card-subtitle>Basic details about you</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="form-grid">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              formControlName="firstName"
+              placeholder="Enter your first name"
+            />
+            <mat-error *ngIf="getFieldError('firstName')">
+              {{ getFieldError("firstName") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              formControlName="lastName"
+              placeholder="Enter your last name"
+            />
+            <mat-error *ngIf="getFieldError('lastName')">
+              {{ getFieldError("lastName") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email Address</mat-label>
+            <input
+              matInput
+              type="email"
+              formControlName="email"
+              placeholder="Enter your email"
+            />
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="getFieldError('email')">
+              {{ getFieldError("email") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Phone Number</mat-label>
+            <input
+              matInput
+              formControlName="phone"
+              placeholder="Enter your phone number"
+            />
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="getFieldError('phone')">
+              {{ getFieldError("phone") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Date of Birth</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dobPicker"
+              formControlName="dateOfBirth"
+              placeholder="Select your date of birth"
+              [max]="maxDate"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="dobPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+            <mat-error *ngIf="getFieldError('dateOfBirth')">
+              {{ getFieldError("dateOfBirth") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Gender</mat-label>
+            <mat-select
+              formControlName="gender"
+              placeholder="Select your gender"
+            >
+              <mat-option
+                *ngFor="let gender of genderOptions"
+                [value]="gender.value"
+              >
+                {{ gender.label }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="getFieldError('gender')">
+              {{ getFieldError("gender") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Nationality</mat-label>
+            <input
+              matInput
+              formControlName="nationality"
+              placeholder="Enter your nationality"
+            />
+            <mat-error *ngIf="getFieldError('nationality')">
+              {{ getFieldError("nationality") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Address Information Section -->
+    <mat-card class="section-card" formGroupName="address">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>home</mat-icon>
+        <mat-card-title>Address Information</mat-card-title>
+        <mat-card-subtitle>Your residential address</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="form-grid">
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Street Address</mat-label>
+            <textarea
+              matInput
+              formControlName="street"
+              rows="2"
+              placeholder="Enter your complete street address"
+            ></textarea>
+            <mat-error *ngIf="getFieldError('address.street')">
+              {{ getFieldError("address.street") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>City</mat-label>
+            <input
+              matInput
+              formControlName="city"
+              placeholder="Enter your city"
+            />
+            <mat-error *ngIf="getFieldError('address.city')">
+              {{ getFieldError("address.city") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>State</mat-label>
+            <input
+              matInput
+              formControlName="state"
+              placeholder="Enter your state"
+            />
+            <mat-error *ngIf="getFieldError('address.state')">
+              {{ getFieldError("address.state") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Pincode</mat-label>
+            <input
+              matInput
+              formControlName="pincode"
+              placeholder="Enter 6-digit pincode"
+            />
+            <mat-error *ngIf="getFieldError('address.pincode')">
+              {{ getFieldError("address.pincode") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Country</mat-label>
+            <input
+              matInput
+              formControlName="country"
+              placeholder="Enter your country"
+            />
+            <mat-error *ngIf="getFieldError('address.country')">
+              {{ getFieldError("address.country") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Emergency Contact Section -->
+    <mat-card class="section-card" formGroupName="emergencyContact">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>contact_emergency</mat-icon>
+        <mat-card-title>Emergency Contact</mat-card-title>
+        <mat-card-subtitle
+          >Person to contact in case of emergency</mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="form-grid">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Contact Name</mat-label>
+            <input
+              matInput
+              formControlName="name"
+              placeholder="Enter emergency contact name"
+            />
+            <mat-error *ngIf="getFieldError('emergencyContact.name')">
+              {{ getFieldError("emergencyContact.name") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Contact Phone</mat-label>
+            <input
+              matInput
+              formControlName="phone"
+              placeholder="Enter emergency contact phone"
+            />
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="getFieldError('emergencyContact.phone')">
+              {{ getFieldError("emergencyContact.phone") }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Relationship</mat-label>
+            <mat-select
+              formControlName="relationship"
+              placeholder="Select relationship"
+            >
+              <mat-option
+                *ngFor="let relation of relationshipOptions"
+                [value]="relation.value"
+              >
+                {{ relation.label }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="getFieldError('emergencyContact.relationship')">
+              {{ getFieldError("emergencyContact.relationship") }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Save Button (Mobile) -->
+    <div *ngIf="isEditing" class="mobile-save-section">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSubmit()"
+        [disabled]="!profileForm.valid"
+        class="mobile-save-btn"
+      >
+        <mat-icon>save</mat-icon>
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>

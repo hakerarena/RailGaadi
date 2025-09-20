@@ -4,6 +4,7 @@ import { SearchResultsPageComponent } from '../pages/search-results/search-resul
 import { TestPageComponent } from '../pages/test/test-page.component';
 import { PNRStatusComponent } from '../components/pnr-status/pnr-status.component';
 import { MyTransactionsComponent } from '../components/my-transactions/my-transactions.component';
+import { MyProfileComponent } from '../components/my-profile/my-profile.component';
 import { SearchGuard } from '../guards/search.guard';
 import { RefreshGuard } from '../guards/refresh.guard';
 
@@ -22,6 +23,11 @@ export const routes: Routes = [
   {
     path: 'my-transactions',
     component: MyTransactionsComponent,
+    canActivate: [RefreshGuard],
+  },
+  {
+    path: 'my-profile',
+    component: MyProfileComponent,
     canActivate: [RefreshGuard],
   },
   {
