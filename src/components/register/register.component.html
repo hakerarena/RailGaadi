@@ -307,6 +307,19 @@
               >Creating Account...</span
             >
           </button>
+
+          <!-- Clear Saved Data Button -->
+          <button
+            type="button"
+            mat-stroked-button
+            color="warn"
+            class="clear-data-btn"
+            (click)="clearSavedData()"
+            [disabled]="isLoading"
+          >
+            <mat-icon>clear</mat-icon>
+            Clear Saved Data
+          </button>
         </form>
       </mat-card-content>
 

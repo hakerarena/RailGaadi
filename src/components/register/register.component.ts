@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 // Services
 import { AuthService } from '../../services/auth.service';
+import { UserManagementService } from '../../services/user-management.service';
 
 // Material Modules
 import { MatCardModule } from '@angular/material/card';
@@ -93,7 +94,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userManagementService: UserManagementService
   ) {
     // Set max date to 13 years ago (minimum age requirement)
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 13);
@@ -101,6 +103,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.loadSavedFormData();
+    this.setupFormAutoSave();
   }
 
   private initializeForm(): void {
@@ -128,6 +132,70 @@ export class RegisterComponent implements OnInit {
         validators: this.passwordMatchValidator,
       }
     );
+  }
+
+  private loadSavedFormData(): void {
+    const savedData = localStorage.getItem('irctc_register_form_data');
+    if (savedData) {
+      try {
+        const formData = JSON.parse(savedData);
+        // Don't load password data for security
+        const { password, confirmPassword, agreeToTerms, ...safeData } =
+          formData;
+
+        // Convert dateOfBirth string back to Date object if it exists
+        if (safeData.dateOfBirth) {
+          safeData.dateOfBirth = new Date(safeData.dateOfBirth);
+        }
+
+        this.registerForm.patchValue(safeData);
+
+        // Show notification about loaded data
+        this.snackBar.open('📋 Form data restored from previous session', '✕', {
+          duration: 3000,
+          panelClass: ['info-snackbar'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+      } catch (error) {
+        console.error('Error loading saved form data:', error);
+        localStorage.removeItem('irctc_register_form_data');
+      }
+    }
+  }
+
+  private setupFormAutoSave(): void {
+    // Auto-save form data on changes (debounced)
+    this.registerForm.valueChanges.subscribe(() => {
+      // Debounce the save operation
+      if (this.saveTimeout) {
+        clearTimeout(this.saveTimeout);
+      }
+
+      this.saveTimeout = setTimeout(() => {
+        this.saveFormDataToLocalStorage();
+      }, 1000); // Save after 1 second of inactivity
+    });
+  }
+
+  private saveTimeout: any;
+
+  private saveFormDataToLocalStorage(): void {
+    const formData = this.registerForm.value;
+    // Don't save sensitive data
+    const { password, confirmPassword, agreeToTerms, ...safeData } = formData;
+
+    localStorage.setItem('irctc_register_form_data', JSON.stringify(safeData));
+  }
+
+  clearSavedData(): void {
+    localStorage.removeItem('irctc_register_form_data');
+    this.snackBar.open('💾 Saved form data cleared', '✕', {
+      duration: 2000,
+      panelClass: ['info-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   // Custom Validators
@@ -196,32 +264,46 @@ export class RegisterComponent implements OnInit {
   }
 
   private simulateRegistration(credentials: RegisterCredentials): void {
-    // Simulate registration logic
-    const mockResponse: RegisterResponse = {
-      success: true,
-      user: {
-        id: 'user_' + Date.now(),
-        username: credentials.email,
-        email: credentials.email,
-        firstName: credentials.firstName,
-        lastName: credentials.lastName,
-      },
-      token: 'mock_jwt_token_' + Date.now(),
-      message: 'Registration successful',
+    // Use the UserManagementService to register the user
+    const userData = {
+      firstName: credentials.firstName,
+      lastName: credentials.lastName,
+      email: credentials.email,
+      mobile: credentials.mobile,
+      password: credentials.password,
+      dateOfBirth: credentials.dateOfBirth.toISOString(),
+      gender: credentials.gender,
+      subscribeNewsletter: credentials.subscribeNewsletter,
     };
 
-    // Simulate different outcomes
-    if (credentials.email === 'existing@irctc.com') {
-      this.handleRegistrationError(
-        'An account with this email already exists.'
-      );
+    const result = this.userManagementService.registerUser(userData);
+
+    if (result.success && result.user) {
+      const response: RegisterResponse = {
+        success: true,
+        user: {
+          id: result.user.id,
+          username: result.user.email,
+          email: result.user.email,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
+        },
+        token: 'mock_jwt_token_' + Date.now(),
+        message: 'Registration successful',
+      };
+      this.handleRegistrationSuccess(response);
     } else {
-      this.handleRegistrationSuccess(mockResponse);
+      this.handleRegistrationError(
+        result.error || 'Registration failed. Please try again.'
+      );
     }
   }
 
   private handleRegistrationSuccess(response: RegisterResponse): void {
     this.isLoading = false;
+
+    // Clear saved form data on successful registration
+    localStorage.removeItem('irctc_register_form_data');
 
     this.snackBar.open(
       `🎉 Welcome to IRCTC, ${response.user?.firstName}! Account created successfully.`,

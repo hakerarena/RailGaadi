@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 // Services
 import { AuthService } from '../../services/auth.service';
+import { UserManagementService } from '../../services/user-management.service';
 
 // Material Modules
 import { MatCardModule } from '@angular/material/card';
@@ -67,17 +68,12 @@ export class LoginComponent implements OnInit {
   isLoading = false;
   hidePassword = true;
 
-  // Mock credentials for demonstration
-  mockCredentials = {
-    username: 'user@irctc.com',
-    password: 'password123',
-  };
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private userManagementService: UserManagementService
   ) {}
 
   ngOnInit(): void {
@@ -133,28 +129,28 @@ export class LoginComponent implements OnInit {
   }
 
   private authenticateUser(credentials: LoginCredentials): void {
-    // Mock authentication logic
-    const isValidCredentials =
-      credentials.username === this.mockCredentials.username &&
-      credentials.password === this.mockCredentials.password;
+    // Use UserManagementService to authenticate
+    const result = this.userManagementService.authenticateUser({
+      username: credentials.username,
+      password: credentials.password,
+    });
 
-    if (isValidCredentials) {
-      const mockResponse: LoginResponse = {
+    if (result.success && result.user) {
+      const response: LoginResponse = {
         success: true,
-        token: 'mock-jwt-token-' + Date.now(),
+        token: 'jwt_token_' + Date.now(),
         user: {
-          id: '1',
-          username: credentials.username,
-          email: credentials.username,
-          firstName: 'John',
-          lastName: 'Doe',
+          id: result.user.id,
+          username: result.user.email,
+          email: result.user.email,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
         },
         message: 'Login successful',
       };
-
-      this.handleLoginSuccess(mockResponse);
+      this.handleLoginSuccess(response);
     } else {
-      this.handleLoginError('Invalid username or password');
+      this.handleLoginError(result.error || 'Invalid credentials');
     }
   }
 
@@ -272,11 +268,11 @@ export class LoginComponent implements OnInit {
     return labels[fieldName] || fieldName;
   }
 
-  // Quick login for demo purposes
+  // Quick login for demo purposes - now uses a registered demo user
   quickLogin(): void {
     this.loginForm.patchValue({
-      username: this.mockCredentials.username,
-      password: this.mockCredentials.password,
+      username: 'demo@irctc.com',
+      password: 'Demo@123',
       rememberMe: true,
     });
   }
