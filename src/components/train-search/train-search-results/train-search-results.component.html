@@ -104,8 +104,10 @@
                       mat-stroked-button
                       color="primary"
                       class="book-button"
+                      (click)="onBookNow(train, class)"
+                      [disabled]="class.availableSeats === 0"
                     >
-                      Book Now
+                      {{ class.availableSeats === 0 ? "Waitlist" : "Book Now" }}
                     </button>
                   </div>
                 </div>
@@ -134,8 +136,14 @@
                 }}
               </div>
               <div class="fare">₹{{ class.fare }}</div>
-              <button mat-stroked-button color="primary" class="book-button">
-                Book Now
+              <button
+                mat-stroked-button
+                color="primary"
+                class="book-button"
+                (click)="onBookNow(train, class)"
+                [disabled]="class.availableSeats === 0"
+              >
+                {{ class.availableSeats === 0 ? "Waitlist" : "Book Now" }}
               </button>
             </div>
           </div>

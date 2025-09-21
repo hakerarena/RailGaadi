@@ -1,0 +1,360 @@
+<div class="booking-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="booking-header">
+      <button mat-icon-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Complete Your Booking</h1>
+    </div>
+
+    <!-- Train Details Summary -->
+    <mat-card class="train-summary" *ngIf="train">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>train</mat-icon>
+        <mat-card-title
+          >{{ train.trainName }} ({{ train.trainNumber }})</mat-card-title
+        >
+        <mat-card-subtitle>
+          {{ train.source }} → {{ train.destination }} |
+          {{ selectedClass?.className }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="train-info">
+          <div class="time-info">
+            <span><strong>Departure:</strong> {{ train.departureTime }}</span>
+            <span><strong>Arrival:</strong> {{ train.arrivalTime }}</span>
+            <span><strong>Duration:</strong> {{ train.duration }}</span>
+          </div>
+          <div class="fare-info">
+            <span class="fare">₹{{ selectedClass?.fare }} per passenger</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Booking Form -->
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+      <!-- Passenger Details Section -->
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>person</mat-icon>
+          <mat-card-title>Passenger Details</mat-card-title>
+          <mat-card-subtitle
+            >Add passenger information (Max 6 passengers)</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <div formArrayName="passengers" class="passengers-section">
+            <div
+              *ngFor="let passenger of passengers.controls; let i = index"
+              [formGroupName]="i"
+              class="passenger-form"
+            >
+              <div class="passenger-header">
+                <h3>Passenger {{ i + 1 }}</h3>
+                <button
+                  type="button"
+                  mat-icon-button
+                  color="warn"
+                  (click)="removePassenger(i)"
+                  *ngIf="passengers.length > 1"
+                  class="remove-button"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+              <div class="passenger-fields">
+                <mat-form-field appearance="outline">
+                  <mat-label>Full Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="name"
+                    placeholder="Enter full name"
+                  />
+                  <mat-error
+                    *ngIf="passenger.get('name')?.touched && passenger.get('name')?.errors?.['required']"
+                  >
+                    Name is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="passenger.get('name')?.touched && passenger.get('name')?.errors?.['pattern']"
+                  >
+                    Only letters and spaces allowed
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Age</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="age"
+                    placeholder="Age"
+                  />
+                  <mat-error
+                    *ngIf="passenger.get('age')?.touched && passenger.get('age')?.errors?.['required']"
+                  >
+                    Age is required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="passenger.get('age')?.touched && (passenger.get('age')?.errors?.['min'] || passenger.get('age')?.errors?.['max'])"
+                  >
+                    Age must be between 5 and 120
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Gender</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="passenger.get('gender')?.touched && passenger.get('gender')?.errors?.['required']"
+                  >
+                    Gender is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Date of Birth</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="dobPicker"
+                    formControlName="dateOfBirth"
+                    [max]="maxDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="dobPicker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #dobPicker></mat-datepicker>
+                  <mat-error
+                    *ngIf="passenger.get('dateOfBirth')?.touched && passenger.get('dateOfBirth')?.errors?.['required']"
+                  >
+                    Date of birth is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Nationality</mat-label>
+                  <mat-select formControlName="nationality">
+                    <mat-option value="IN">Indian</mat-option>
+                    <mat-option value="US">US</mat-option>
+                    <mat-option value="UK">UK</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>ID Type</mat-label>
+                  <mat-select formControlName="idType">
+                    <mat-option value="AADHAR">Aadhar Card</mat-option>
+                    <mat-option value="PAN">PAN Card</mat-option>
+                    <mat-option value="PASSPORT">Passport</mat-option>
+                    <mat-option value="VOTER">Voter ID</mat-option>
+                    <mat-option value="DRIVING">Driving License</mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="passenger.get('idType')?.touched && passenger.get('idType')?.errors?.['required']"
+                  >
+                    ID Type is required
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>ID Number</mat-label>
+                  <input
+                    matInput
+                    formControlName="idNumber"
+                    placeholder="Enter ID number"
+                  />
+                  <mat-error
+                    *ngIf="passenger.get('idNumber')?.touched && passenger.get('idNumber')?.errors?.['required']"
+                  >
+                    ID Number is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <mat-divider *ngIf="i < passengers.length - 1"></mat-divider>
+            </div>
+
+            <button
+              type="button"
+              mat-stroked-button
+              color="primary"
+              (click)="addPassenger()"
+              *ngIf="passengers.length < 6"
+              class="add-passenger-btn"
+            >
+              <mat-icon>person_add</mat-icon>
+              Add Another Passenger
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Contact Details Section -->
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>contact_mail</mat-icon>
+          <mat-card-title>Contact Details</mat-card-title>
+          <mat-card-subtitle
+            >Booking confirmation will be sent to these
+            details</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <div formGroupName="contactDetails" class="contact-fields">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                placeholder="your@email.com"
+              />
+              <mat-error
+                *ngIf="bookingForm.get('contactDetails.email')?.touched && bookingForm.get('contactDetails.email')?.errors?.['required']"
+              >
+                Email is required
+              </mat-error>
+              <mat-error
+                *ngIf="bookingForm.get('contactDetails.email')?.touched && bookingForm.get('contactDetails.email')?.errors?.['email']"
+              >
+                Please enter a valid email
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Mobile Number</mat-label>
+              <input
+                matInput
+                formControlName="mobile"
+                placeholder="10-digit mobile number"
+              />
+              <mat-error
+                *ngIf="bookingForm.get('contactDetails.mobile')?.touched && bookingForm.get('contactDetails.mobile')?.errors?.['required']"
+              >
+                Mobile number is required
+              </mat-error>
+              <mat-error
+                *ngIf="bookingForm.get('contactDetails.mobile')?.touched && bookingForm.get('contactDetails.mobile')?.errors?.['pattern']"
+              >
+                Please enter a valid 10-digit mobile number
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Preferences Section -->
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>settings</mat-icon>
+          <mat-card-title>Travel Preferences</mat-card-title>
+          <mat-card-subtitle
+            >Optional preferences for your journey</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <div formGroupName="preferences" class="preferences-fields">
+            <mat-form-field appearance="outline">
+              <mat-label>Berth Preference</mat-label>
+              <mat-select formControlName="berth">
+                <mat-option value="LOWER">Lower Berth</mat-option>
+                <mat-option value="MIDDLE">Middle Berth</mat-option>
+                <mat-option value="UPPER">Upper Berth</mat-option>
+                <mat-option value="SIDE_LOWER">Side Lower</mat-option>
+                <mat-option value="SIDE_UPPER">Side Upper</mat-option>
+                <mat-option value="NO_PREFERENCE">No Preference</mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="bookingForm.get('preferences.berth')?.touched && bookingForm.get('preferences.berth')?.errors?.['required']"
+              >
+                Berth preference is required
+              </mat-error>
+            </mat-form-field>
+
+            <div class="checkbox-options">
+              <mat-checkbox formControlName="meal">
+                Meal Preference (+₹150 per passenger)
+              </mat-checkbox>
+
+              <mat-checkbox formControlName="travelInsurance">
+                Travel Insurance (+₹99 per passenger)
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Fare Summary -->
+      <mat-card class="fare-summary">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>receipt</mat-icon>
+          <mat-card-title>Fare Summary</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="fare-breakdown">
+            <div class="fare-line">
+              <span
+                >Base Fare ({{ passengers.length }} passenger{{
+                  passengers.length > 1 ? "s" : ""
+                }})</span
+              >
+              <span>₹{{ selectedClass?.fare * passengers.length }}</span>
+            </div>
+            <div
+              class="fare-line"
+              *ngIf="bookingForm.get('preferences.meal')?.value"
+            >
+              <span>Meal Charges</span>
+              <span>₹{{ 150 * passengers.length }}</span>
+            </div>
+            <div
+              class="fare-line"
+              *ngIf="bookingForm.get('preferences.travelInsurance')?.value"
+            >
+              <span>Travel Insurance</span>
+              <span>₹{{ 99 * passengers.length }}</span>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="fare-line total">
+              <span><strong>Total Amount</strong></span>
+              <span
+                ><strong>₹{{ calculateTotalFare() }}</strong></span
+              >
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button
+          type="button"
+          mat-stroked-button
+          (click)="goBack()"
+          class="cancel-btn"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          class="book-btn"
+          [disabled]="bookingForm.invalid"
+        >
+          Confirm Booking - ₹{{ calculateTotalFare() }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +22,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Train, SortOption } from '../../../interfaces';
 import { APP_CONSTANTS } from '../../../constants/app.constants';
 import { DataService } from '../../../services/data.service';
+import { AuthService } from '../../../services/auth.service';
+import { NavigationService } from '../../../services/navigation.service';
 
 @Component({
   selector: 'app-train-search-results',
@@ -54,7 +57,12 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private authService: AuthService,
+    private router: Router,
+    private navigationService: NavigationService
+  ) {}
 
   ngOnChanges() {
     if (this.searchResults) {
@@ -65,6 +73,39 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  onBookNow(train: Train, trainClass: any): void {
+    // Check if user is authenticated
+    this.authService.isAuthenticated$
+      .subscribe((isAuthenticated) => {
+        if (!isAuthenticated) {
+          // User is not signed in, redirect to login page
+          this.navigationService.markValidNavigation();
+          this.router.navigate(['/login'], {
+            queryParams: { returnUrl: '/booking' },
+            state: {
+              bookingData: {
+                train,
+                class: trainClass,
+                returnUrl: this.router.url,
+              },
+            },
+          });
+        } else {
+          // User is authenticated, proceed to booking flow
+          this.navigationService.markValidNavigation();
+          this.router.navigate(['/booking'], {
+            state: {
+              bookingData: {
+                train,
+                class: trainClass,
+              },
+            },
+          });
+        }
+      })
+      .unsubscribe();
   }
 
   getDayDifference(departureTime: string, arrivalTime: string): number {

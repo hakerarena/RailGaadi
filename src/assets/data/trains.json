@@ -24,7 +24,7 @@
       {
         "classCode": "3A",
         "className": "Third AC",
-        "fare": 1950, 
+        "fare": 1950,
         "availableSeats": 45
       }
     ],
@@ -604,6 +604,189 @@
         "arrivalTime": "18:30",
         "departureTime": null,
         "distance": 1472
+      }
+    ]
+  },
+  {
+    "trainNumber": "12345",
+    "trainName": "Weekend Special Express",
+    "source": "Chennai Central",
+    "destination": "Bangalore City",
+    "departureTime": "22:00",
+    "arrivalTime": "05:30",
+    "duration": "7h 30m",
+    "runningDays": ["SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 285,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 845,
+        "availableSeats": 0
+      }
+    ],
+    "stations": [
+      {
+        "code": "MAS",
+        "name": "Chennai Central",
+        "arrivalTime": null,
+        "departureTime": "22:00",
+        "distance": 0
+      },
+      {
+        "code": "AJJ",
+        "name": "Arakkonam",
+        "arrivalTime": "22:45",
+        "departureTime": "22:47",
+        "distance": 69
+      },
+      {
+        "code": "KPD",
+        "name": "Katpadi",
+        "arrivalTime": "23:15",
+        "departureTime": "23:20",
+        "distance": 117
+      },
+      {
+        "code": "BWT",
+        "name": "Bangarapet",
+        "arrivalTime": "02:13",
+        "departureTime": "02:15",
+        "distance": 264
+      },
+      {
+        "code": "SBC",
+        "name": "Bangalore City",
+        "arrivalTime": "05:30",
+        "departureTime": null,
+        "distance": 362
+      }
+    ]
+  },
+  {
+    "trainNumber": "11111",
+    "trainName": "Budget Passenger Express",
+    "source": "Patna",
+    "destination": "New Delhi",
+    "departureTime": "14:30",
+    "arrivalTime": "06:45",
+    "duration": "16h 15m",
+    "runningDays": ["MON", "WED", "FRI"],
+    "availableClasses": [
+      {
+        "classCode": "2S",
+        "className": "Second Sitting",
+        "fare": 125,
+        "availableSeats": 234
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 385,
+        "availableSeats": 189
+      }
+    ],
+    "stations": [
+      {
+        "code": "PNBE",
+        "name": "Patna",
+        "arrivalTime": null,
+        "departureTime": "14:30",
+        "distance": 0
+      },
+      {
+        "code": "ARA",
+        "name": "Ara",
+        "arrivalTime": "15:08",
+        "departureTime": "15:10",
+        "distance": 47
+      },
+      {
+        "code": "MGS",
+        "name": "Mughal Sarai",
+        "arrivalTime": "17:45",
+        "departureTime": "17:55",
+        "distance": 185
+      },
+      {
+        "code": "ALD",
+        "name": "Allahabad",
+        "arrivalTime": "19:25",
+        "departureTime": "19:30",
+        "distance": 276
+      },
+      {
+        "code": "CNB",
+        "name": "Kanpur Central",
+        "arrivalTime": "22:15",
+        "departureTime": "22:25",
+        "distance": 484
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "06:45",
+        "departureTime": null,
+        "distance": 925
+      }
+    ]
+  },
+  {
+    "trainNumber": "99999",
+    "trainName": "Premium Luxury Express",
+    "source": "Mumbai Central",
+    "destination": "Ahmedabad",
+    "departureTime": "08:15",
+    "arrivalTime": "15:45",
+    "duration": "7h 30m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4850,
+        "availableSeats": 2
+      },
+      {
+        "classCode": "EC",
+        "className": "Executive Chair Car",
+        "fare": 2950,
+        "availableSeats": 8
+      }
+    ],
+    "stations": [
+      {
+        "code": "BCT",
+        "name": "Mumbai Central",
+        "arrivalTime": null,
+        "departureTime": "08:15",
+        "distance": 0
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "08:45",
+        "departureTime": "08:47",
+        "distance": 28
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "12:30",
+        "departureTime": "12:35",
+        "distance": 428
+      },
+      {
+        "code": "ADI",
+        "name": "Ahmedabad",
+        "arrivalTime": "15:45",
+        "departureTime": null,
+        "distance": 492
       }
     ]
   }

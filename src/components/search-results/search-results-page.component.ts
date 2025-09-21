@@ -71,13 +71,15 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
           };
           this.searchCriteria = searchCriteria;
           this.performSearch();
+        } else {
+          // No search criteria available, redirect to home
+          this.isSearching = false;
+          this.router.navigate(['/']);
+          return;
         }
       });
-    }
-
-    this.searchCriteria = searchCriteria;
-
-    if (this.searchCriteria) {
+    } else {
+      this.searchCriteria = searchCriteria;
       this.performSearch();
     }
   }

@@ -7,6 +7,7 @@ import { MyProfileComponent } from '../components/my-profile/my-profile.componen
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { ContactUsComponent } from '../components/contact-us/contact-us.component';
+import { BookingComponent } from '../components/booking/booking.component';
 import { SearchGuard } from '../guards/search.guard';
 import { RefreshGuard } from '../guards/refresh.guard';
 import { AuthGuard } from '../guards/auth.guard';
@@ -38,6 +39,11 @@ export const routes: Routes = [
     path: 'pnr-status',
     component: PNRStatusComponent,
     canActivate: [RefreshGuard],
+  },
+  {
+    path: 'booking',
+    component: BookingComponent,
+    canActivate: [RefreshGuard, AuthGuard],
   },
   {
     path: 'my-transactions',

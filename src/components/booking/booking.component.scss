@@ -1,0 +1,453 @@
+@use "sass:color";
+
+$primary-color: #213d77;
+$secondary-color: #f2f2f2;
+$accent-color: #1976d2;
+$success-color: #4caf50;
+$warning-color: #ff9800;
+$error-color: #f44336;
+$border-radius: 12px;
+
+.booking-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem 0;
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .booking-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem; // Increased spacing between title and train header
+    background: white;
+    padding: 1rem;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .back-button {
+      margin-right: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+
+  .train-summary {
+    margin-bottom: 3rem; // Increased spacing
+    border-radius: $border-radius;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    mat-card-header {
+      background: linear-gradient(
+        135deg,
+        $primary-color,
+        color.adjust($primary-color, $lightness: 10%)
+      );
+      color: white;
+      border-radius: $border-radius $border-radius 0 0;
+      margin: -24px -24px 24px -24px; // Increased bottom margin
+      padding: 1.2rem 1.5rem; // Reduced padding for smaller headers
+
+      // Fix for Material Design card avatar
+      .mat-mdc-card-avatar {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 50% !important;
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-right: 1rem !important;
+
+        mat-icon {
+          font-size: 24px !important;
+          width: 24px !important;
+          height: 24px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+      }
+
+      // Smaller header text
+      .mat-mdc-card-title {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
+      }
+
+      .mat-mdc-card-subtitle {
+        font-size: 0.875rem !important;
+        opacity: 0.9 !important;
+        margin-bottom: 0 !important;
+        line-height: 1.2 !important;
+      }
+    }
+
+    .train-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      .time-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        span {
+          color: #666;
+        }
+      }
+
+      .fare-info {
+        .fare {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: $success-color;
+        }
+      }
+    }
+  }
+
+  .section-card {
+    margin-bottom: 3rem; // Increased spacing between sections
+    border-radius: $border-radius;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    mat-card-header {
+      background: linear-gradient(
+        135deg,
+        $accent-color,
+        color.adjust($accent-color, $lightness: 10%)
+      );
+      color: white;
+      border-radius: $border-radius $border-radius 0 0;
+      margin: -24px -24px 24px -24px; // Increased bottom margin
+      padding: 1.2rem 1.5rem; // Reduced padding for smaller headers
+
+      // Fix for Material Design card avatar
+      .mat-mdc-card-avatar {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 50% !important;
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-right: 1rem !important;
+
+        mat-icon {
+          font-size: 24px !important;
+          width: 24px !important;
+          height: 24px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+      }
+
+      // Smaller header text
+      .mat-mdc-card-title {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
+      }
+
+      .mat-mdc-card-subtitle {
+        font-size: 0.875rem !important;
+        opacity: 0.9 !important;
+        margin-bottom: 0 !important;
+        line-height: 1.2 !important;
+      }
+    }
+
+    .passengers-section {
+      padding: 1.5rem 0; // Added padding to content
+
+      .passenger-form {
+        margin-bottom: 2.5rem; // Increased spacing between passengers
+        padding: 1.5rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: #fafafa;
+
+        .passenger-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem; // Increased margin
+
+          h3 {
+            margin: 0;
+            color: $primary-color;
+            font-size: 1.1rem; // Reduced size
+            font-weight: 500;
+          }
+
+          .remove-button {
+            color: $error-color;
+          }
+        }
+
+        .passenger-fields {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.2rem; // Increased gap
+        }
+      }
+
+      .add-passenger-btn {
+        margin-top: 1.5rem; // Increased margin
+        border: 2px dashed $accent-color;
+        color: $accent-color;
+        padding: 0.75rem 1.5rem;
+
+        &:hover {
+          background-color: rgba(25, 118, 210, 0.1);
+        }
+      }
+    }
+
+    .contact-fields {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+      padding: 1.5rem 0; // Added padding
+    }
+
+    .preferences-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      padding: 1.5rem 0; // Added padding
+
+      mat-form-field {
+        max-width: 300px;
+      }
+
+      .checkbox-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; // Increased gap
+        margin-top: 1.5rem; // Increased margin
+
+        mat-checkbox {
+          color: #666;
+          padding: 0.5rem 0; // Added padding to checkboxes
+        }
+      }
+    }
+  }
+
+  .fare-summary {
+    margin-bottom: 3rem; // Increased spacing
+    border-radius: $border-radius;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    mat-card-header {
+      background: linear-gradient(
+        135deg,
+        $success-color,
+        color.adjust($success-color, $lightness: 10%)
+      );
+      color: white;
+      border-radius: $border-radius $border-radius 0 0;
+      margin: -24px -24px 24px -24px; // Increased bottom margin
+      padding: 1.2rem 1.5rem; // Reduced padding for smaller headers
+
+      // Fix for Material Design card avatar
+      .mat-mdc-card-avatar {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 50% !important;
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-right: 1rem !important;
+
+        mat-icon {
+          font-size: 24px !important;
+          width: 24px !important;
+          height: 24px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+      }
+
+      // Smaller header text
+      .mat-mdc-card-title {
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.25rem !important;
+        line-height: 1.3 !important;
+      }
+
+      .mat-mdc-card-subtitle {
+        font-size: 0.875rem !important;
+        opacity: 0.9 !important;
+        margin-bottom: 0 !important;
+        line-height: 1.2 !important;
+      }
+    }
+
+    .fare-breakdown {
+      padding: 1.5rem 0; // Added padding
+
+      .fare-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0; // Increased padding
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &.total {
+          font-size: 1.2rem;
+          margin-top: 1.5rem; // Increased margin
+          padding-top: 1.5rem; // Increased padding
+          color: $success-color;
+        }
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem; // Increased gap
+    margin-top: 3rem; // Increased margin
+    padding-bottom: 2rem; // Added bottom padding
+
+    .cancel-btn {
+      flex: 1;
+      padding: 1rem 2rem; // Increased padding
+      color: #666;
+      border-color: #ddd;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .book-btn {
+      flex: 2;
+      padding: 1rem 2rem; // Increased padding
+      background: linear-gradient(
+        135deg,
+        $success-color,
+        color.adjust($success-color, $lightness: 10%)
+      );
+      font-weight: 600;
+      font-size: 1.1rem;
+
+      &:disabled {
+        background: #ccc;
+        color: #999;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .booking-container {
+    padding: 1rem 0;
+
+    .container {
+      padding: 0 0.5rem;
+    }
+
+    .train-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .passenger-fields {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-fields {
+      grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+
+      .cancel-btn,
+      .book-btn {
+        flex: none;
+      }
+    }
+  }
+}
+
+// Animation
+.section-card {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Enhanced form field styling
+.mat-mdc-form-field {
+  &.mat-form-field-appearance-outline {
+    .mat-mdc-form-field-outline {
+      border-radius: 8px;
+    }
+  }
+
+  &.mat-focused {
+    .mat-mdc-form-field-outline-thick {
+      border-color: $accent-color;
+    }
+  }
+}
+
+// Enhanced button styling
+.mat-mdc-raised-button {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.mat-mdc-stroked-button {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
