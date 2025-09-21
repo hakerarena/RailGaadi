@@ -525,18 +525,6 @@ $gradient-primary: linear-gradient(135deg, $primary-color 0%, #1565c0 100%);
     }
   }
 
-  .loading-text {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 8px;
-    white-space: nowrap;
-    animation: textFade 2s ease-in-out infinite;
-  }
-
   &:disabled {
     opacity: 0.9;
     position: relative;

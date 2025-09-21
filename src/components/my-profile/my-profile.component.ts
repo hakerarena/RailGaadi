@@ -7,6 +7,13 @@ import {
   Validators,
 } from '@angular/forms';
 
+// Services
+import { AuthService } from '../../services/auth.service';
+import {
+  UserManagementService,
+  StoredUser,
+} from '../../services/user-management.service';
+
 // Material Modules
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -65,6 +72,8 @@ export class MyProfileComponent implements OnInit {
   profileForm!: FormGroup;
   isEditing = false;
   maxDate = new Date(); // No future dates for DOB
+  currentUser: StoredUser | null = null;
+  isLoading = true;
 
   genderOptions = [
     { value: 'male', label: 'Male' },
@@ -82,30 +91,12 @@ export class MyProfileComponent implements OnInit {
     { value: 'other', label: 'Other' },
   ];
 
-  // Mock user data - in a real app, this would come from a service
-  mockUserProfile: UserProfile = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@email.com',
-    phone: '+91 9876543210',
-    dateOfBirth: new Date('1990-05-15'),
-    gender: 'male',
-    nationality: 'Indian',
-    address: {
-      street: '123 Main Street, Apartment 4B',
-      city: 'Mumbai',
-      state: 'Maharashtra',
-      pincode: '400001',
-      country: 'India',
-    },
-    emergencyContact: {
-      name: 'Jane Doe',
-      phone: '+91 9876543211',
-      relationship: 'spouse',
-    },
-  };
-
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
+  constructor(
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
+    private userManagementService: UserManagementService
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -146,10 +137,58 @@ export class MyProfileComponent implements OnInit {
   }
 
   private loadUserProfile(): void {
-    // In a real app, this would be an API call
-    setTimeout(() => {
-      this.profileForm.patchValue(this.mockUserProfile);
-    }, 500);
+    this.isLoading = true;
+
+    // Get current authenticated user
+    const authUser = this.authService.getCurrentUser();
+    if (!authUser) {
+      this.snackBar.open('Please login to view your profile.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar'],
+      });
+      return;
+    }
+
+    // Get full user details from UserManagementService
+    this.currentUser = this.userManagementService.getUserByEmailOrMobile(
+      authUser.email
+    );
+
+    if (this.currentUser) {
+      // Map the stored user data to the profile form
+      const profileData = {
+        firstName: this.currentUser.firstName,
+        lastName: this.currentUser.lastName,
+        email: this.currentUser.email,
+        phone: this.currentUser.mobile,
+        dateOfBirth: new Date(this.currentUser.dateOfBirth),
+        gender: this.currentUser.gender,
+        nationality: 'Indian', // Default value, could be added to registration later
+        address: {
+          street: '', // These could be added to registration form later
+          city: '',
+          state: '',
+          pincode: '',
+          country: 'India',
+        },
+        emergencyContact: {
+          name: '',
+          phone: '',
+          relationship: '',
+        },
+      };
+
+      setTimeout(() => {
+        this.profileForm.patchValue(profileData);
+        this.isLoading = false;
+      }, 500);
+    } else {
+      this.snackBar.open('Unable to load user profile.', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar'],
+      });
+      this.isLoading = false;
+    }
   }
 
   toggleEdit(): void {
@@ -165,9 +204,15 @@ export class MyProfileComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.profileForm.valid) {
-      // In a real app, this would be an API call to save the profile
-      console.log('Profile updated:', this.profileForm.value);
+    if (this.profileForm.valid && this.currentUser) {
+      // Update the user data with form values
+      const formData = this.profileForm.value;
+
+      // For now, we'll only update the basic information that we store
+      // Note: In a real app, you'd want to extend the StoredUser interface
+      // to include address and emergency contact information
+
+      console.log('Profile update attempted:', formData);
 
       // Simulate API success
       setTimeout(() => {

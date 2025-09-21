@@ -186,6 +186,14 @@ export class UserManagementService {
   }
 
   /**
+   * Get user by ID
+   */
+  getUserById(id: string): StoredUser | null {
+    const users = this.getAllUsers();
+    return users.find((u) => u.id === id) || null;
+  }
+
+  /**
    * Get total registered users count
    */
   getTotalUsersCount(): number {
