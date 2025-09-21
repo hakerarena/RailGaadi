@@ -244,13 +244,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSignUp(): void {
-    // In a real app, this would navigate to registration page
-    this.snackBar.open('🚀 Registration feature coming soon!', '✕', {
-      duration: 3000,
-      panelClass: ['info-snackbar', 'enhanced-snackbar'],
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
+    this.router.navigate(['/register']);
   }
 
   // Helper methods for error handling

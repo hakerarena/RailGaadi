@@ -52,7 +52,13 @@
               <mat-icon>login</mat-icon>
               {{ constants.BUTTONS.LOGIN }}
             </button>
-            <button mat-raised-button color="primary">
+            <button
+              mat-raised-button
+              color="primary"
+              routerLink="/register"
+              class="register-btn"
+            >
+              <mat-icon>person_add</mat-icon>
               {{ constants.BUTTONS.REGISTER }}
             </button>
           </ng-container>

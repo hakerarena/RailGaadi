@@ -6,6 +6,7 @@ import { PNRStatusComponent } from '../components/pnr-status/pnr-status.componen
 import { MyTransactionsComponent } from '../components/my-transactions/my-transactions.component';
 import { MyProfileComponent } from '../components/my-profile/my-profile.component';
 import { LoginComponent } from '../components/login/login.component';
+import { RegisterComponent } from '../components/register/register.component';
 import { SearchGuard } from '../guards/search.guard';
 import { RefreshGuard } from '../guards/refresh.guard';
 import { AuthGuard } from '../guards/auth.guard';
@@ -16,6 +17,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [GuestGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
     canActivate: [GuestGuard],
   },
   {
