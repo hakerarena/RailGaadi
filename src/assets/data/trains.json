@@ -789,5 +789,2303 @@
         "distance": 492
       }
     ]
+  },
+  {
+    "trainNumber": "12903",
+    "trainName": "Golden Temple Mail",
+    "source": "Mumbai Central",
+    "destination": "Amritsar",
+    "departureTime": "19:15",
+    "arrivalTime": "06:45",
+    "duration": "35h 30m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 5500,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 3200,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2100,
+        "availableSeats": 15
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 750,
+        "availableSeats": 45
+      }
+    ],
+    "stations": [
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": null,
+        "departureTime": "19:15",
+        "distance": 0
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "19:50",
+        "departureTime": "19:52",
+        "distance": 28
+      },
+      {
+        "code": "ST",
+        "name": "Surat",
+        "arrivalTime": "22:45",
+        "departureTime": "22:50",
+        "distance": 263
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "01:15",
+        "departureTime": "01:20",
+        "distance": 428
+      },
+      {
+        "code": "ADI",
+        "name": "Ahmedabad",
+        "arrivalTime": "04:30",
+        "departureTime": "04:45",
+        "distance": 492
+      },
+      {
+        "code": "ABR",
+        "name": "Abu Road",
+        "arrivalTime": "08:15",
+        "departureTime": "08:20",
+        "distance": 651
+      },
+      {
+        "code": "AII",
+        "name": "Ajmer",
+        "arrivalTime": "11:30",
+        "departureTime": "11:35",
+        "distance": 823
+      },
+      {
+        "code": "JP",
+        "name": "Jaipur",
+        "arrivalTime": "14:20",
+        "departureTime": "14:25",
+        "distance": 1037
+      },
+      {
+        "code": "RE",
+        "name": "Rewari",
+        "arrivalTime": "17:45",
+        "departureTime": "17:47",
+        "distance": 1245
+      },
+      {
+        "code": "DLI",
+        "name": "Delhi",
+        "arrivalTime": "19:30",
+        "departureTime": "19:45",
+        "distance": 1384
+      },
+      {
+        "code": "PNP",
+        "name": "Panipat",
+        "arrivalTime": "21:15",
+        "departureTime": "21:17",
+        "distance": 1474
+      },
+      {
+        "code": "KRK",
+        "name": "Karnal",
+        "arrivalTime": "21:55",
+        "departureTime": "21:57",
+        "distance": 1515
+      },
+      {
+        "code": "UMB",
+        "name": "Ambala Cantt",
+        "arrivalTime": "23:45",
+        "departureTime": "23:50",
+        "distance": 1652
+      },
+      {
+        "code": "LDH",
+        "name": "Ludhiana",
+        "arrivalTime": "02:15",
+        "departureTime": "02:20",
+        "distance": 1789
+      },
+      {
+        "code": "JRC",
+        "name": "Jalandhar City",
+        "arrivalTime": "03:45",
+        "departureTime": "03:47",
+        "distance": 1856
+      },
+      {
+        "code": "PTKC",
+        "name": "Pathankot Cantt",
+        "arrivalTime": "05:30",
+        "departureTime": "05:35",
+        "distance": 1923
+      },
+      {
+        "code": "ASR",
+        "name": "Amritsar",
+        "arrivalTime": "06:45",
+        "departureTime": null,
+        "distance": 1998
+      }
+    ]
+  },
+  {
+    "trainNumber": "12904",
+    "trainName": "Amritsar Golden Temple Mail",
+    "source": "Amritsar",
+    "destination": "Mumbai Central",
+    "departureTime": "11:45",
+    "arrivalTime": "22:15",
+    "duration": "34h 30m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 5500,
+        "availableSeats": 5
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 3200,
+        "availableSeats": 18
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2100,
+        "availableSeats": 35
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 750,
+        "availableSeats": 85
+      }
+    ],
+    "stations": [
+      {
+        "code": "ASR",
+        "name": "Amritsar",
+        "arrivalTime": null,
+        "departureTime": "11:45",
+        "distance": 0
+      },
+      {
+        "code": "PTKC",
+        "name": "Pathankot Cantt",
+        "arrivalTime": "13:15",
+        "departureTime": "13:20",
+        "distance": 75
+      },
+      {
+        "code": "JRC",
+        "name": "Jalandhar City",
+        "arrivalTime": "15:10",
+        "departureTime": "15:12",
+        "distance": 142
+      },
+      {
+        "code": "LDH",
+        "name": "Ludhiana",
+        "arrivalTime": "16:35",
+        "departureTime": "16:40",
+        "distance": 209
+      },
+      {
+        "code": "UMB",
+        "name": "Ambala Cantt",
+        "arrivalTime": "18:45",
+        "departureTime": "18:50",
+        "distance": 346
+      },
+      {
+        "code": "KRK",
+        "name": "Karnal",
+        "arrivalTime": "20:25",
+        "departureTime": "20:27",
+        "distance": 483
+      },
+      {
+        "code": "PNP",
+        "name": "Panipat",
+        "arrivalTime": "21:05",
+        "departureTime": "21:07",
+        "distance": 524
+      },
+      {
+        "code": "DLI",
+        "name": "Delhi",
+        "arrivalTime": "22:45",
+        "departureTime": "23:00",
+        "distance": 614
+      },
+      {
+        "code": "RE",
+        "name": "Rewari",
+        "arrivalTime": "00:35",
+        "departureTime": "00:37",
+        "distance": 753
+      },
+      {
+        "code": "JP",
+        "name": "Jaipur",
+        "arrivalTime": "03:45",
+        "departureTime": "03:50",
+        "distance": 961
+      },
+      {
+        "code": "AII",
+        "name": "Ajmer",
+        "arrivalTime": "06:30",
+        "departureTime": "06:35",
+        "distance": 1175
+      },
+      {
+        "code": "ABR",
+        "name": "Abu Road",
+        "arrivalTime": "09:45",
+        "departureTime": "09:50",
+        "distance": 1347
+      },
+      {
+        "code": "ADI",
+        "name": "Ahmedabad",
+        "arrivalTime": "13:15",
+        "departureTime": "13:30",
+        "distance": 1506
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "16:45",
+        "departureTime": "16:50",
+        "distance": 1570
+      },
+      {
+        "code": "ST",
+        "name": "Surat",
+        "arrivalTime": "19:15",
+        "departureTime": "19:20",
+        "distance": 1735
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "21:45",
+        "departureTime": "21:47",
+        "distance": 1970
+      },
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": "22:15",
+        "departureTime": null,
+        "distance": 1998
+      }
+    ]
+  },
+  {
+    "trainNumber": "12137",
+    "trainName": "Punjab Mail",
+    "source": "Mumbai Central",
+    "destination": "Firozpur Cantt",
+    "departureTime": "20:40",
+    "arrivalTime": "04:30",
+    "duration": "31h 50m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2950,
+        "availableSeats": 8
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 1950,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 680,
+        "availableSeats": 25
+      }
+    ],
+    "stations": [
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": null,
+        "departureTime": "20:40",
+        "distance": 0
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "21:15",
+        "departureTime": "21:17",
+        "distance": 28
+      },
+      {
+        "code": "ST",
+        "name": "Surat",
+        "arrivalTime": "00:15",
+        "departureTime": "00:20",
+        "distance": 263
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "02:45",
+        "departureTime": "02:50",
+        "distance": 428
+      },
+      {
+        "code": "RTM",
+        "name": "Ratlam",
+        "arrivalTime": "06:15",
+        "departureTime": "06:25",
+        "distance": 612
+      },
+      {
+        "code": "UJN",
+        "name": "Ujjain",
+        "arrivalTime": "07:45",
+        "departureTime": "07:50",
+        "distance": 677
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "10:30",
+        "departureTime": "10:40",
+        "distance": 875
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "14:15",
+        "departureTime": "14:25",
+        "distance": 1167
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "16:45",
+        "departureTime": "16:50",
+        "distance": 1366
+      },
+      {
+        "code": "MTJ",
+        "name": "Mathura",
+        "arrivalTime": "17:35",
+        "departureTime": "17:37",
+        "distance": 1423
+      },
+      {
+        "code": "DLI",
+        "name": "Delhi",
+        "arrivalTime": "19:30",
+        "departureTime": "19:50",
+        "distance": 1584
+      },
+      {
+        "code": "UMB",
+        "name": "Ambala Cantt",
+        "arrivalTime": "23:15",
+        "departureTime": "23:20",
+        "distance": 1852
+      },
+      {
+        "code": "LDH",
+        "name": "Ludhiana",
+        "arrivalTime": "01:45",
+        "departureTime": "01:50",
+        "distance": 1989
+      },
+      {
+        "code": "FZR",
+        "name": "Firozpur Cantt",
+        "arrivalTime": "04:30",
+        "departureTime": null,
+        "distance": 2156
+      }
+    ]
+  },
+  {
+    "trainNumber": "12138",
+    "trainName": "Punjab Mail",
+    "source": "Firozpur Cantt",
+    "destination": "Mumbai Central",
+    "departureTime": "18:30",
+    "arrivalTime": "05:20",
+    "duration": "34h 50m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2950,
+        "availableSeats": 22
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 1950,
+        "availableSeats": 45
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 680,
+        "availableSeats": 78
+      }
+    ],
+    "stations": [
+      {
+        "code": "FZR",
+        "name": "Firozpur Cantt",
+        "arrivalTime": null,
+        "departureTime": "18:30",
+        "distance": 0
+      },
+      {
+        "code": "LDH",
+        "name": "Ludhiana",
+        "arrivalTime": "21:15",
+        "departureTime": "21:20",
+        "distance": 167
+      },
+      {
+        "code": "UMB",
+        "name": "Ambala Cantt",
+        "arrivalTime": "23:45",
+        "departureTime": "23:50",
+        "distance": 304
+      },
+      {
+        "code": "DLI",
+        "name": "Delhi",
+        "arrivalTime": "03:15",
+        "departureTime": "03:35",
+        "distance": 572
+      },
+      {
+        "code": "MTJ",
+        "name": "Mathura",
+        "arrivalTime": "05:25",
+        "departureTime": "05:27",
+        "distance": 733
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "06:15",
+        "departureTime": "06:20",
+        "distance": 790
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "08:45",
+        "departureTime": "08:55",
+        "distance": 989
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "12:30",
+        "departureTime": "12:40",
+        "distance": 1281
+      },
+      {
+        "code": "UJN",
+        "name": "Ujjain",
+        "arrivalTime": "15:15",
+        "departureTime": "15:20",
+        "distance": 1479
+      },
+      {
+        "code": "RTM",
+        "name": "Ratlam",
+        "arrivalTime": "16:45",
+        "departureTime": "16:55",
+        "distance": 1544
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "20:15",
+        "departureTime": "20:20",
+        "distance": 1728
+      },
+      {
+        "code": "ST",
+        "name": "Surat",
+        "arrivalTime": "22:45",
+        "departureTime": "22:50",
+        "distance": 1893
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "04:45",
+        "departureTime": "04:47",
+        "distance": 2128
+      },
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": "05:20",
+        "departureTime": null,
+        "distance": 2156
+      }
+    ]
+  },
+  {
+    "trainNumber": "12723",
+    "trainName": "Telangana Express",
+    "source": "New Delhi",
+    "destination": "Hyderabad",
+    "departureTime": "21:15",
+    "arrivalTime": "06:00",
+    "duration": "32h 45m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4200,
+        "availableSeats": 3
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2650,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 1750,
+        "availableSeats": 8
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 620,
+        "availableSeats": 35
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "21:15",
+        "distance": 0
+      },
+      {
+        "code": "MTJ",
+        "name": "Mathura",
+        "arrivalTime": "23:10",
+        "departureTime": "23:12",
+        "distance": 149
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "00:05",
+        "departureTime": "00:10",
+        "distance": 206
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "01:45",
+        "departureTime": "01:50",
+        "distance": 325
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "02:55",
+        "departureTime": "03:05",
+        "distance": 421
+      },
+      {
+        "code": "LAR",
+        "name": "Lalitpur",
+        "arrivalTime": "04:15",
+        "departureTime": "04:17",
+        "distance": 512
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "06:45",
+        "departureTime": "06:55",
+        "distance": 713
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "07:35",
+        "departureTime": "07:40",
+        "distance": 780
+      },
+      {
+        "code": "HD",
+        "name": "Harda",
+        "arrivalTime": "08:25",
+        "departureTime": "08:27",
+        "distance": 839
+      },
+      {
+        "code": "KNW",
+        "name": "Khandwa",
+        "arrivalTime": "09:45",
+        "departureTime": "09:50",
+        "distance": 941
+      },
+      {
+        "code": "AK",
+        "name": "Akola",
+        "arrivalTime": "13:20",
+        "departureTime": "13:25",
+        "distance": 1245
+      },
+      {
+        "code": "WR",
+        "name": "Wardha",
+        "arrivalTime": "15:45",
+        "departureTime": "15:50",
+        "distance": 1375
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "16:45",
+        "departureTime": "16:55",
+        "distance": 1430
+      },
+      {
+        "code": "CD",
+        "name": "Chandrapur",
+        "arrivalTime": "19:15",
+        "departureTime": "19:20",
+        "distance": 1582
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "20:30",
+        "departureTime": "20:40",
+        "distance": 1645
+      },
+      {
+        "code": "SKZR",
+        "name": "Sirpur Kagaznagar",
+        "arrivalTime": "22:15",
+        "departureTime": "22:17",
+        "distance": 1743
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "arrivalTime": "02:15",
+        "departureTime": "02:25",
+        "distance": 2041
+      },
+      {
+        "code": "HYB",
+        "name": "Hyderabad",
+        "arrivalTime": "06:00",
+        "departureTime": null,
+        "distance": 2294
+      }
+    ]
+  },
+  {
+    "trainNumber": "12724",
+    "trainName": "Telangana Express",
+    "source": "Hyderabad",
+    "destination": "New Delhi",
+    "departureTime": "17:35",
+    "arrivalTime": "05:30",
+    "duration": "35h 55m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4200,
+        "availableSeats": 8
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2650,
+        "availableSeats": 25
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 1750,
+        "availableSeats": 42
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 620,
+        "availableSeats": 95
+      }
+    ],
+    "stations": [
+      {
+        "code": "HYB",
+        "name": "Hyderabad",
+        "arrivalTime": null,
+        "departureTime": "17:35",
+        "distance": 0
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "arrivalTime": "21:15",
+        "departureTime": "21:25",
+        "distance": 253
+      },
+      {
+        "code": "SKZR",
+        "name": "Sirpur Kagaznagar",
+        "arrivalTime": "01:15",
+        "departureTime": "01:17",
+        "distance": 551
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "03:00",
+        "departureTime": "03:10",
+        "distance": 649
+      },
+      {
+        "code": "CD",
+        "name": "Chandrapur",
+        "arrivalTime": "04:20",
+        "departureTime": "04:25",
+        "distance": 712
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "06:45",
+        "departureTime": "06:55",
+        "distance": 864
+      },
+      {
+        "code": "WR",
+        "name": "Wardha",
+        "arrivalTime": "07:50",
+        "departureTime": "07:55",
+        "distance": 919
+      },
+      {
+        "code": "AK",
+        "name": "Akola",
+        "arrivalTime": "10:15",
+        "departureTime": "10:20",
+        "distance": 1049
+      },
+      {
+        "code": "KNW",
+        "name": "Khandwa",
+        "arrivalTime": "13:45",
+        "departureTime": "13:50",
+        "distance": 1353
+      },
+      {
+        "code": "HD",
+        "name": "Harda",
+        "arrivalTime": "15:10",
+        "departureTime": "15:12",
+        "distance": 1455
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "16:00",
+        "departureTime": "16:05",
+        "distance": 1514
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "16:45",
+        "departureTime": "16:55",
+        "distance": 1581
+      },
+      {
+        "code": "LAR",
+        "name": "Lalitpur",
+        "arrivalTime": "19:25",
+        "departureTime": "19:27",
+        "distance": 1782
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "20:35",
+        "departureTime": "20:45",
+        "distance": 1873
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "21:50",
+        "departureTime": "21:55",
+        "distance": 1969
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "23:30",
+        "departureTime": "23:35",
+        "distance": 2088
+      },
+      {
+        "code": "MTJ",
+        "name": "Mathura",
+        "arrivalTime": "00:25",
+        "departureTime": "00:27",
+        "distance": 2145
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "05:30",
+        "departureTime": null,
+        "distance": 2294
+      }
+    ]
+  },
+  {
+    "trainNumber": "12615",
+    "trainName": "Grand Trunk Express",
+    "source": "New Delhi",
+    "destination": "Chennai Central",
+    "departureTime": "07:30",
+    "arrivalTime": "11:45",
+    "duration": "52h 15m",
+    "runningDays": ["MON", "WED", "FRI", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 6500,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 4200,
+        "availableSeats": 12
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2850,
+        "availableSeats": 28
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 980,
+        "availableSeats": 65
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "07:30",
+        "distance": 0
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "09:45",
+        "departureTime": "09:50",
+        "distance": 199
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "11:23",
+        "departureTime": "11:25",
+        "distance": 319
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "12:30",
+        "departureTime": "12:40",
+        "distance": 415
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "15:25",
+        "departureTime": "15:35",
+        "distance": 707
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "16:15",
+        "departureTime": "16:20",
+        "distance": 774
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "20:45",
+        "departureTime": "20:55",
+        "distance": 1089
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "01:15",
+        "departureTime": "01:25",
+        "distance": 1387
+      },
+      {
+        "code": "WL",
+        "name": "Warangal",
+        "arrivalTime": "04:45",
+        "departureTime": "04:50",
+        "distance": 1587
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "arrivalTime": "07:30",
+        "departureTime": "07:45",
+        "distance": 1734
+      },
+      {
+        "code": "GDR",
+        "name": "Gudur",
+        "arrivalTime": "11:15",
+        "departureTime": "11:20",
+        "distance": 1987
+      },
+      {
+        "code": "MS",
+        "name": "Chennai Central",
+        "arrivalTime": "11:45",
+        "departureTime": null,
+        "distance": 2194
+      }
+    ]
+  },
+  {
+    "trainNumber": "12616",
+    "trainName": "Grand Trunk Express",
+    "source": "Chennai Central",
+    "destination": "New Delhi",
+    "departureTime": "13:40",
+    "arrivalTime": "17:55",
+    "duration": "52h 15m",
+    "runningDays": ["TUE", "THU", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 6500,
+        "availableSeats": 4
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 4200,
+        "availableSeats": 18
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2850,
+        "availableSeats": 35
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 980,
+        "availableSeats": 89
+      }
+    ],
+    "stations": [
+      {
+        "code": "MS",
+        "name": "Chennai Central",
+        "arrivalTime": null,
+        "departureTime": "13:40",
+        "distance": 0
+      },
+      {
+        "code": "GDR",
+        "name": "Gudur",
+        "arrivalTime": "16:15",
+        "departureTime": "16:20",
+        "distance": 207
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "arrivalTime": "19:45",
+        "departureTime": "20:00",
+        "distance": 460
+      },
+      {
+        "code": "WL",
+        "name": "Warangal",
+        "arrivalTime": "22:30",
+        "departureTime": "22:35",
+        "distance": 607
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "02:00",
+        "departureTime": "02:10",
+        "distance": 807
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "06:35",
+        "departureTime": "06:45",
+        "distance": 1105
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "11:15",
+        "departureTime": "11:20",
+        "distance": 1420
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "12:00",
+        "departureTime": "12:10",
+        "distance": 1487
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "14:55",
+        "departureTime": "15:05",
+        "distance": 1779
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "16:10",
+        "departureTime": "16:15",
+        "distance": 1875
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "17:50",
+        "departureTime": "17:55",
+        "distance": 1995
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "17:55",
+        "departureTime": null,
+        "distance": 2194
+      }
+    ]
+  },
+  {
+    "trainNumber": "22471",
+    "trainName": "Shatabdi Express",
+    "source": "New Delhi",
+    "destination": "Bhopal",
+    "departureTime": "06:00",
+    "arrivalTime": "13:45",
+    "duration": "7h 45m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "EC",
+        "className": "Executive Chair Car",
+        "fare": 2850,
+        "availableSeats": 12
+      },
+      {
+        "classCode": "CC",
+        "className": "Chair Car",
+        "fare": 1450,
+        "availableSeats": 35
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "06:00",
+        "distance": 0
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "08:15",
+        "departureTime": "08:20",
+        "distance": 199
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "09:50",
+        "departureTime": "09:55",
+        "distance": 319
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "11:00",
+        "departureTime": "11:05",
+        "distance": 415
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "13:45",
+        "departureTime": null,
+        "distance": 707
+      }
+    ]
+  },
+  {
+    "trainNumber": "22472",
+    "trainName": "Shatabdi Express",
+    "source": "Bhopal",
+    "destination": "New Delhi",
+    "departureTime": "14:30",
+    "arrivalTime": "22:15",
+    "duration": "7h 45m",
+    "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "EC",
+        "className": "Executive Chair Car",
+        "fare": 2850,
+        "availableSeats": 8
+      },
+      {
+        "classCode": "CC",
+        "className": "Chair Car",
+        "fare": 1450,
+        "availableSeats": 45
+      }
+    ],
+    "stations": [
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": null,
+        "departureTime": "14:30",
+        "distance": 0
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "17:15",
+        "departureTime": "17:20",
+        "distance": 292
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "18:25",
+        "departureTime": "18:30",
+        "distance": 388
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "20:05",
+        "departureTime": "20:10",
+        "distance": 508
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "22:15",
+        "departureTime": null,
+        "distance": 707
+      }
+    ]
+  },
+  {
+    "trainNumber": "12953",
+    "trainName": "August Kranti Rajdhani Express",
+    "source": "Mumbai Central",
+    "destination": "New Delhi",
+    "departureTime": "17:50",
+    "arrivalTime": "11:40",
+    "duration": "17h 50m",
+    "runningDays": ["TUE", "WED", "FRI", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4750,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2950,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2050,
+        "availableSeats": 0
+      }
+    ],
+    "stations": [
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": null,
+        "departureTime": "17:50",
+        "distance": 0
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "18:25",
+        "departureTime": "18:27",
+        "distance": 28
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "22:10",
+        "departureTime": "22:15",
+        "distance": 428
+      },
+      {
+        "code": "RTM",
+        "name": "Ratlam",
+        "arrivalTime": "01:25",
+        "departureTime": "01:30",
+        "distance": 612
+      },
+      {
+        "code": "UJN",
+        "name": "Ujjain",
+        "arrivalTime": "02:50",
+        "departureTime": "02:55",
+        "distance": 677
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "05:35",
+        "departureTime": "05:40",
+        "distance": 875
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "08:15",
+        "departureTime": "08:20",
+        "distance": 1167
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "10:05",
+        "departureTime": "10:10",
+        "distance": 1366
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "11:40",
+        "departureTime": null,
+        "distance": 1584
+      }
+    ]
+  },
+  {
+    "trainNumber": "12954",
+    "trainName": "August Kranti Rajdhani Express",
+    "source": "New Delhi",
+    "destination": "Mumbai Central",
+    "departureTime": "16:30",
+    "arrivalTime": "10:05",
+    "duration": "17h 35m",
+    "runningDays": ["MON", "WED", "THU", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4750,
+        "availableSeats": 2
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2950,
+        "availableSeats": 8
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2050,
+        "availableSeats": 25
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "16:30",
+        "distance": 0
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "18:20",
+        "departureTime": "18:25",
+        "distance": 218
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "20:15",
+        "departureTime": "20:20",
+        "distance": 417
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "22:55",
+        "departureTime": "23:00",
+        "distance": 709
+      },
+      {
+        "code": "UJN",
+        "name": "Ujjain",
+        "arrivalTime": "01:40",
+        "departureTime": "01:45",
+        "distance": 907
+      },
+      {
+        "code": "RTM",
+        "name": "Ratlam",
+        "arrivalTime": "03:05",
+        "departureTime": "03:10",
+        "distance": 972
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "06:20",
+        "departureTime": "06:25",
+        "distance": 1156
+      },
+      {
+        "code": "BVI",
+        "name": "Borivali",
+        "arrivalTime": "09:30",
+        "departureTime": "09:32",
+        "distance": 1556
+      },
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": "10:05",
+        "departureTime": null,
+        "distance": 1584
+      }
+    ]
+  },
+  {
+    "trainNumber": "12955",
+    "trainName": "Mumbai Rajdhani Express (Bi-Weekly)",
+    "source": "New Delhi",
+    "destination": "Mumbai Central",
+    "departureTime": "15:20",
+    "arrivalTime": "07:15",
+    "duration": "15h 55m",
+    "runningDays": ["WED", "THU"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4650,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2900,
+        "availableSeats": 3
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2000,
+        "availableSeats": 12
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "15:20",
+        "distance": 0
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "17:35",
+        "departureTime": "17:40",
+        "distance": 199
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "19:25",
+        "departureTime": "19:30",
+        "distance": 415
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "22:10",
+        "departureTime": "22:15",
+        "distance": 707
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "02:35",
+        "departureTime": "02:45",
+        "distance": 1089
+      },
+      {
+        "code": "IGP",
+        "name": "Igatpuri",
+        "arrivalTime": "05:50",
+        "departureTime": "05:52",
+        "distance": 1315
+      },
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": "07:15",
+        "departureTime": null,
+        "distance": 1384
+      }
+    ]
+  },
+  {
+    "trainNumber": "12956",
+    "trainName": "Mumbai Rajdhani Express (Bi-Weekly)",
+    "source": "Mumbai Central",
+    "destination": "New Delhi",
+    "departureTime": "16:20",
+    "arrivalTime": "08:35",
+    "duration": "16h 15m",
+    "runningDays": ["THU", "FRI"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 4650,
+        "availableSeats": 6
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 2900,
+        "availableSeats": 15
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2000,
+        "availableSeats": 35
+      }
+    ],
+    "stations": [
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": null,
+        "departureTime": "16:20",
+        "distance": 0
+      },
+      {
+        "code": "IGP",
+        "name": "Igatpuri",
+        "arrivalTime": "17:45",
+        "departureTime": "17:47",
+        "distance": 69
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "00:15",
+        "departureTime": "00:25",
+        "distance": 295
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "04:50",
+        "departureTime": "04:55",
+        "distance": 677
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "07:35",
+        "departureTime": "07:40",
+        "distance": 969
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "09:25",
+        "departureTime": "09:30",
+        "distance": 1168
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "08:35",
+        "departureTime": null,
+        "distance": 1384
+      }
+    ]
+  },
+  {
+    "trainNumber": "11057",
+    "trainName": "Amritsar Express",
+    "source": "Mumbai Central",
+    "destination": "Amritsar",
+    "departureTime": "11:35",
+    "arrivalTime": "11:10",
+    "duration": "47h 35m",
+    "runningDays": ["TUE", "FRI", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 3100,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2050,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 735,
+        "availableSeats": 0
+      }
+    ],
+    "stations": [
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": null,
+        "departureTime": "11:35",
+        "distance": 0
+      },
+      {
+        "code": "ST",
+        "name": "Surat",
+        "arrivalTime": "14:30",
+        "departureTime": "14:35",
+        "distance": 263
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "17:05",
+        "departureTime": "17:10",
+        "distance": 428
+      },
+      {
+        "code": "ADI",
+        "name": "Ahmedabad",
+        "arrivalTime": "20:25",
+        "departureTime": "20:40",
+        "distance": 492
+      },
+      {
+        "code": "AII",
+        "name": "Ajmer",
+        "arrivalTime": "03:15",
+        "departureTime": "03:20",
+        "distance": 823
+      },
+      {
+        "code": "JP",
+        "name": "Jaipur",
+        "arrivalTime": "06:05",
+        "departureTime": "06:10",
+        "distance": 1037
+      },
+      {
+        "code": "RE",
+        "name": "Rewari",
+        "arrivalTime": "09:30",
+        "departureTime": "09:32",
+        "distance": 1245
+      },
+      {
+        "code": "DLI",
+        "name": "Delhi",
+        "arrivalTime": "11:15",
+        "departureTime": "11:30",
+        "distance": 1384
+      },
+      {
+        "code": "UMB",
+        "name": "Ambala Cantt",
+        "arrivalTime": "15:45",
+        "departureTime": "15:50",
+        "distance": 1652
+      },
+      {
+        "code": "LDH",
+        "name": "Ludhiana",
+        "arrivalTime": "18:15",
+        "departureTime": "18:20",
+        "distance": 1789
+      },
+      {
+        "code": "JRC",
+        "name": "Jalandhar City",
+        "arrivalTime": "19:45",
+        "departureTime": "19:47",
+        "distance": 1856
+      },
+      {
+        "code": "ASR",
+        "name": "Amritsar",
+        "arrivalTime": "11:10",
+        "departureTime": null,
+        "distance": 1998
+      }
+    ]
+  },
+  {
+    "trainNumber": "11058",
+    "trainName": "Amritsar Express",
+    "source": "Amritsar",
+    "destination": "Mumbai Central",
+    "departureTime": "15:40",
+    "arrivalTime": "15:15",
+    "duration": "47h 35m",
+    "runningDays": ["MON", "THU", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 3100,
+        "availableSeats": 12
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2050,
+        "availableSeats": 28
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 735,
+        "availableSeats": 65
+      }
+    ],
+    "stations": [
+      {
+        "code": "ASR",
+        "name": "Amritsar",
+        "arrivalTime": null,
+        "departureTime": "15:40",
+        "distance": 0
+      },
+      {
+        "code": "JRC",
+        "name": "Jalandhar City",
+        "arrivalTime": "17:10",
+        "departureTime": "17:12",
+        "distance": 142
+      },
+      {
+        "code": "LDH",
+        "name": "Ludhiana",
+        "arrivalTime": "18:35",
+        "departureTime": "18:40",
+        "distance": 209
+      },
+      {
+        "code": "UMB",
+        "name": "Ambala Cantt",
+        "arrivalTime": "21:15",
+        "departureTime": "21:20",
+        "distance": 346
+      },
+      {
+        "code": "DLI",
+        "name": "Delhi",
+        "arrivalTime": "01:45",
+        "departureTime": "02:00",
+        "distance": 614
+      },
+      {
+        "code": "RE",
+        "name": "Rewari",
+        "arrivalTime": "03:45",
+        "departureTime": "03:47",
+        "distance": 753
+      },
+      {
+        "code": "JP",
+        "name": "Jaipur",
+        "arrivalTime": "06:55",
+        "departureTime": "07:00",
+        "distance": 961
+      },
+      {
+        "code": "AII",
+        "name": "Ajmer",
+        "arrivalTime": "09:45",
+        "departureTime": "09:50",
+        "distance": 1175
+      },
+      {
+        "code": "ADI",
+        "name": "Ahmedabad",
+        "arrivalTime": "16:25",
+        "departureTime": "16:40",
+        "distance": 1506
+      },
+      {
+        "code": "BRC",
+        "name": "Vadodara",
+        "arrivalTime": "19:55",
+        "departureTime": "20:00",
+        "distance": 1570
+      },
+      {
+        "code": "ST",
+        "name": "Surat",
+        "arrivalTime": "22:25",
+        "departureTime": "22:30",
+        "distance": 1735
+      },
+      {
+        "code": "MMCT",
+        "name": "Mumbai Central",
+        "arrivalTime": "15:15",
+        "departureTime": null,
+        "distance": 1998
+      }
+    ]
+  },
+  {
+    "trainNumber": "12473",
+    "trainName": "Sarvodaya Express",
+    "source": "New Delhi",
+    "destination": "Bangalore City",
+    "departureTime": "12:50",
+    "arrivalTime": "04:40",
+    "duration": "39h 50m",
+    "runningDays": ["MON", "WED", "FRI"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 5850,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 3650,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2450,
+        "availableSeats": 5
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 850,
+        "availableSeats": 18
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "12:50",
+        "distance": 0
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "15:05",
+        "departureTime": "15:10",
+        "distance": 199
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "17:30",
+        "departureTime": "17:35",
+        "distance": 415
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "20:15",
+        "departureTime": "20:25",
+        "distance": 707
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "21:05",
+        "departureTime": "21:10",
+        "distance": 774
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "01:35",
+        "departureTime": "01:45",
+        "distance": 1089
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "06:15",
+        "departureTime": "06:25",
+        "distance": 1387
+      },
+      {
+        "code": "HYB",
+        "name": "Hyderabad",
+        "arrivalTime": "12:30",
+        "departureTime": "12:45",
+        "distance": 1641
+      },
+      {
+        "code": "GTL",
+        "name": "Guntakal",
+        "arrivalTime": "16:20",
+        "departureTime": "16:25",
+        "distance": 1874
+      },
+      {
+        "code": "SBC",
+        "name": "Bangalore City",
+        "arrivalTime": "04:40",
+        "departureTime": null,
+        "distance": 2279
+      }
+    ]
+  },
+  {
+    "trainNumber": "12474",
+    "trainName": "Sarvodaya Express",
+    "source": "Bangalore City",
+    "destination": "New Delhi",
+    "departureTime": "20:15",
+    "arrivalTime": "12:05",
+    "duration": "39h 50m",
+    "runningDays": ["TUE", "THU", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 5850,
+        "availableSeats": 4
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 3650,
+        "availableSeats": 16
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2450,
+        "availableSeats": 32
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 850,
+        "availableSeats": 78
+      }
+    ],
+    "stations": [
+      {
+        "code": "SBC",
+        "name": "Bangalore City",
+        "arrivalTime": null,
+        "departureTime": "20:15",
+        "distance": 0
+      },
+      {
+        "code": "GTL",
+        "name": "Guntakal",
+        "arrivalTime": "02:45",
+        "departureTime": "02:50",
+        "distance": 405
+      },
+      {
+        "code": "HYB",
+        "name": "Hyderabad",
+        "arrivalTime": "06:30",
+        "departureTime": "06:45",
+        "distance": 638
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "12:50",
+        "departureTime": "13:00",
+        "distance": 892
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "17:30",
+        "departureTime": "17:40",
+        "distance": 1190
+      },
+      {
+        "code": "ET",
+        "name": "Itarsi",
+        "arrivalTime": "22:05",
+        "departureTime": "22:10",
+        "distance": 1505
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "22:50",
+        "departureTime": "23:00",
+        "distance": 1572
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "01:45",
+        "departureTime": "01:50",
+        "distance": 1864
+      },
+      {
+        "code": "AGC",
+        "name": "Agra Cantt",
+        "arrivalTime": "04:10",
+        "departureTime": "04:15",
+        "distance": 2080
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "12:05",
+        "departureTime": null,
+        "distance": 2279
+      }
+    ]
+  },
+  {
+    "trainNumber": "12625",
+    "trainName": "Kerala Express",
+    "source": "New Delhi",
+    "destination": "Thiruvananthapuram Central",
+    "departureTime": "11:00",
+    "arrivalTime": "10:15",
+    "duration": "47h 15m",
+    "runningDays": ["MON", "WED", "FRI", "SAT"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 6850,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 4350,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2950,
+        "availableSeats": 0
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 1050,
+        "availableSeats": 8
+      }
+    ],
+    "stations": [
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": null,
+        "departureTime": "11:00",
+        "distance": 0
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "14:23",
+        "departureTime": "14:25",
+        "distance": 319
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "15:30",
+        "departureTime": "15:40",
+        "distance": 415
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "18:25",
+        "departureTime": "18:35",
+        "distance": 707
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "23:45",
+        "departureTime": "23:55",
+        "distance": 1089
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "04:25",
+        "departureTime": "04:35",
+        "distance": 1387
+      },
+      {
+        "code": "HYB",
+        "name": "Hyderabad",
+        "arrivalTime": "10:40",
+        "departureTime": "10:55",
+        "distance": 1641
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "arrivalTime": "15:30",
+        "departureTime": "15:45",
+        "distance": 1894
+      },
+      {
+        "code": "MS",
+        "name": "Chennai Central",
+        "arrivalTime": "20:45",
+        "departureTime": "21:15",
+        "distance": 2154
+      },
+      {
+        "code": "CBE",
+        "name": "Coimbatore",
+        "arrivalTime": "04:45",
+        "departureTime": "04:50",
+        "distance": 2651
+      },
+      {
+        "code": "TVC",
+        "name": "Thiruvananthapuram Central",
+        "arrivalTime": "10:15",
+        "departureTime": null,
+        "distance": 3149
+      }
+    ]
+  },
+  {
+    "trainNumber": "12626",
+    "trainName": "Kerala Express",
+    "source": "Thiruvananthapuram Central",
+    "destination": "New Delhi",
+    "departureTime": "15:15",
+    "arrivalTime": "14:30",
+    "duration": "47h 15m",
+    "runningDays": ["TUE", "THU", "SAT", "SUN"],
+    "availableClasses": [
+      {
+        "classCode": "1A",
+        "className": "First AC",
+        "fare": 6850,
+        "availableSeats": 3
+      },
+      {
+        "classCode": "2A",
+        "className": "Second AC",
+        "fare": 4350,
+        "availableSeats": 18
+      },
+      {
+        "classCode": "3A",
+        "className": "Third AC",
+        "fare": 2950,
+        "availableSeats": 42
+      },
+      {
+        "classCode": "SL",
+        "className": "Sleeper",
+        "fare": 1050,
+        "availableSeats": 85
+      }
+    ],
+    "stations": [
+      {
+        "code": "TVC",
+        "name": "Thiruvananthapuram Central",
+        "arrivalTime": null,
+        "departureTime": "15:15",
+        "distance": 0
+      },
+      {
+        "code": "CBE",
+        "name": "Coimbatore",
+        "arrivalTime": "21:15",
+        "departureTime": "21:20",
+        "distance": 498
+      },
+      {
+        "code": "MS",
+        "name": "Chennai Central",
+        "arrivalTime": "05:45",
+        "departureTime": "06:15",
+        "distance": 995
+      },
+      {
+        "code": "BZA",
+        "name": "Vijayawada",
+        "arrivalTime": "11:30",
+        "departureTime": "11:45",
+        "distance": 1255
+      },
+      {
+        "code": "HYB",
+        "name": "Hyderabad",
+        "arrivalTime": "16:20",
+        "departureTime": "16:35",
+        "distance": 1508
+      },
+      {
+        "code": "BPQ",
+        "name": "Balharshah",
+        "arrivalTime": "22:40",
+        "departureTime": "22:50",
+        "distance": 1762
+      },
+      {
+        "code": "NGP",
+        "name": "Nagpur",
+        "arrivalTime": "03:20",
+        "departureTime": "03:30",
+        "distance": 2060
+      },
+      {
+        "code": "BPL",
+        "name": "Bhopal",
+        "arrivalTime": "08:55",
+        "departureTime": "09:05",
+        "distance": 2442
+      },
+      {
+        "code": "JHS",
+        "name": "Jhansi",
+        "arrivalTime": "11:50",
+        "departureTime": "12:00",
+        "distance": 2734
+      },
+      {
+        "code": "GWL",
+        "name": "Gwalior",
+        "arrivalTime": "13:05",
+        "departureTime": "13:10",
+        "distance": 2830
+      },
+      {
+        "code": "NDLS",
+        "name": "New Delhi",
+        "arrivalTime": "14:30",
+        "departureTime": null,
+        "distance": 3149
+      }
+    ]
   }
 ]

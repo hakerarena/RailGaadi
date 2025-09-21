@@ -191,34 +191,373 @@ $accent-color: #ff6b6b;
     padding-bottom: 0.5rem;
   }
 
-  .date-options {
-    .date-option {
-      margin-bottom: 1.5rem;
+  .date-carousel-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
 
-      .date-header {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.75rem;
+    .carousel-arrow {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      z-index: 2;
 
-        .date-label {
-          font-weight: 600;
-          color: $primary-color;
-          font-size: 0.95rem;
+      &:hover:not(:disabled) {
+        background-color: $primary-color;
+        color: white;
+        border-color: $primary-color;
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .date-carousel {
+      flex: 1;
+      display: flex;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0.5rem 0;
+      overflow: hidden;
+      position: relative;
+      min-height: 300px; // Increased height to accommodate content
+
+      .date-option {
+        width: auto;
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 0.75rem;
+        transition: all 0.3s ease;
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        bottom: 0.5rem;
+        opacity: 1;
+        transform: translateX(0);
+        overflow: hidden; // Prevent any overflow
+        box-sizing: border-box;
+
+        &.slide-out-left {
+          animation: slideOutLeft 0.3s ease-in-out forwards;
         }
 
-        .date-full {
-          color: #666;
-          font-size: 0.85rem;
+        &.slide-out-right {
+          animation: slideOutRight 0.3s ease-in-out forwards;
+        }
+
+        &.slide-in-left {
+          animation: slideInLeft 0.3s ease-in-out forwards;
+        }
+
+        &.slide-in-right {
+          animation: slideInRight 0.3s ease-in-out forwards;
+        }
+
+        &:hover {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          border-color: $primary-color;
+        }
+
+        .date-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 2px solid #f0f0f0;
+          flex-shrink: 0; // Prevent header from shrinking
+
+          .date-label {
+            font-weight: 700;
+            color: $primary-color;
+            font-size: 1.1rem;
+          }
+
+          .date-full {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+        }
+
+        .class-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+          gap: 0.4rem;
+          width: 100%;
+          overflow: hidden;
+          justify-items: stretch;
+          align-items: start;
+          padding: 0;
+          box-sizing: border-box;
+
+          .class-card {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background-color: #fafafa;
+            box-sizing: border-box;
+            min-height: 160px;
+            height: auto;
+            overflow: hidden;
+            word-wrap: break-word;
+
+            .class-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 0.6rem;
+              flex-shrink: 0;
+
+              .class-name {
+                font-weight: 500;
+                color: $primary-color;
+                font-size: 0.9rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+
+              .class-code {
+                color: #666;
+                font-size: 0.75rem;
+                flex-shrink: 0;
+              }
+            }
+
+            .availability {
+              font-size: 0.8rem;
+              margin-bottom: 0.6rem;
+              flex-shrink: 0;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+
+              &.available {
+                color: #4caf50;
+              }
+
+              &:not(.available) {
+                color: #f44336;
+              }
+            }
+
+            .fare {
+              font-size: 1rem;
+              font-weight: 600;
+              color: $primary-color;
+              margin-bottom: 0.8rem;
+              flex-shrink: 0;
+            }
+
+            .book-button {
+              width: 100%;
+              margin-top: auto;
+              background-color: $primary-color;
+              color: white;
+              font-size: 0.75rem;
+              padding: 0.35rem;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+
+              &:hover {
+                background-color: color.adjust(
+                  $primary-color,
+                  $lightness: -10%
+                );
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Animation keyframes
+    @keyframes slideOutLeft {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes slideOutRight {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+    }
+
+    @keyframes slideInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 1200px) {
+    .date-carousel-container {
+      .date-carousel {
+        .date-option {
+          .class-grid {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.3rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .date-carousel-container {
+      .date-carousel {
+        .date-option {
+          .class-grid {
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 0.3rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .date-carousel-container {
+      .carousel-arrow {
+        width: 36px;
+        height: 36px;
+
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
         }
       }
 
-      .class-grid {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        padding-left: 1rem;
-        border-left: 3px solid #e0e0e0;
+      .date-carousel {
+        min-height: 350px; // Increased for mobile to accommodate content
+
+        .date-option {
+          padding: 1rem;
+
+          .date-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+          }
+
+          .class-grid {
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.3rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .date-carousel-container {
+      .date-carousel {
+        .date-option {
+          .class-grid {
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.4rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .date-carousel-container {
+      .date-carousel {
+        min-height: 400px; // Even more height for small screens
+
+        .date-option {
+          padding: 0.75rem;
+
+          .class-grid {
+            grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+            gap: 0.4rem;
+
+            .class-card {
+              min-height: 120px;
+              padding: 0.75rem;
+
+              .class-header {
+                margin-bottom: 0.25rem;
+
+                .class-name {
+                  font-size: 0.8rem;
+                }
+
+                .class-code {
+                  font-size: 0.7rem;
+                }
+              }
+
+              .availability {
+                font-size: 0.75rem;
+                margin-bottom: 0.25rem;
+              }
+
+              .fare {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+              }
+
+              .book-button {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+              }
+            }
+          }
+        }
       }
     }
   }

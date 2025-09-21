@@ -2,6 +2,9 @@ import {
   Component,
   Input,
   ViewChild,
+  ViewChildren,
+  QueryList,
+  ElementRef,
   AfterViewInit,
   OnChanges,
 } from '@angular/core';
@@ -56,6 +59,13 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChildren('dateCarousel') dateCarousels!: QueryList<ElementRef>;
+
+  // Track selected date index for each train
+  private trainDateIndexes: Map<string, number> = new Map();
+
+  // Track animation states for each train
+  private trainAnimationStates: Map<string, string> = new Map();
 
   constructor(
     private dataService: DataService,
@@ -67,6 +77,8 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
   ngOnChanges() {
     if (this.searchResults) {
       this.dataSource.data = this.searchResults;
+      // Initialize date indexes for each train
+      this.initializeDateIndexes();
     }
   }
 
@@ -186,5 +198,154 @@ export class TrainSearchResultsComponent implements AfterViewInit, OnChanges {
     // For calendar-based availability, we always return the train's available classes
     // since the train either runs or doesn't run on that date
     return train.availableClasses;
+  }
+
+  // Initialize date indexes for all trains
+  private initializeDateIndexes(): void {
+    if (!this.searchResults || !this.isFlexibleSearch) return;
+
+    this.trainDateIndexes.clear();
+
+    for (const train of this.searchResults) {
+      const availableDates = this.getAvailableDatesForTrain(train);
+      if (availableDates.length > 0) {
+        // Find the index of current/search date or closest future date
+        const currentDateIndex = this.findInitialDateIndex(availableDates);
+        this.trainDateIndexes.set(train.trainNumber, currentDateIndex);
+      }
+    }
+  }
+
+  private findInitialDateIndex(availableDates: Date[]): number {
+    if (!this.searchDate) return 0;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // If search date is today or in future, use search date
+    const searchDateOnly = new Date(this.searchDate);
+    searchDateOnly.setHours(0, 0, 0, 0);
+
+    if (searchDateOnly >= today) {
+      const searchIndex = availableDates.findIndex((date) => {
+        const dateOnly = new Date(date);
+        dateOnly.setHours(0, 0, 0, 0);
+        return dateOnly.getTime() === searchDateOnly.getTime();
+      });
+      return searchIndex >= 0 ? searchIndex : 0;
+    }
+
+    // If search date is in past, find first available future date
+    const futureIndex = availableDates.findIndex((date) => {
+      const dateOnly = new Date(date);
+      dateOnly.setHours(0, 0, 0, 0);
+      return dateOnly >= today;
+    });
+
+    return futureIndex >= 0 ? futureIndex : 0;
+  }
+
+  // Get currently selected date for a train
+  getCurrentSelectedDate(train: Train): Date | null {
+    const availableDates = this.getAvailableDatesForTrain(train);
+    const currentIndex = this.trainDateIndexes.get(train.trainNumber) || 0;
+    return availableDates[currentIndex] || null;
+  }
+
+  // Get current date index for a train
+  getCurrentDateIndex(trainNumber: string): number {
+    return this.trainDateIndexes.get(trainNumber) || 0;
+  }
+
+  // Get animation state for a train
+  getAnimationState(trainNumber: string): string {
+    return this.trainAnimationStates.get(trainNumber) || '';
+  }
+
+  // Date carousel navigation methods
+  scrollLeft(trainNumber: string): void {
+    const availableDates = this.getAvailableDatesForTrain(
+      this.searchResults?.find((t) => t.trainNumber === trainNumber)!
+    );
+    const currentIndex = this.getCurrentDateIndex(trainNumber);
+
+    if (currentIndex > 0) {
+      const newIndex = currentIndex - 1;
+      const newDate = availableDates[newIndex];
+
+      // Check if new date is not in the past
+      if (this.isDateAllowed(newDate)) {
+        // Trigger slide out animation
+        this.trainAnimationStates.set(trainNumber, 'slide-out-right');
+
+        // Update index after animation delay
+        setTimeout(() => {
+          this.trainDateIndexes.set(trainNumber, newIndex);
+          this.trainAnimationStates.set(trainNumber, 'slide-in-left');
+
+          // Clear animation state after animation completes
+          setTimeout(() => {
+            this.trainAnimationStates.set(trainNumber, '');
+          }, 300);
+        }, 150);
+      }
+    }
+  }
+
+  scrollRight(trainNumber: string): void {
+    const availableDates = this.getAvailableDatesForTrain(
+      this.searchResults?.find((t) => t.trainNumber === trainNumber)!
+    );
+    const currentIndex = this.getCurrentDateIndex(trainNumber);
+
+    if (currentIndex < availableDates.length - 1) {
+      const newIndex = currentIndex + 1;
+
+      // Trigger slide out animation
+      this.trainAnimationStates.set(trainNumber, 'slide-out-left');
+
+      // Update index after animation delay
+      setTimeout(() => {
+        this.trainDateIndexes.set(trainNumber, newIndex);
+        this.trainAnimationStates.set(trainNumber, 'slide-in-right');
+
+        // Clear animation state after animation completes
+        setTimeout(() => {
+          this.trainAnimationStates.set(trainNumber, '');
+        }, 300);
+      }, 150);
+    }
+  }
+
+  canScrollLeft(trainNumber: string): boolean {
+    const availableDates = this.getAvailableDatesForTrain(
+      this.searchResults?.find((t) => t.trainNumber === trainNumber)!
+    );
+    const currentIndex = this.getCurrentDateIndex(trainNumber);
+
+    if (currentIndex <= 0) return false;
+
+    // Check if previous date is allowed (not in past)
+    const previousDate = availableDates[currentIndex - 1];
+    return this.isDateAllowed(previousDate);
+  }
+
+  canScrollRight(trainNumber: string): boolean {
+    const availableDates = this.getAvailableDatesForTrain(
+      this.searchResults?.find((t) => t.trainNumber === trainNumber)!
+    );
+    const currentIndex = this.getCurrentDateIndex(trainNumber);
+
+    return currentIndex < availableDates.length - 1;
+  }
+
+  private isDateAllowed(date: Date): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const checkDate = new Date(date);
+    checkDate.setHours(0, 0, 0, 0);
+
+    return checkDate >= today;
   }
 }

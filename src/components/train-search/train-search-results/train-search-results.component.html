@@ -69,49 +69,83 @@
             class="flexible-dates"
           >
             <h4>Available Dates</h4>
-            <div class="date-options">
-              <div
-                *ngFor="let date of getAvailableDatesForTrain(train)"
-                class="date-option"
+            <div class="date-carousel-container">
+              <button
+                class="carousel-arrow left-arrow"
+                (click)="scrollLeft(train.trainNumber)"
+                [disabled]="!canScrollLeft(train.trainNumber)"
+                mat-icon-button
               >
-                <div class="date-header">
-                  <span class="date-label">{{ formatDate(date) }}</span>
-                  <span class="date-full">{{ date.toDateString() }}</span>
-                </div>
-                <div class="class-grid">
-                  <div
-                    class="class-card"
-                    *ngFor="
-                      let class of getClassAvailabilityForDate(train, date)
-                    "
-                  >
-                    <div class="class-header">
-                      <span class="class-name">{{ class.name }}</span>
-                      <span class="class-code">({{ class.code }})</span>
-                    </div>
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+
+              <div
+                class="date-carousel"
+                #dateCarousel
+                [attr.data-train]="train.trainNumber"
+              >
+                <div
+                  *ngIf="getCurrentSelectedDate(train) as selectedDate"
+                  class="date-option"
+                  [class]="getAnimationState(train.trainNumber)"
+                >
+                  <div class="date-header">
+                    <span class="date-label">{{
+                      formatDate(selectedDate)
+                    }}</span>
+                    <span class="date-full">{{
+                      selectedDate.toDateString()
+                    }}</span>
+                  </div>
+                  <div class="class-grid">
                     <div
-                      class="availability"
-                      [class.available]="class.availableSeats > 0"
+                      class="class-card"
+                      *ngFor="
+                        let class of getClassAvailabilityForDate(
+                          train,
+                          selectedDate
+                        )
+                      "
                     >
-                      {{
-                        class.availableSeats > 0
-                          ? class.availableSeats + " seats"
-                          : "Waiting List"
-                      }}
+                      <div class="class-header">
+                        <span class="class-name">{{ class.name }}</span>
+                        <span class="class-code">({{ class.code }})</span>
+                      </div>
+                      <div
+                        class="availability"
+                        [class.available]="class.availableSeats > 0"
+                      >
+                        {{
+                          class.availableSeats > 0
+                            ? class.availableSeats + " seats"
+                            : "Waiting List"
+                        }}
+                      </div>
+                      <div class="fare">₹{{ class.fare }}</div>
+                      <button
+                        mat-stroked-button
+                        color="primary"
+                        class="book-button"
+                        (click)="onBookNow(train, class)"
+                        [disabled]="class.availableSeats === 0"
+                      >
+                        {{
+                          class.availableSeats === 0 ? "Waitlist" : "Book Now"
+                        }}
+                      </button>
                     </div>
-                    <div class="fare">₹{{ class.fare }}</div>
-                    <button
-                      mat-stroked-button
-                      color="primary"
-                      class="book-button"
-                      (click)="onBookNow(train, class)"
-                      [disabled]="class.availableSeats === 0"
-                    >
-                      {{ class.availableSeats === 0 ? "Waitlist" : "Book Now" }}
-                    </button>
                   </div>
                 </div>
               </div>
+
+              <button
+                class="carousel-arrow right-arrow"
+                (click)="scrollRight(train.trainNumber)"
+                [disabled]="!canScrollRight(train.trainNumber)"
+                mat-icon-button
+              >
+                <mat-icon>chevron_right</mat-icon>
+              </button>
             </div>
           </div>
 
