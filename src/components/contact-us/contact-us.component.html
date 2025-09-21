@@ -254,16 +254,16 @@
               <button
                 mat-stroked-button
                 class="action-btn"
-                routerLink="/pnr-status"
+                (click)="navigateTo('/pnr-status')"
               >
                 <mat-icon>search</mat-icon>
-                Check PNR Status
+                PNR Status
               </button>
 
               <button
                 mat-stroked-button
                 class="action-btn"
-                routerLink="/my-transactions"
+                (click)="navigateTo('/my-transactions')"
                 *ngIf="false"
               >
                 <mat-icon>receipt</mat-icon>

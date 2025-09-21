@@ -56,4 +56,9 @@ export class AppComponent implements OnInit {
   logout(): void {
     this.authService.logout();
   }
+
+  navigateTo(route: string): void {
+    this.navigationService.markValidNavigation();
+    this.router.navigate([route]);
+  }
 }

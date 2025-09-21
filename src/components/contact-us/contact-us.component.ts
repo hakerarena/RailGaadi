@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -22,6 +24,7 @@ import { MatChipsModule } from '@angular/material/chips';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -38,6 +41,8 @@ import { MatChipsModule } from '@angular/material/chips';
 export class ContactUsComponent {
   private fb = inject(FormBuilder);
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  private navigationService = inject(NavigationService);
 
   contactForm: FormGroup;
   isSubmitting = false;
@@ -184,5 +189,10 @@ export class ContactUsComponent {
 
   sendEmail(): void {
     window.open('mailto:support@railgaadi.com');
+  }
+
+  navigateTo(route: string): void {
+    this.navigationService.markValidNavigation();
+    this.router.navigate([route]);
   }
 }

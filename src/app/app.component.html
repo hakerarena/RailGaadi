@@ -105,13 +105,17 @@
         <div class="footer-section">
           <h3>{{ constants.FOOTER_LINKS.POPULAR_SERVICES }}</h3>
           <a href="#">{{ constants.FOOTER_LINKS.TRAIN_TICKET_BOOKING }}</a>
-          <a href="#">{{ constants.FOOTER_LINKS.CHECK_PNR_STATUS }}</a>
+          <a (click)="navigateTo('/pnr-status')" style="cursor: pointer">{{
+            constants.FOOTER_LINKS.CHECK_PNR_STATUS
+          }}</a>
           <a href="#">{{ constants.FOOTER_LINKS.TRAIN_SCHEDULE }}</a>
         </div>
         <div class="footer-section">
           <h3>{{ constants.FOOTER_LINKS.SUPPORT }}</h3>
           <a href="#">{{ constants.FOOTER_LINKS.FAQS }}</a>
-          <a href="#">{{ constants.FOOTER_LINKS.FEEDBACK }}</a>
+          <a (click)="navigateTo('/contact-us')" style="cursor: pointer">{{
+            constants.FOOTER_LINKS.FEEDBACK
+          }}</a>
         </div>
       </div>
     </div>
