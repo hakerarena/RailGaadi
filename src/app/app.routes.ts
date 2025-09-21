@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from '../pages/home/home-page.component';
-import { SearchResultsPageComponent } from '../pages/search-results/search-results-page.component';
-import { TestPageComponent } from '../pages/test/test-page.component';
+import { HomePageComponent } from '../components/home/home-page.component';
+import { SearchResultsPageComponent } from '../components/search-results/search-results-page.component';
 import { PNRStatusComponent } from '../components/pnr-status/pnr-status.component';
 import { MyTransactionsComponent } from '../components/my-transactions/my-transactions.component';
 import { MyProfileComponent } from '../components/my-profile/my-profile.component';
@@ -49,11 +48,6 @@ export const routes: Routes = [
     path: 'my-profile',
     component: MyProfileComponent,
     canActivate: [RefreshGuard, AuthGuard],
-  },
-  {
-    path: 'test',
-    component: TestPageComponent,
-    canActivate: [RefreshGuard],
   },
   { path: '**', redirectTo: '', canActivate: [RefreshGuard] },
 ];

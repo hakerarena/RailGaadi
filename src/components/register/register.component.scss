@@ -545,7 +545,7 @@ $gradient-primary: linear-gradient(135deg, $primary-color 0%, #1565c0 100%);
       background: linear-gradient(
         45deg,
         $primary-color,
-        darken($primary-color, 10%)
+        color.adjust($primary-color, $lightness: -10%)
       );
 
       &::before {

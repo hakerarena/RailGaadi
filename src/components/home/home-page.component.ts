@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { TrainSearchFormComponent } from '../../components/train-search/train-search-form/train-search-form.component';
+import { TrainSearchFormComponent } from '../train-search/train-search-form/train-search-form.component';
 import { SearchCriteria } from '../../interfaces';
 import { APP_CONSTANTS } from '../../constants/app.constants';
 import { NavigationService } from '../../services/navigation.service';
