@@ -16,9 +16,12 @@
     <div class="container">
       <div class="header-content">
         <div class="logo">
+          <mat-icon class="logo-icon">train</mat-icon>
           <h1>{{ constants.APP_NAME }}</h1>
         </div>
-        <nav class="main-nav">
+
+        <!-- Center navigation when authenticated -->
+        <nav class="main-nav" [class.centered]="isAuthenticated$ | async">
           <a
             routerLink="/"
             routerLinkActive="active"
