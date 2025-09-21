@@ -7,6 +7,7 @@ import { MyTransactionsComponent } from '../components/my-transactions/my-transa
 import { MyProfileComponent } from '../components/my-profile/my-profile.component';
 import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
+import { ContactUsComponent } from '../components/contact-us/contact-us.component';
 import { SearchGuard } from '../guards/search.guard';
 import { RefreshGuard } from '../guards/refresh.guard';
 import { AuthGuard } from '../guards/auth.guard';
@@ -23,6 +24,11 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [GuestGuard],
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
+    canActivate: [RefreshGuard],
   },
   {
     path: 'search',

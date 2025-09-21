@@ -1,0 +1,368 @@
+<div class="contact-us-container">
+  <div class="contact-wrapper">
+    <!-- Header Section -->
+    <div class="contact-header">
+      <div class="header-content">
+        <mat-icon class="contact-icon">support_agent</mat-icon>
+        <div class="header-text">
+          <h1>Contact Us</h1>
+          <p>We're here to help! Get in touch with our support team</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-content">
+      <!-- Contact Form Section -->
+      <div class="form-section">
+        <mat-card class="contact-form-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="form-avatar">mail</mat-icon>
+            <mat-card-title>Send us a Message</mat-card-title>
+            <mat-card-subtitle
+              >Fill out the form below and we'll get back to you
+              soon</mat-card-subtitle
+            >
+          </mat-card-header>
+
+          <mat-card-content>
+            <form
+              [formGroup]="contactForm"
+              (ngSubmit)="onSubmit()"
+              class="contact-form"
+            >
+              <!-- Personal Information Row -->
+              <div class="form-row">
+                <mat-form-field
+                  appearance="outline"
+                  class="form-field half-width"
+                >
+                  <mat-label>Full Name</mat-label>
+                  <input
+                    matInput
+                    formControlName="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                  />
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error *ngIf="getFieldError('name')">
+                    {{ getFieldError("name") }}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="outline"
+                  class="form-field half-width"
+                >
+                  <mat-label>Email Address</mat-label>
+                  <input
+                    matInput
+                    formControlName="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    type="email"
+                  />
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error *ngIf="getFieldError('email')">
+                    {{ getFieldError("email") }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Contact Information Row -->
+              <div class="form-row">
+                <mat-form-field
+                  appearance="outline"
+                  class="form-field half-width"
+                >
+                  <mat-label>Phone Number</mat-label>
+                  <input
+                    matInput
+                    formControlName="phone"
+                    placeholder="Enter your 10-digit mobile number"
+                    autocomplete="tel"
+                    type="tel"
+                    maxlength="10"
+                  />
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <mat-error *ngIf="getFieldError('phone')">
+                    {{ getFieldError("phone") }}
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field
+                  appearance="outline"
+                  class="form-field half-width"
+                >
+                  <mat-label>Inquiry Type</mat-label>
+                  <mat-select formControlName="inquiryType">
+                    <mat-option
+                      *ngFor="let type of inquiryTypes"
+                      [value]="type.value"
+                    >
+                      {{ type.label }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>category</mat-icon>
+                  <mat-error *ngIf="getFieldError('inquiryType')">
+                    {{ getFieldError("inquiryType") }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Subject Field -->
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Subject</mat-label>
+                <input
+                  matInput
+                  formControlName="subject"
+                  placeholder="Brief description of your inquiry"
+                />
+                <mat-icon matSuffix>subject</mat-icon>
+                <mat-error *ngIf="getFieldError('subject')">
+                  {{ getFieldError("subject") }}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Message Field -->
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Message</mat-label>
+                <textarea
+                  matInput
+                  formControlName="message"
+                  placeholder="Please describe your inquiry in detail..."
+                  rows="6"
+                  maxlength="1000"
+                ></textarea>
+                <mat-icon matSuffix>message</mat-icon>
+                <mat-hint align="end">
+                  {{ contactForm.get("message")?.value?.length || 0 }}/1000
+                </mat-hint>
+                <mat-error *ngIf="getFieldError('message')">
+                  {{ getFieldError("message") }}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Submit Button -->
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="submit-btn"
+                [class.loading]="isSubmitting"
+                [disabled]="!contactForm.valid || isSubmitting"
+              >
+                <div *ngIf="isSubmitting" class="loading-container">
+                  <div class="spinner"></div>
+                </div>
+                <span *ngIf="!isSubmitting" class="button-text">
+                  <mat-icon>send</mat-icon>
+                  Send Message
+                </span>
+                <span *ngIf="isSubmitting" class="loading-text"
+                  >Sending...</span
+                >
+              </button>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Contact Information Section -->
+      <div class="info-section">
+        <!-- Office Details Card -->
+        <mat-card class="office-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="office-avatar">business</mat-icon>
+            <mat-card-title>Office Information</mat-card-title>
+            <mat-card-subtitle
+              >Visit us or call for immediate assistance</mat-card-subtitle
+            >
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="office-details">
+              <div class="detail-item">
+                <mat-icon>location_on</mat-icon>
+                <div class="detail-content">
+                  <h4>Address</h4>
+                  <p>{{ officeDetails.address }}</p>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <mat-icon>phone</mat-icon>
+                <div class="detail-content">
+                  <h4>Phone</h4>
+                  <p>
+                    <a href="tel:+911392340000" (click)="callSupport()">
+                      {{ officeDetails.phone }}
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <mat-icon>email</mat-icon>
+                <div class="detail-content">
+                  <h4>Email</h4>
+                  <p>
+                    <a
+                      href="mailto:support@railgaadi.com"
+                      (click)="sendEmail()"
+                    >
+                      {{ officeDetails.email }}
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <mat-icon>schedule</mat-icon>
+                <div class="detail-content">
+                  <h4>Operating Hours</h4>
+                  <p>{{ officeDetails.hours }}</p>
+                </div>
+              </div>
+
+              <div class="detail-item highlight">
+                <mat-icon>support</mat-icon>
+                <div class="detail-content">
+                  <h4>24/7 Helpline</h4>
+                  <p>
+                    <a href="tel:139" class="helpline-number">
+                      {{ officeDetails.helpline }}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Quick Actions Card -->
+        <mat-card class="quick-actions-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="actions-avatar">flash_on</mat-icon>
+            <mat-card-title>Quick Actions</mat-card-title>
+            <mat-card-subtitle
+              >Get instant help for common issues</mat-card-subtitle
+            >
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="quick-actions">
+              <button
+                mat-stroked-button
+                class="action-btn"
+                routerLink="/pnr-status"
+              >
+                <mat-icon>search</mat-icon>
+                Check PNR Status
+              </button>
+
+              <button
+                mat-stroked-button
+                class="action-btn"
+                routerLink="/my-transactions"
+                *ngIf="false"
+              >
+                <mat-icon>receipt</mat-icon>
+                View My Bookings
+              </button>
+
+              <button
+                mat-stroked-button
+                class="action-btn"
+                (click)="callSupport()"
+              >
+                <mat-icon>call</mat-icon>
+                Call Support
+              </button>
+
+              <button
+                mat-stroked-button
+                class="action-btn"
+                (click)="sendEmail()"
+              >
+                <mat-icon>email</mat-icon>
+                Email Us
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Social Media Card -->
+        <mat-card class="social-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="social-avatar">share</mat-icon>
+            <mat-card-title>Follow Us</mat-card-title>
+            <mat-card-subtitle
+              >Stay connected on social media</mat-card-subtitle
+            >
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="social-links">
+              <button
+                mat-icon-button
+                *ngFor="let social of socialLinks"
+                class="social-btn"
+                [title]="social.platform"
+                (click)="openSocialLink(social.url)"
+              >
+                <mat-icon>{{ social.icon }}</mat-icon>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <mat-card class="faq-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar class="faq-avatar">help</mat-icon>
+        <mat-card-title>Frequently Asked Questions</mat-card-title>
+        <mat-card-subtitle
+          >Find quick answers to common questions</mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h4>How do I cancel my ticket?</h4>
+            <p>
+              You can cancel your ticket online through the "My Transactions"
+              section or call our helpline at 139.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4>When will I get my refund?</h4>
+            <p>
+              Refunds are processed within 3-5 working days after successful
+              cancellation.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4>How to check PNR status?</h4>
+            <p>
+              Use our PNR Status checker by entering your 10-digit PNR number on
+              the home page.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Payment failed but money deducted?</h4>
+            <p>
+              Don't worry! The amount will be auto-refunded within 5-7 working
+              days if the booking wasn't confirmed.
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
