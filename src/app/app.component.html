@@ -43,7 +43,13 @@
         <div class="auth-buttons">
           <!-- Show login/register when not authenticated -->
           <ng-container *ngIf="!(isAuthenticated$ | async)">
-            <button mat-button routerLink="/login">
+            <button
+              mat-raised-button
+              color="accent"
+              routerLink="/login"
+              class="login-btn"
+            >
+              <mat-icon>login</mat-icon>
               {{ constants.BUTTONS.LOGIN }}
             </button>
             <button mat-raised-button color="primary">

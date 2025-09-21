@@ -1,6 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* Custom Material Theme Overrides */
+:root {
+  --mat-accent-rgb: 255, 107, 107;
+  --mat-accent-color: rgb(255, 107, 107);
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: #ff6b6b;
+  color: white;
+}
+
 /* Global styles */
 html,
 body {
@@ -87,7 +98,41 @@ body {
 .mat-mdc-option {
   font-size: 14px;
   height: 48px !important;
-  line-height: 48px !important;
+}
+
+/* Enhanced Snackbar Global Positioning */
+.cdk-overlay-container {
+  .cdk-overlay-pane {
+    &.mat-mdc-snack-bar-container {
+      animation: snackbarSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+      &.ng-animating {
+        animation: snackbarSlideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      }
+    }
+  }
+}
+
+@keyframes snackbarSlideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes snackbarSlideOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 
 /* Container and Layout */

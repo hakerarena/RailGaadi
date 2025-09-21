@@ -168,24 +168,55 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('rememberMe')?.value || false
     );
 
-    this.snackBar.open('Login successful! Welcome back.', 'Close', {
-      duration: 3000,
-      panelClass: ['success-snackbar'],
-    });
+    // Get user's first name for personalized message
+    const firstName = response.user?.firstName || 'User';
+
+    this.snackBar.open(
+      `🎉 Welcome back, ${firstName}! Login successful.`,
+      '✕',
+      {
+        duration: 4000,
+        panelClass: ['success-snackbar', 'enhanced-snackbar'],
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      }
+    );
+
+    // Add haptic feedback if available
+    if ('vibrate' in navigator) {
+      navigator.vibrate([50, 100, 50]);
+    }
 
     // Navigate to dashboard or previous page
     setTimeout(() => {
       this.router.navigate(['/']);
-    }, 1500);
+    }, 2000);
   }
 
   private handleLoginError(errorMessage: string): void {
     this.isLoading = false;
 
-    this.snackBar.open(errorMessage, 'Close', {
-      duration: 5000,
-      panelClass: ['error-snackbar'],
+    // Enhance error messages
+    let enhancedMessage = errorMessage;
+    if (errorMessage.toLowerCase().includes('invalid')) {
+      enhancedMessage =
+        'Invalid credentials. Please check your email and password.';
+    } else if (errorMessage.toLowerCase().includes('network')) {
+      enhancedMessage =
+        'Network error. Please check your connection and try again.';
+    }
+
+    this.snackBar.open(`⚠️ ${enhancedMessage}`, '✕', {
+      duration: 6000,
+      panelClass: ['error-snackbar', 'enhanced-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
+
+    // Add error haptic feedback if available
+    if ('vibrate' in navigator) {
+      navigator.vibrate([100, 50, 100, 50, 100]);
+    }
 
     // Clear password field on error
     this.loginForm.get('password')?.setValue('');
@@ -204,17 +235,21 @@ export class LoginComponent implements OnInit {
 
   onForgotPassword(): void {
     // In a real app, this would navigate to forgot password page
-    this.snackBar.open('Forgot password feature coming soon!', 'Close', {
+    this.snackBar.open('💡 Forgot password feature coming soon!', '✕', {
       duration: 3000,
-      panelClass: ['info-snackbar'],
+      panelClass: ['info-snackbar', 'enhanced-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 
   onSignUp(): void {
     // In a real app, this would navigate to registration page
-    this.snackBar.open('Registration feature coming soon!', 'Close', {
+    this.snackBar.open('🚀 Registration feature coming soon!', '✕', {
       duration: 3000,
-      panelClass: ['info-snackbar'],
+      panelClass: ['info-snackbar', 'enhanced-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 
