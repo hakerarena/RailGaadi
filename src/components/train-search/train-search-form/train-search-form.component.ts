@@ -57,6 +57,7 @@ const QUOTAS: Quota[] = APP_CONSTANTS.FORM_DATA.QUOTAS;
 })
 export class TrainSearchFormComponent implements OnInit {
   @Output() search = new EventEmitter<SearchCriteria>();
+  @Output() advancedSearch = new EventEmitter<SearchCriteria>();
 
   searchForm!: FormGroup;
   stations: StationInfo[] = [];
@@ -337,7 +338,11 @@ export class TrainSearchFormComponent implements OnInit {
         isAdvancedSearch: this.isAdvancedSearch,
       };
 
-      this.search.emit(searchCriteria);
+      if (this.isAdvancedSearch) {
+        this.advancedSearch.emit(searchCriteria);
+      } else {
+        this.search.emit(searchCriteria);
+      }
 
       setTimeout(() => {
         this.resetForm();

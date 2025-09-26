@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomePageComponent } from '../components/home/home-page.component';
 import { SearchResultsPageComponent } from '../components/search-results/search-results-page.component';
+import { AdvancedSearchResultsComponent } from '../components/advanced-search-results/advanced-search-results.component';
 import { PNRStatusComponent } from '../components/pnr-status/pnr-status.component';
 import { MyTransactionsComponent } from '../components/my-transactions/my-transactions.component';
 import { MyProfileComponent } from '../components/my-profile/my-profile.component';
@@ -33,6 +34,11 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchResultsPageComponent,
+    canActivate: [RefreshGuard, SearchGuard],
+  },
+  {
+    path: 'advanced-search',
+    component: AdvancedSearchResultsComponent,
     canActivate: [RefreshGuard, SearchGuard],
   },
   {

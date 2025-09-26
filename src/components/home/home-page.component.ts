@@ -45,4 +45,34 @@ export class HomePageComponent {
         }
       );
   }
+
+  onAdvancedSearch(criteria: SearchCriteria): void {
+    if (!criteria.fromStation || !criteria.toStation) {
+      return;
+    }
+
+    // Mark navigation as valid for all guards
+    this.navigationService.markValidNavigation();
+    this.navigationService.markSearchSession();
+
+    // Store criteria in localStorage as backup for advanced search
+    localStorage.setItem('advancedSearchCriteria', JSON.stringify(criteria));
+
+    this.router
+      .navigate(['/advanced-search'], {
+        state: { searchCriteria: criteria },
+      })
+      .then(
+        (success) => {
+          if (!success) {
+            this.navigationService.clearSearchSession();
+            localStorage.removeItem('advancedSearchCriteria');
+          }
+        },
+        (error) => {
+          this.navigationService.clearSearchSession();
+          localStorage.removeItem('advancedSearchCriteria');
+        }
+      );
+  }
 }

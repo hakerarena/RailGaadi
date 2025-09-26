@@ -1,0 +1,314 @@
+<div class="advanced-search-results-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="header-content">
+        <h1>
+          <mat-icon class="header-icon">advanced_search</mat-icon>
+          {{ constants.SEARCH_RESULTS.AVAILABLE_TRAINS }} - Advanced
+        </h1>
+        <button
+          mat-button
+          color="primary"
+          (click)="onNewSearch()"
+          class="new-search-btn"
+        >
+          {{ constants.BUTTONS.NEW_SEARCH }}
+        </button>
+      </div>
+
+      <!-- Search Summary -->
+      <div class="search-summary" *ngIf="searchCriteria">
+        <p>
+          <strong>{{ searchCriteria.fromStation.name }}</strong>
+          →
+          <strong>{{ searchCriteria.toStation.name }}</strong>
+          | {{ searchCriteria.journeyDate | date : "dd MMM yyyy" }}
+          <span
+            *ngIf="searchCriteria.flexibleWithDate"
+            class="flexible-indicator"
+          >
+            (±3 days flexible)
+          </span>
+          <span *ngIf="searchCriteria.trainClass">
+            | {{ searchCriteria.trainClass }}</span
+          >
+        </p>
+        <div class="advanced-features">
+          <mat-chip-set>
+            <mat-chip color="accent" selected>
+              <mat-icon matChipAvatar>search</mat-icon>
+              Advanced Search
+            </mat-chip>
+            <mat-chip *ngIf="hasPartialJourneys" color="primary">
+              <mat-icon matChipAvatar>alt_route</mat-icon>
+              Partial Journey Options
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-section" *ngIf="isSearching">
+    <app-loading-spinner
+      message="Searching trains and analyzing routes..."
+      size="large"
+    >
+    </app-loading-spinner>
+  </div>
+
+  <!-- Search Results Tabs -->
+  <div class="results-section" *ngIf="showResults">
+    <div class="container">
+      <mat-tab-group [(selectedIndex)]="activeTab" class="results-tabs">
+        <!-- Direct Trains Tab -->
+        <mat-tab [label]="'Direct Trains (' + searchResults.length + ')'">
+          <div class="tab-content" *ngIf="hasDirectTrains">
+            <div class="section-header">
+              <h2>Direct Trains</h2>
+              <p>Trains running directly between your selected stations</p>
+            </div>
+            <app-train-search-results
+              [searchResults]="searchResults"
+              [isFlexibleSearch]="searchCriteria?.flexibleWithDate || false"
+              [searchDate]="searchCriteria?.journeyDate || null"
+            >
+            </app-train-search-results>
+          </div>
+          <div class="no-direct-trains" *ngIf="!hasDirectTrains">
+            <mat-icon class="no-results-icon">train</mat-icon>
+            <h3>No Direct Trains Found</h3>
+            <p>
+              No direct trains available for this route. Check partial journey
+              options below.
+            </p>
+          </div>
+        </mat-tab>
+
+        <!-- Partial Journey Options Tab -->
+        <mat-tab
+          [label]="
+            'Partial Journey Options (' + partialJourneyResults.length + ')'
+          "
+        >
+          <div class="tab-content" *ngIf="hasPartialJourneys">
+            <div class="section-header">
+              <h2>Partial Journey Options</h2>
+              <p>
+                Alternative routes with confirmed tickets for partial segments
+              </p>
+              <div class="info-card">
+                <mat-icon class="info-icon">info</mat-icon>
+                <span
+                  >These options show confirmed tickets available for parts of
+                  your journey. You may need to book multiple tickets.</span
+                >
+              </div>
+            </div>
+
+            <div class="partial-journeys-list">
+              <mat-expansion-panel
+                *ngFor="
+                  let partialJourney of partialJourneyResults;
+                  let i = index
+                "
+                class="partial-journey-panel"
+                [expanded]="i === 0"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <div class="journey-title">
+                      <div class="route-info">
+                        <span class="route">
+                          {{ partialJourney.fromStation.name }} →
+                          {{ partialJourney.toStation.name }}
+                        </span>
+                        <mat-chip class="transfer-chip">
+                          {{ partialJourney.transferCount }} Transfer{{
+                            partialJourney.transferCount > 1 ? "s" : ""
+                          }}
+                        </mat-chip>
+                      </div>
+                      <div class="timing-info">
+                        <span class="time"
+                          >{{ partialJourney.departureTime }} -
+                          {{ partialJourney.arrivalTime }}</span
+                        >
+                        <span class="duration">{{
+                          partialJourney.totalDuration
+                        }}</span>
+                      </div>
+                    </div>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <div class="classes-info">
+                      <span
+                        *ngFor="
+                          let cls of partialJourney.availableClasses;
+                          let last = last
+                        "
+                      >
+                        {{ cls }}<span *ngIf="!last">, </span>
+                      </span>
+                    </div>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <!-- Journey Details -->
+                <div class="journey-details">
+                  <div class="route-segments">
+                    <div
+                      *ngFor="
+                        let segment of partialJourney.routeSegments;
+                        let i = index;
+                        let last = last
+                      "
+                      class="segment"
+                    >
+                      <!-- Train Segment -->
+                      <div class="train-segment">
+                        <div class="segment-header">
+                          <div class="train-info">
+                            <mat-icon class="segment-icon">train</mat-icon>
+                            <div class="train-details">
+                              <h4>
+                                {{ segment.train.trainName }} ({{
+                                  segment.train.trainNumber
+                                }})
+                              </h4>
+                              <p class="segment-route">
+                                {{ segment.fromStation.name }} →
+                                {{ segment.toStation.name }}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="timing">
+                            <div class="time-slot">
+                              <span class="time">{{
+                                segment.departureTime
+                              }}</span>
+                              <span class="station">{{
+                                segment.fromStation.code
+                              }}</span>
+                            </div>
+                            <div class="duration-indicator">
+                              <mat-icon>schedule</mat-icon>
+                              <span>{{ segment.duration }}</span>
+                            </div>
+                            <div class="time-slot">
+                              <span class="time">{{
+                                segment.arrivalTime
+                              }}</span>
+                              <span class="station">{{
+                                segment.toStation.code
+                              }}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="classes-availability">
+                          <div class="available-classes">
+                            <span class="label">Available Classes:</span>
+                            <mat-chip-set>
+                              <mat-chip
+                                *ngFor="let cls of segment.availableClasses"
+                              >
+                                {{ cls }}
+                              </mat-chip>
+                            </mat-chip-set>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Transfer Information -->
+                      <div
+                        class="transfer-info"
+                        *ngIf="segment.isTransfer && !last"
+                      >
+                        <div class="transfer-details">
+                          <mat-icon class="transfer-icon"
+                            >transfer_within_a_station</mat-icon
+                          >
+                          <div class="transfer-text">
+                            <strong
+                              >Transfer at {{ segment.toStation.name }}</strong
+                            >
+                            <p>
+                              Minimum transfer time: {{ segment.transferTime }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Connector Line -->
+                      <div class="connector" *ngIf="!last"></div>
+                    </div>
+                  </div>
+
+                  <!-- Action Buttons -->
+                  <div class="journey-actions">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="onBookPartialJourney(partialJourney)"
+                      class="book-journey-btn"
+                    >
+                      <mat-icon>book_online</mat-icon>
+                      Book This Journey
+                    </button>
+                    <button mat-button color="accent" class="journey-info-btn">
+                      <mat-icon>info</mat-icon>
+                      More Details
+                    </button>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+
+          <div class="no-partial-journeys" *ngIf="!hasPartialJourneys">
+            <mat-icon class="no-results-icon">alt_route</mat-icon>
+            <h3>No Partial Journey Options Found</h3>
+            <p>
+              No alternative routes with confirmed ticket availability found for
+              this route.
+            </p>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+
+  <!-- No Results Message -->
+  <div class="no-results-section" *ngIf="showNoResults">
+    <div class="container">
+      <div class="no-results-card">
+        <mat-icon class="no-results-icon">search_off</mat-icon>
+        <h2>{{ constants.SEARCH_RESULTS.NO_TRAINS_FOUND }}</h2>
+        <p>
+          Sorry, no trains or alternative routes were found for the selected
+          criteria.
+        </p>
+        <div class="suggestions">
+          <h3>Try these alternatives:</h3>
+          <ul>
+            <li>Search for different dates</li>
+            <li>Check nearby stations</li>
+            <li>Try different travel classes</li>
+            <li>Enable flexible date search</li>
+          </ul>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onNewSearch()"
+          class="new-search-btn"
+        >
+          {{ constants.BUTTONS.TRY_DIFFERENT_SEARCH }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

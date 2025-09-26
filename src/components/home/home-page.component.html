@@ -10,7 +10,10 @@
 
   <div class="search-section">
     <div class="container">
-      <app-train-search-form (search)="onSearch($event)">
+      <app-train-search-form
+        (search)="onSearch($event)"
+        (advancedSearch)="onAdvancedSearch($event)"
+      >
       </app-train-search-form>
     </div>
   </div>
