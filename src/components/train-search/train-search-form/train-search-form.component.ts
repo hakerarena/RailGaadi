@@ -7,6 +7,7 @@ import {
   Validators,
   AbstractControl,
   ValidationErrors,
+  FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -44,6 +45,7 @@ const QUOTAS: Quota[] = APP_CONSTANTS.FORM_DATA.QUOTAS;
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
@@ -60,6 +62,7 @@ export class TrainSearchFormComponent implements OnInit {
   stations: StationInfo[] = [];
   travelClasses: TravelClass[] = TRAVEL_CLASSES;
   quotas: Quota[] = QUOTAS;
+  isAdvancedSearch = false;
 
   // Date limits (4 months from today)
   minDate = new Date();
@@ -236,12 +239,36 @@ export class TrainSearchFormComponent implements OnInit {
     const fromStation = this.searchForm.get('fromStation')?.value;
     const toStation = this.searchForm.get('toStation')?.value;
     const journeyDate = this.searchForm.get('journeyDate')?.value;
+    const travelClass = this.searchForm.get('travelClass')?.value;
 
-    // Check if all required fields are filled and form is valid (including cross-field validation)
+    const basicValid =
+      !!fromStation &&
+      !!toStation &&
+      !!journeyDate &&
+      this.fromStationControl.valid &&
+      this.toStationControl.valid &&
+      this.journeyDateControl.valid &&
+      !this.searchForm.errors?.['sameStation'];
+
+    if (this.isAdvancedSearch) {
+      return basicValid && !!travelClass && travelClass !== '';
+    }
+
+    return basicValid;
+  }
+
+  canSubmitAdvanced(): boolean {
+    const fromStation = this.searchForm.get('fromStation')?.value;
+    const toStation = this.searchForm.get('toStation')?.value;
+    const journeyDate = this.searchForm.get('journeyDate')?.value;
+    const travelClass = this.searchForm.get('travelClass')?.value;
+
     return (
       !!fromStation &&
       !!toStation &&
       !!journeyDate &&
+      !!travelClass &&
+      travelClass !== '' &&
       this.fromStationControl.valid &&
       this.toStationControl.valid &&
       this.journeyDateControl.valid &&
@@ -249,7 +276,27 @@ export class TrainSearchFormComponent implements OnInit {
     );
   }
 
+  get travelClassError(): string | null {
+    const control = this.travelClassControl;
+    if (this.isAdvancedSearch && control.errors && control.touched) {
+      if (control.errors['required']) {
+        return 'Travel class is required for advanced search';
+      }
+    }
+    return null;
+  }
+
   onSubmit(): void {
+    this.isAdvancedSearch = false;
+    this.performSearch();
+  }
+
+  onAdvancedSubmit(): void {
+    this.isAdvancedSearch = true;
+    this.performSearch();
+  }
+
+  private performSearch(): void {
     let fromStation = this.searchForm.get('fromStation')?.value;
     let toStation = this.searchForm.get('toStation')?.value;
     const journeyDate = this.searchForm.get('journeyDate')?.value;
@@ -287,6 +334,7 @@ export class TrainSearchFormComponent implements OnInit {
         flexibleWithDate: this.searchForm.get('flexibleWithDate')?.value,
         personWithDisability: this.searchForm.get('divyaangConcession')?.value,
         availableBerth: true,
+        isAdvancedSearch: this.isAdvancedSearch,
       };
 
       this.search.emit(searchCriteria);

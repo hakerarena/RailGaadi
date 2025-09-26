@@ -2,7 +2,7 @@
   <mat-form-field class="class-field" appearance="outline">
     <mat-label>{{ classLabel }}</mat-label>
     <mat-select [formControl]="classControl">
-      <mat-option value="">All Classes</mat-option>
+      <mat-option value="" *ngIf="!isClassRequired">All Classes</mat-option>
       <mat-option
         *ngFor="let travelClass of travelClasses"
         [value]="travelClass.code"

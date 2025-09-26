@@ -52,17 +52,22 @@
       [maxDate]="maxDate"
     >
     </app-date-picker>
+  </div>
 
-    <!-- Travel Class and Quota -->
+  <div class="form-row class-search-row">
     <app-class-quota-selector
       [classControl]="travelClassControl"
       [quotaControl]="quotaControl"
       [travelClasses]="travelClasses"
       [quotas]="quotas"
-      [classLabel]="'Travel Class'"
+      [classLabel]="isAdvancedSearch ? 'Travel Class *' : 'Travel Class'"
       [quotaLabel]="'Quota'"
+      [isClassRequired]="isAdvancedSearch"
     >
     </app-class-quota-selector>
+    <mat-error *ngIf="travelClassError" class="class-error">
+      {{ travelClassError }}
+    </mat-error>
   </div>
 
   <div class="form-row options-row">
@@ -87,6 +92,16 @@
       (click)="onSubmit()"
     >
       Search
+    </button>
+    <button
+      mat-stroked-button
+      color="accent"
+      class="advanced-search-button"
+      [class.active]="isAdvancedSearch"
+      [disabled]="!canSubmitAdvanced()"
+      (click)="onAdvancedSubmit()"
+    >
+      Advanced Search
     </button>
   </div>
 </div>

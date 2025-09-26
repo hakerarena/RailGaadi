@@ -11,6 +11,7 @@ export interface SearchCriteria {
   flexibleWithDate: boolean;
   personWithDisability: boolean;
   availableBerth: boolean;
+  isAdvancedSearch?: boolean;
 }
 
 export interface Train {

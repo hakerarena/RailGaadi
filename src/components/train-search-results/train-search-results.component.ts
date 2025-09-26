@@ -22,11 +22,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
-import { Train, SortOption } from '../../../interfaces';
-import { APP_CONSTANTS } from '../../../constants/app.constants';
-import { DataService } from '../../../services/data.service';
-import { AuthService } from '../../../services/auth.service';
-import { NavigationService } from '../../../services/navigation.service';
+import { Train, SortOption } from '../../interfaces';
+import { APP_CONSTANTS } from '../../constants/app.constants';
+import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'app-train-search-results',

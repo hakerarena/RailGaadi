@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { TrainSearchResultsComponent } from '../train-search/train-search-results/train-search-results.component';
+import { TrainSearchResultsComponent } from '../train-search-results/train-search-results.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { SearchCriteria, Train } from '../../interfaces';
 import { DataService } from '../../services/data.service';

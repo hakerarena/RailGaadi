@@ -24,4 +24,5 @@ export class ClassQuotaSelectorComponent {
   @Input() quotas: Quota[] = [];
   @Input() classLabel: string = 'Travel Class';
   @Input() quotaLabel: string = 'Quota';
+  @Input() isClassRequired: boolean = false;
 }

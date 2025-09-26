@@ -29,8 +29,6 @@ export class DataService {
   }
 
   private loadTrainsData(): void {
-    console.log('Starting to load trains data from:', API_ENDPOINTS.TRAINS);
-
     interface RawTrain {
       trainNumber: string;
       trainName: string;
@@ -276,13 +274,18 @@ export class DataService {
       return train;
     });
 
-    console.log('Search results:', filteredResults.length, 'trains found');
+    let finalResults = filteredResults;
+    if (searchCriteria.isAdvancedSearch && searchCriteria.trainClass) {
+      finalResults = filteredResults.filter(
+        (train) => train.availableClasses.length > 0
+      );
+    }
+
     console.log(
       'Class filter applied:',
       searchCriteria.trainClass || 'All Classes'
     );
-    console.log('========================');
-    return filteredResults;
+    return finalResults;
   }
 
   private getSearchDates(baseDate: Date, flexible: boolean = false): Date[] {
