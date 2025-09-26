@@ -1,4 +1,4 @@
-# 🚆 Optimized IRCTC Clone
+# 🚆 RailGaadi
 
 A modern, fully-featured clone of the Indian Railway Catering and Tourism Corporation (IRCTC) website built with **Angular 19** and **Angular Material**. This project demonstrates advanced Angular development practices, responsive design, and a comprehensive train booking system.
 
