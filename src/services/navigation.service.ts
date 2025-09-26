@@ -50,7 +50,7 @@ export class NavigationService {
 
       return isValid;
     } catch (error) {
-      console.error('Error checking search session:', error);
+      // Error handling
       this.clearSearchSession();
       return false;
     }

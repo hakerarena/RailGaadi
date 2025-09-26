@@ -149,7 +149,7 @@ export class UserManagementService {
       const usersData = localStorage.getItem(this.USERS_KEY);
       return usersData ? JSON.parse(usersData) : [];
     } catch (error) {
-      console.error('Error loading users:', error);
+      // Error handling
       return [];
     }
   }
@@ -161,7 +161,7 @@ export class UserManagementService {
     try {
       localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
     } catch (error) {
-      console.error('Error saving users:', error);
+      // Error handling
       throw error;
     }
   }

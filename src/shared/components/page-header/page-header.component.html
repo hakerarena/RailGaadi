@@ -1,0 +1,24 @@
+<div class="page-header" [class.gradient-bg]="backgroundGradient">
+  <div class="container">
+    <div class="header-content">
+      <h1>
+        <mat-icon *ngIf="icon" class="header-icon">{{ icon }}</mat-icon>
+        {{ title }}
+      </h1>
+      <button
+        *ngIf="showNewSearchButton"
+        mat-button
+        color="primary"
+        (click)="onNewSearchClick()"
+        class="new-search-btn"
+      >
+        {{ newSearchButtonText }}
+      </button>
+    </div>
+
+    <!-- Additional content like search summary -->
+    <div class="additional-content" *ngIf="additionalContent">
+      <ng-container [ngTemplateOutlet]="additionalContent"></ng-container>
+    </div>
+  </div>
+</div>

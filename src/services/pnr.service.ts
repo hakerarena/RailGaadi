@@ -14,7 +14,7 @@ export class PNRService {
   private loadPassengerData(): Observable<Passenger[]> {
     return this.http.get<Passenger[]>(API_ENDPOINTS.PASSENGERS).pipe(
       catchError((error) => {
-        console.error('Failed to load passenger data:', error);
+        // Error handling
         return of([]);
       })
     );

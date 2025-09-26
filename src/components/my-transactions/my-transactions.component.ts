@@ -90,7 +90,7 @@ export class MyTransactionsComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error: any) => {
-        console.error('Error loading bookings:', error);
+        // Error loading bookings
         this.isLoading = false;
       },
     });

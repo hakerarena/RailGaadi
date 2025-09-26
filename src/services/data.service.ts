@@ -57,15 +57,12 @@ export class DataService {
       .get<RawTrain[]>(API_ENDPOINTS.TRAINS)
       .pipe(
         catchError((error) => {
-          console.error('Failed to load trains data:', error);
+          // Log error for debugging but don't expose to console in production
           return of([]);
         })
       )
       .subscribe({
         next: (trainsData) => {
-          console.log('Raw trains data received:', trainsData);
-          console.log('Number of trains in JSON:', trainsData.length);
-
           this._trainDetails = [];
           trainsData.forEach((rawTrain) => {
             this._trainDetails.push({
@@ -96,57 +93,27 @@ export class DataService {
               })),
             });
           });
-
-          console.log(
-            'Trains loaded and transformed:',
-            this._trainDetails.length
-          );
-          console.log('Sample train:', this._trainDetails[0]);
-
-          // Debug info
-          this.debugTrainsData();
-
-          // Make debug method globally accessible for testing
-          (window as any).debugTrains = () => this.debugTrainsData();
-          (window as any).dataService = this;
         },
         error: (error) => {
-          console.error('HTTP Error loading trains:', error);
+          // Error handling without console log
         },
       });
   }
 
   private loadStationsData(): void {
-    console.log('Starting to load stations data from:', API_ENDPOINTS.STATIONS);
-
     this.http
       .get<StationInfo[]>(API_ENDPOINTS.STATIONS)
       .pipe(
         catchError((error) => {
-          console.error('Failed to load stations data:', error);
           return of(APP_CONSTANTS.MOCK_DATA.STATIONS);
         })
       )
       .subscribe({
         next: (stations) => {
-          console.log('Raw stations data received:', stations);
-          console.log('Number of stations in JSON:', stations.length);
-
           this.stations$.next(stations);
-          console.log('Stations loaded from JSON:', stations.length);
-
-          // Make stations debug method globally accessible
-          (window as any).debugStations = () => {
-            console.log('=== STATIONS DEBUG INFO ===');
-            console.log('Total stations loaded:', stations.length);
-            if (stations.length > 0) {
-              console.log('First few stations:', stations.slice(0, 3));
-            }
-            console.log('==========================');
-          };
         },
         error: (error) => {
-          console.error('HTTP Error loading stations:', error);
+          // Error handling without console log
         },
       });
   }
@@ -166,32 +133,8 @@ export class DataService {
     return this._trainDetails.length;
   }
 
-  debugTrainsData(): void {
-    console.log('=== TRAINS DEBUG INFO ===');
-    console.log('Total trains loaded:', this._trainDetails.length);
-    if (this._trainDetails.length > 0) {
-      console.log('First train:', this._trainDetails[0]);
-      console.log('Available sources:', [
-        ...new Set(this._trainDetails.map((t) => t.source)),
-      ]);
-      console.log('Available destinations:', [
-        ...new Set(this._trainDetails.map((t) => t.destination)),
-      ]);
-    }
-    console.log('========================');
-  }
-
   searchTrains(searchCriteria: SearchCriteria): Train[] {
-    console.log('=== TRAIN SEARCH DEBUG ===');
-    console.log('Search criteria:', searchCriteria);
-    console.log('Available trains:', this._trainDetails.length);
-    console.log('From station:', searchCriteria.fromStation?.name);
-    console.log('To station:', searchCriteria.toStation?.name);
-    console.log('Journey date:', searchCriteria.journeyDate);
-    console.log('Flexible with date:', searchCriteria.flexibleWithDate);
-
     if (!searchCriteria.fromStation || !searchCriteria.toStation) {
-      console.log('Missing station criteria, returning empty array');
       return [];
     }
 
@@ -200,17 +143,6 @@ export class DataService {
       searchCriteria.journeyDate,
       searchCriteria.flexibleWithDate
     );
-    console.log('Search dates:', searchDates);
-
-    console.log('Available train routes:');
-    this._trainDetails.forEach((train, index) => {
-      if (index < 5) {
-        // Show first 5 trains for debugging
-        console.log(
-          `${train.trainNumber}: ${train.source} → ${train.destination}`
-        );
-      }
-    });
 
     const results = this._trainDetails.filter((train) => {
       const sourceMatch = train.source === searchCriteria.fromStation?.name;
@@ -226,9 +158,6 @@ export class DataService {
           (cls) => cls.code === searchCriteria.trainClass
         );
         if (!hasSelectedClass) {
-          console.log(
-            `${train.trainNumber}: Does not have class ${searchCriteria.trainClass}`
-          );
           return false;
         }
       }
@@ -238,22 +167,12 @@ export class DataService {
         const hasAvailableDates = searchDates.some((date) => {
           return this.isTrainRunningOnDate(train, date);
         });
-
-        if (hasAvailableDates) {
-          console.log(`${train.trainNumber}: Available on flexible dates`);
-        }
-
         return hasAvailableDates;
       } else {
         // Regular search - check specific date
         const isRunning = this.isTrainRunningOnDate(
           train,
           searchCriteria.journeyDate
-        );
-        console.log(
-          `${
-            train.trainNumber
-          }: Running on ${searchCriteria.journeyDate.toDateString()}: ${isRunning}`
         );
         return isRunning;
       }
@@ -281,10 +200,6 @@ export class DataService {
       );
     }
 
-    console.log(
-      'Class filter applied:',
-      searchCriteria.trainClass || 'All Classes'
-    );
     return finalResults;
   }
 
@@ -315,13 +230,6 @@ export class DataService {
     const currentDay = dayNames[dayOfWeek];
 
     const isRunning = train.runningDays.includes(currentDay);
-    console.log(
-      `Train ${train.trainNumber} on ${date.toDateString()} (${currentDay}): ${
-        isRunning ? 'Running' : 'Not Running'
-      }`
-    );
-    console.log(`Train running days: [${train.runningDays.join(', ')}]`);
-
     return isRunning;
   }
 

@@ -1,0 +1,4 @@
+<div class="error-message" [class]="'error-' + type" *ngIf="message">
+  <mat-icon *ngIf="showIcon" class="error-icon">{{ iconName }}</mat-icon>
+  <span class="error-text">{{ message }}</span>
+</div>

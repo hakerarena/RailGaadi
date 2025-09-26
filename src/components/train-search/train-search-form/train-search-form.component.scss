@@ -92,7 +92,7 @@ $accent-color: #ff6b6b;
     color: white;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
   }
 
@@ -129,8 +129,8 @@ $accent-color: #ff6b6b;
 
     &:hover {
       background-color: rgba($primary-color, 0.1);
-      border-color: darken($primary-color, 10%);
-      color: darken($primary-color, 10%);
+      border-color: color.adjust($primary-color, $lightness: -10%);
+      color: color.adjust($primary-color, $lightness: -10%);
     }
   }
 
@@ -140,8 +140,8 @@ $accent-color: #ff6b6b;
     border-color: $primary-color;
 
     &:hover {
-      background-color: darken($primary-color, 10%);
-      border-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
+      border-color: color.adjust($primary-color, $lightness: -10%);
       color: white;
     }
   }

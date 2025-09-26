@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 import { TrainSearchResultsComponent } from '../train-search-results/train-search-results.component';
-import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import {
+  LoadingSpinnerComponent,
+  PageHeaderComponent,
+  SearchSummaryComponent,
+  NoResultsComponent,
+} from '../../shared/components';
 import { SearchCriteria, Train } from '../../interfaces';
 import { DataService } from '../../services/data.service';
 import { APP_CONSTANTS } from '../../constants/app.constants';
@@ -16,9 +20,11 @@ import { NavigationService } from '../../services/navigation.service';
   standalone: true,
   imports: [
     CommonModule,
-    MatButtonModule,
     TrainSearchResultsComponent,
     LoadingSpinnerComponent,
+    PageHeaderComponent,
+    SearchSummaryComponent,
+    NoResultsComponent,
   ],
 })
 export class SearchResultsPageComponent implements OnInit, OnDestroy {
@@ -52,7 +58,7 @@ export class SearchResultsPageComponent implements OnInit, OnDestroy {
           }
           localStorage.removeItem('searchCriteria');
         } catch (e) {
-          console.error('Error parsing stored criteria:', e);
+          // Error parsing stored criteria
         }
       }
     }

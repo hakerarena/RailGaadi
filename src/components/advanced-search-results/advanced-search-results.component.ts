@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
@@ -9,7 +8,13 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TrainSearchResultsComponent } from '../train-search-results/train-search-results.component';
-import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import {
+  LoadingSpinnerComponent,
+  PageHeaderComponent,
+  SearchSummaryComponent,
+  NoResultsComponent,
+  ActionButtonComponent,
+} from '../../shared/components';
 import { SearchCriteria, Train, StationInfo } from '../../interfaces';
 import { DataService } from '../../services/data.service';
 import { APP_CONSTANTS } from '../../constants/app.constants';
@@ -48,7 +53,6 @@ export interface RouteSegment {
   standalone: true,
   imports: [
     CommonModule,
-    MatButtonModule,
     MatIconModule,
     MatExpansionModule,
     MatCardModule,
@@ -57,6 +61,10 @@ export interface RouteSegment {
     MatTabsModule,
     TrainSearchResultsComponent,
     LoadingSpinnerComponent,
+    PageHeaderComponent,
+    SearchSummaryComponent,
+    NoResultsComponent,
+    ActionButtonComponent,
   ],
 })
 export class AdvancedSearchResultsComponent implements OnInit, OnDestroy {
@@ -92,7 +100,7 @@ export class AdvancedSearchResultsComponent implements OnInit, OnDestroy {
           }
           localStorage.removeItem('advancedSearchCriteria');
         } catch (e) {
-          console.error('Error parsing stored criteria:', e);
+          // Error parsing stored criteria
         }
       }
     }

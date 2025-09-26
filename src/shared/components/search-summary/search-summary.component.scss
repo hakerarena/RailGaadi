@@ -1,0 +1,57 @@
+.search-summary {
+  p {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #666;
+
+    .page-header.gradient-bg & {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    strong {
+      color: #333;
+
+      .page-header.gradient-bg & {
+        color: white;
+      }
+    }
+
+    .flexible-indicator {
+      color: #4caf50;
+      font-weight: 500;
+      font-size: 14px;
+
+      .page-header.gradient-bg & {
+        color: #64b5f6;
+      }
+    }
+  }
+
+  .additional-features {
+    margin-top: 12px;
+
+    .mat-chip-set {
+      .mat-chip {
+        color: white;
+
+        &.mat-accent {
+          background-color: #ff4081;
+        }
+
+        &.mat-primary {
+          background-color: #2196f3;
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .search-summary {
+    p {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

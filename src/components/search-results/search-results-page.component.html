@@ -1,39 +1,17 @@
 <div class="search-results-page">
   <!-- Page Header -->
-  <div class="page-header">
-    <div class="container">
-      <div class="header-content">
-        <h1>{{ constants.SEARCH_RESULTS.AVAILABLE_TRAINS }}</h1>
-        <button
-          mat-button
-          color="primary"
-          (click)="onNewSearch()"
-          class="new-search-btn"
-        >
-          {{ constants.BUTTONS.NEW_SEARCH }}
-        </button>
-      </div>
+  <app-page-header
+    [title]="constants.SEARCH_RESULTS.AVAILABLE_TRAINS"
+    [newSearchButtonText]="constants.BUTTONS.NEW_SEARCH"
+    (newSearch)="onNewSearch()"
+    [additionalContent]="searchSummaryTemplate"
+  >
+  </app-page-header>
 
-      <!-- Search Summary -->
-      <div class="search-summary" *ngIf="searchCriteria">
-        <p>
-          <strong>{{ searchCriteria.fromStation.name }}</strong>
-          →
-          <strong>{{ searchCriteria.toStation.name }}</strong>
-          | {{ searchCriteria.journeyDate | date : "dd MMM yyyy" }}
-          <span
-            *ngIf="searchCriteria.flexibleWithDate"
-            class="flexible-indicator"
-          >
-            (±3 days flexible)
-          </span>
-          <span *ngIf="searchCriteria.trainClass">
-            | {{ searchCriteria.trainClass }}</span
-          >
-        </p>
-      </div>
-    </div>
-  </div>
+  <!-- Search Summary Template -->
+  <ng-template #searchSummaryTemplate>
+    <app-search-summary [searchCriteria]="searchCriteria!"></app-search-summary>
+  </ng-template>
 
   <!-- Loading State -->
   <div class="loading-section" *ngIf="isSearching">
@@ -54,20 +32,12 @@
   </div>
 
   <!-- No Results Message -->
-  <div class="no-results-section" *ngIf="showNoResults">
-    <div class="container">
-      <div class="no-results-card">
-        <h2>{{ constants.SEARCH_RESULTS.NO_TRAINS_FOUND }}</h2>
-        <p>Sorry, no trains were found for the selected route and date.</p>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="onNewSearch()"
-          class="new-search-btn"
-        >
-          {{ constants.BUTTONS.TRY_DIFFERENT_SEARCH }}
-        </button>
-      </div>
-    </div>
-  </div>
+  <app-no-results
+    *ngIf="showNoResults"
+    [title]="constants.SEARCH_RESULTS.NO_TRAINS_FOUND"
+    message="Sorry, no trains were found for the selected route and date."
+    [actionButtonText]="constants.BUTTONS.TRY_DIFFERENT_SEARCH"
+    (actionButtonClick)="onNewSearch()"
+  >
+  </app-no-results>
 </div>

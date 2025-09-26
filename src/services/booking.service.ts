@@ -13,7 +13,7 @@ export class BookingService {
   getAllBookings(): Observable<TransactionBooking[]> {
     return this.http.get<TransactionBooking[]>(API_ENDPOINTS.BOOKINGS).pipe(
       catchError((error) => {
-        console.error('Failed to load booking data:', error);
+        // Error handling
         return of([]);
       })
     );

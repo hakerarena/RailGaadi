@@ -1,0 +1,58 @@
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 4px;
+  font-size: 14px;
+
+  .error-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .error-text {
+    flex: 1;
+  }
+
+  &.error-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+
+    .error-icon {
+      color: #d32f2f;
+    }
+  }
+
+  &.error-warning {
+    background-color: #fff8e1;
+    color: #f57c00;
+    border: 1px solid #ffecb3;
+
+    .error-icon {
+      color: #ff9800;
+    }
+  }
+
+  &.error-info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+
+    .error-icon {
+      color: #1976d2;
+    }
+  }
+}
+
+// Inline error (for form fields)
+.inline-error {
+  display: block;
+  color: #f44336;
+  font-size: 12px;
+  margin-top: 4px;
+  line-height: 1.4;
+}

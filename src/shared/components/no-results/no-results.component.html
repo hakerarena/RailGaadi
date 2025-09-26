@@ -1,0 +1,29 @@
+<div class="no-results-section">
+  <div class="container">
+    <div class="no-results-card">
+      <mat-icon class="no-results-icon">{{ icon }}</mat-icon>
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+
+      <div
+        class="suggestions"
+        *ngIf="showSuggestions && suggestions.length > 0"
+      >
+        <h3>Try these alternatives:</h3>
+        <ul>
+          <li *ngFor="let suggestion of suggestions">{{ suggestion }}</li>
+        </ul>
+      </div>
+
+      <button
+        *ngIf="showActionButton"
+        mat-raised-button
+        color="primary"
+        (click)="onActionClick()"
+        class="action-btn"
+      >
+        {{ actionButtonText }}
+      </button>
+    </div>
+  </div>
+</div>

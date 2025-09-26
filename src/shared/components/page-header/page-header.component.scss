@@ -1,0 +1,77 @@
+.page-header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 24px 0;
+  margin-bottom: 24px;
+
+  &.gradient-bg {
+    background: linear-gradient(135deg, #1976d2, #1565c0);
+    color: white;
+    border-bottom: none;
+    box-shadow: 0 4px 20px rgba(25, 118, 210, 0.2);
+
+    .new-search-btn {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h1 {
+    margin: 0;
+    color: #1976d2;
+    font-size: 28px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .gradient-bg & {
+      color: white;
+    }
+
+    .header-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .new-search-btn {
+    min-width: 140px;
+  }
+}
+
+.additional-content {
+  margin-top: 16px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+
+    .new-search-btn {
+      align-self: center;
+    }
+  }
+}
