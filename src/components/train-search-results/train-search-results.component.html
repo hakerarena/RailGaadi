@@ -1,7 +1,5 @@
-<div
-  class="results-container"
-  *ngIf="searchResults && searchResults.length > 0"
->
+@if (searchResults && searchResults.length > 0) {
+<div class="results-container">
   <div class="results-header">
     <!-- <h2>Available Trains</h2> -->
     <div class="filter-options">
@@ -17,20 +15,18 @@
   </div>
 
   <div class="train-cards">
-    <mat-card class="train-card" *ngFor="let train of dataSource.data">
+    @for (train of dataSource.data; track train.trainNumber) {
+    <mat-card class="train-card">
       <mat-card-header>
         <div class="train-header">
           <div class="train-basic-info">
             <h3>{{ train.trainNumber }} · {{ train.trainName }}</h3>
             <div class="running-days">
-              Runs on:
-              <span
-                *ngFor="let day of train.runningDays"
-                [class.active]="day"
-                class="day-indicator"
-              >
+              Runs on: @for (day of train.runningDays; track day) {
+              <span [class.active]="day" class="day-indicator">
                 {{ day }}
               </span>
+              }
             </div>
           </div>
         </div>
@@ -84,8 +80,8 @@
                 #dateCarousel
                 [attr.data-train]="train.trainNumber"
               >
+                @if (getCurrentSelectedDate(train); as selectedDate) {
                 <div
-                  *ngIf="getCurrentSelectedDate(train) as selectedDate"
                   class="date-option"
                   [class]="getAnimationState(train.trainNumber)"
                 >
@@ -98,15 +94,9 @@
                     }}</span>
                   </div>
                   <div class="class-grid">
-                    <div
-                      class="class-card"
-                      *ngFor="
-                        let class of getClassAvailabilityForDate(
-                          train,
-                          selectedDate
-                        )
-                      "
-                    >
+                    @for (class of getClassAvailabilityForDate(train,
+                    selectedDate); track class.code) {
+                    <div class="class-card">
                       <div class="class-header">
                         <span class="class-name">{{ class.name }}</span>
                         <span class="class-code">({{ class.code }})</span>
@@ -134,8 +124,10 @@
                         }}
                       </button>
                     </div>
+                    }
                   </div>
                 </div>
+                }
               </div>
 
               <button
@@ -150,11 +142,10 @@
           </div>
 
           <!-- Regular class availability for non-flexible search -->
-          <div *ngIf="!isFlexibleSearch" class="regular-classes">
-            <div
-              class="class-card"
-              *ngFor="let class of train.availableClasses"
-            >
+          @if (!isFlexibleSearch) {
+          <div class="regular-classes">
+            @for (class of train.availableClasses; track class.code) {
+            <div class="class-card">
               <div class="class-header">
                 <span class="class-name">{{ class.name }}</span>
                 <span class="class-code">({{ class.code }})</span>
@@ -180,10 +171,13 @@
                 {{ class.availableSeats === 0 ? "Waitlist" : "Book Now" }}
               </button>
             </div>
+            }
           </div>
+          }
         </div>
       </mat-card-content>
     </mat-card>
+    }
   </div>
 
   <mat-paginator
@@ -192,13 +186,14 @@
     aria-label="Select page of trains"
   ></mat-paginator>
 </div>
-
-<div class="no-results" *ngIf="searchResults && searchResults.length === 0">
+} @if (searchResults && searchResults.length === 0) {
+<div class="no-results">
   <mat-icon>train</mat-icon>
   <h3>No trains found for this route</h3>
   <p>Try searching with different dates or stations</p>
 </div>
-
-<div *ngIf="searchResults?.length === 0" class="no-results">
+} @if (searchResults?.length === 0) {
+<div class="no-results">
   <p>No trains found for the selected route.</p>
 </div>
+}

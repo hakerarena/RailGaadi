@@ -1,79 +1,93 @@
-<ng-container [ngSwitch]="variant">
-  <!-- Basic Button -->
-  <button
-    *ngSwitchCase="'basic'"
-    mat-button
-    [color]="color"
-    [disabled]="disabled || loading"
-    [class]="class"
-    [class.full-width]="fullWidth"
-    [class.loading]="loading"
-    (click)="onClick()"
-  >
-    <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
-    <mat-icon *ngIf="loading" class="loading-spinner">refresh</mat-icon>
-    <span *ngIf="text">{{ text }}</span>
-  </button>
-
-  <!-- Raised Button -->
-  <button
-    *ngSwitchCase="'raised'"
-    mat-raised-button
-    [color]="color"
-    [disabled]="disabled || loading"
-    [class]="class"
-    [class.full-width]="fullWidth"
-    [class.loading]="loading"
-    (click)="onClick()"
-  >
-    <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
-    <mat-icon *ngIf="loading" class="loading-spinner">refresh</mat-icon>
-    <span *ngIf="text">{{ text }}</span>
-  </button>
-
-  <!-- Stroked Button -->
-  <button
-    *ngSwitchCase="'stroked'"
-    mat-stroked-button
-    [color]="color"
-    [disabled]="disabled || loading"
-    [class]="class"
-    [class.full-width]="fullWidth"
-    [class.loading]="loading"
-    (click)="onClick()"
-  >
-    <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
-    <mat-icon *ngIf="loading" class="loading-spinner">refresh</mat-icon>
-    <span *ngIf="text">{{ text }}</span>
-  </button>
-
-  <!-- Flat Button -->
-  <button
-    *ngSwitchCase="'flat'"
-    mat-flat-button
-    [color]="color"
-    [disabled]="disabled || loading"
-    [class]="class"
-    [class.full-width]="fullWidth"
-    [class.loading]="loading"
-    (click)="onClick()"
-  >
-    <mat-icon *ngIf="icon && !loading">{{ icon }}</mat-icon>
-    <mat-icon *ngIf="loading" class="loading-spinner">refresh</mat-icon>
-    <span *ngIf="text">{{ text }}</span>
-  </button>
-
-  <!-- Icon Button -->
-  <button
-    *ngSwitchCase="'icon'"
-    mat-icon-button
-    [color]="color"
-    [disabled]="disabled || loading"
-    [class]="class"
-    [class.loading]="loading"
-    (click)="onClick()"
-  >
-    <mat-icon *ngIf="!loading">{{ icon || "more_vert" }}</mat-icon>
-    <mat-icon *ngIf="loading" class="loading-spinner">refresh</mat-icon>
-  </button>
-</ng-container>
+@switch (variant) { @case ('basic') {
+<!-- Basic Button -->
+<button
+  mat-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class]="class"
+  [class.full-width]="fullWidth"
+  [class.loading]="loading"
+  (click)="onClick()"
+>
+  @if (icon && !loading) {
+  <mat-icon>{{ icon }}</mat-icon>
+  } @if (loading) {
+  <mat-icon class="loading-spinner">refresh</mat-icon>
+  } @if (text) {
+  <span>{{ text }}</span>
+  }
+</button>
+} @case ('raised') {
+<!-- Raised Button -->
+<button
+  mat-raised-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class]="class"
+  [class.full-width]="fullWidth"
+  [class.loading]="loading"
+  (click)="onClick()"
+>
+  @if (icon && !loading) {
+  <mat-icon>{{ icon }}</mat-icon>
+  } @if (loading) {
+  <mat-icon class="loading-spinner">refresh</mat-icon>
+  } @if (text) {
+  <span>{{ text }}</span>
+  }
+</button>
+} @case ('stroked') {
+<!-- Stroked Button -->
+<button
+  mat-stroked-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class]="class"
+  [class.full-width]="fullWidth"
+  [class.loading]="loading"
+  (click)="onClick()"
+>
+  @if (icon && !loading) {
+  <mat-icon>{{ icon }}</mat-icon>
+  } @if (loading) {
+  <mat-icon class="loading-spinner">refresh</mat-icon>
+  } @if (text) {
+  <span>{{ text }}</span>
+  }
+</button>
+} @case ('flat') {
+<!-- Flat Button -->
+<button
+  mat-flat-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class]="class"
+  [class.full-width]="fullWidth"
+  [class.loading]="loading"
+  (click)="onClick()"
+>
+  @if (icon && !loading) {
+  <mat-icon>{{ icon }}</mat-icon>
+  } @if (loading) {
+  <mat-icon class="loading-spinner">refresh</mat-icon>
+  } @if (text) {
+  <span>{{ text }}</span>
+  }
+</button>
+} @case ('icon') {
+<!-- Icon Button -->
+<button
+  mat-icon-button
+  [color]="color"
+  [disabled]="disabled || loading"
+  [class]="class"
+  [class.loading]="loading"
+  (click)="onClick()"
+>
+  @if (!loading) {
+  <mat-icon>{{ icon || "more_vert" }}</mat-icon>
+  } @if (loading) {
+  <mat-icon class="loading-spinner">refresh</mat-icon>
+  }
+</button>
+} }

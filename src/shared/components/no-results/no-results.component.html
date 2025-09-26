@@ -5,18 +5,17 @@
       <h2>{{ title }}</h2>
       <p>{{ message }}</p>
 
-      <div
-        class="suggestions"
-        *ngIf="showSuggestions && suggestions.length > 0"
-      >
+      @if (showSuggestions && suggestions.length > 0) {
+      <div class="suggestions">
         <h3>Try these alternatives:</h3>
         <ul>
-          <li *ngFor="let suggestion of suggestions">{{ suggestion }}</li>
+          @for (suggestion of suggestions; track suggestion) {
+          <li>{{ suggestion }}</li>
+          }
         </ul>
       </div>
-
+      } @if (showActionButton) {
       <button
-        *ngIf="showActionButton"
         mat-raised-button
         color="primary"
         (click)="onActionClick()"
@@ -24,6 +23,7 @@
       >
         {{ actionButtonText }}
       </button>
+      }
     </div>
   </div>
 </div>

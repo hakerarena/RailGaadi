@@ -10,9 +10,11 @@
         class="form-field"
       >
       </app-station-autocomplete>
-      <mat-error *ngIf="fromStationError" class="station-error">
+      @if (fromStationError) {
+      <mat-error class="station-error">
         {{ fromStationError }}
       </mat-error>
+      }
     </div>
 
     <!-- Swap Button -->
@@ -36,9 +38,11 @@
         class="form-field"
       >
       </app-station-autocomplete>
-      <mat-error *ngIf="toStationError" class="station-error">
+      @if (toStationError) {
+      <mat-error class="station-error">
         {{ toStationError }}
       </mat-error>
+      }
     </div>
   </div>
 
@@ -65,9 +69,11 @@
       [isClassRequired]="isAdvancedSearch"
     >
     </app-class-quota-selector>
-    <mat-error *ngIf="travelClassError" class="class-error">
+    @if (travelClassError) {
+    <mat-error class="class-error">
       {{ travelClassError }}
     </mat-error>
+    }
   </div>
 
   <div class="form-row options-row">

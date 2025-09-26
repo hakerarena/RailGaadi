@@ -11,12 +11,13 @@
 
   <!-- Search Summary Template -->
   <ng-template #searchSummaryTemplate>
+    @if (searchCriteria) {
     <app-search-summary
-      *ngIf="searchCriteria"
       [searchCriteria]="searchCriteria"
       [additionalFeatures]="advancedFeaturesTemplate"
     >
     </app-search-summary>
+    }
 
     <!-- Advanced Features Template -->
     <ng-template #advancedFeaturesTemplate>
@@ -26,31 +27,37 @@
             <mat-icon matChipAvatar>search</mat-icon>
             Advanced Search
           </mat-chip>
-          <mat-chip *ngIf="hasPartialJourneys" color="primary">
+          @if (hasPartialJourneys) {
+          <mat-chip color="primary">
             <mat-icon matChipAvatar>alt_route</mat-icon>
             Partial Journey Options
           </mat-chip>
+          }
         </mat-chip-set>
       </div>
     </ng-template>
   </ng-template>
 
   <!-- Loading State -->
-  <div class="loading-section" *ngIf="isSearching">
+  @if (isSearching) {
+  <div class="loading-section">
     <app-loading-spinner
       message="Searching trains and analyzing routes..."
       size="large"
     >
     </app-loading-spinner>
   </div>
+  }
 
   <!-- Search Results Tabs -->
-  <div class="results-section" *ngIf="showResults">
+  @if (showResults) {
+  <div class="results-section">
     <div class="container">
       <mat-tab-group [(selectedIndex)]="activeTab" class="results-tabs">
         <!-- Direct Trains Tab -->
         <mat-tab [label]="'Direct Trains (' + searchResults.length + ')'">
-          <div class="tab-content" *ngIf="hasDirectTrains">
+          @if (hasDirectTrains) {
+          <div class="tab-content">
             <div class="section-header">
               <h2>Direct Trains</h2>
               <p>Trains running directly between your selected stations</p>
@@ -62,14 +69,15 @@
             >
             </app-train-search-results>
           </div>
+          } @if (!hasDirectTrains) {
           <app-no-results
-            *ngIf="!hasDirectTrains"
             title="No Direct Trains Found"
             message="No direct trains available for this route. Check partial journey options below."
             icon="train"
             [showActionButton]="false"
           >
           </app-no-results>
+          }
         </mat-tab>
 
         <!-- Partial Journey Options Tab -->
@@ -78,7 +86,8 @@
             'Partial Journey Options (' + partialJourneyResults.length + ')'
           "
         >
-          <div class="tab-content" *ngIf="hasPartialJourneys">
+          @if (hasPartialJourneys) {
+          <div class="tab-content">
             <div class="section-header">
               <h2>Partial Journey Options</h2>
               <p>
@@ -94,11 +103,9 @@
             </div>
 
             <div class="partial-journeys-list">
+              @for (partialJourney of partialJourneyResults; track
+              partialJourney; let i = $index) {
               <mat-expansion-panel
-                *ngFor="
-                  let partialJourney of partialJourneyResults;
-                  let i = index
-                "
                 class="partial-journey-panel"
                 [expanded]="i === 0"
               >
@@ -129,14 +136,10 @@
                   </mat-panel-title>
                   <mat-panel-description>
                     <div class="classes-info">
-                      <span
-                        *ngFor="
-                          let cls of partialJourney.availableClasses;
-                          let last = last
-                        "
-                      >
-                        {{ cls }}<span *ngIf="!last">, </span>
-                      </span>
+                      @for (cls of partialJourney.availableClasses; track cls;
+                      let last = $last) {
+                      <span> {{ cls }}@if (!last) {<span>, </span>} </span>
+                      }
                     </div>
                   </mat-panel-description>
                 </mat-expansion-panel-header>
@@ -144,14 +147,9 @@
                 <!-- Journey Details -->
                 <div class="journey-details">
                   <div class="route-segments">
-                    <div
-                      *ngFor="
-                        let segment of partialJourney.routeSegments;
-                        let i = index;
-                        let last = last
-                      "
-                      class="segment"
-                    >
+                    @for (segment of partialJourney.routeSegments; track
+                    segment; let i = $index; let last = $last) {
+                    <div class="segment">
                       <!-- Train Segment -->
                       <div class="train-segment">
                         <div class="segment-header">
@@ -197,21 +195,20 @@
                           <div class="available-classes">
                             <span class="label">Available Classes:</span>
                             <mat-chip-set>
-                              <mat-chip
-                                *ngFor="let cls of segment.availableClasses"
-                              >
+                              @for (cls of segment.availableClasses; track cls)
+                              {
+                              <mat-chip>
                                 {{ cls }}
                               </mat-chip>
+                              }
                             </mat-chip-set>
                           </div>
                         </div>
                       </div>
 
                       <!-- Transfer Information -->
-                      <div
-                        class="transfer-info"
-                        *ngIf="segment.isTransfer && !last"
-                      >
+                      @if (segment.isTransfer && !last) {
+                      <div class="transfer-info">
                         <div class="transfer-details">
                           <mat-icon class="transfer-icon"
                             >transfer_within_a_station</mat-icon
@@ -226,10 +223,14 @@
                           </div>
                         </div>
                       </div>
+                      }
 
                       <!-- Connector Line -->
-                      <div class="connector" *ngIf="!last"></div>
+                      @if (!last) {
+                      <div class="connector"></div>
+                      }
                     </div>
+                    }
                   </div>
 
                   <!-- Action Buttons -->
@@ -255,24 +256,27 @@
                   </div>
                 </div>
               </mat-expansion-panel>
+              }
             </div>
           </div>
-
+          } @if (!hasPartialJourneys) {
           <app-no-results
-            *ngIf="!hasPartialJourneys"
             title="No Partial Journey Options Found"
             message="No alternative routes with confirmed ticket availability found for this route."
             icon="alt_route"
             [showActionButton]="false"
           >
           </app-no-results>
+          }
         </mat-tab>
       </mat-tab-group>
     </div>
   </div>
+  }
 
   <!-- No Results Message -->
-  <div class="no-results-section" *ngIf="showNoResults">
+  @if (showNoResults) {
+  <div class="no-results-section">
     <div class="container">
       <app-no-results
         [title]="constants.SEARCH_RESULTS.NO_TRAINS_FOUND"
@@ -291,4 +295,5 @@
       </app-no-results>
     </div>
   </div>
+  }
 </div>

@@ -13,12 +13,11 @@
         placeholder="Enter 10-digit PNR"
         maxlength="10"
       />
-      <mat-error *ngIf="pnrForm.get('pnr')?.hasError('required')">
-        PNR number is required
-      </mat-error>
-      <mat-error *ngIf="pnrForm.get('pnr')?.hasError('pattern')">
-        PNR must be exactly 10 digits
-      </mat-error>
+      @if (pnrForm.get('pnr')?.hasError('required')) {
+      <mat-error> PNR number is required </mat-error>
+      } @if (pnrForm.get('pnr')?.hasError('pattern')) {
+      <mat-error> PNR must be exactly 10 digits </mat-error>
+      }
     </mat-form-field>
 
     <button
@@ -28,20 +27,26 @@
       [disabled]="pnrForm.invalid || isLoading"
       class="search-button"
     >
-      <mat-icon *ngIf="isLoading">hourglass_empty</mat-icon>
-      <mat-icon *ngIf="!isLoading">search</mat-icon>
+      @if (isLoading) {
+      <mat-icon>hourglass_empty</mat-icon>
+      } @if (!isLoading) {
+      <mat-icon>search</mat-icon>
+      }
       {{ isLoading ? "Searching..." : "Check Status" }}
     </button>
   </form>
 
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-container">
+  @if (isLoading) {
+  <div class="loading-container">
     <mat-spinner diameter="40"></mat-spinner>
     <p>Fetching PNR status...</p>
   </div>
+  }
 
   <!-- PNR Status Result -->
-  <div *ngIf="pnrStatus && !isLoading" class="pnr-result">
+  @if (pnrStatus && !isLoading) {
+  <div class="pnr-result">
     <mat-card class="status-card">
       <mat-card-header>
         <mat-card-title>
@@ -100,9 +105,11 @@
       </mat-card-content>
     </mat-card>
   </div>
+  }
 
   <!-- No Result Found -->
-  <div *ngIf="!pnrStatus && !isLoading && searchAttempted" class="no-result">
+  @if (!pnrStatus && !isLoading && searchAttempted) {
+  <div class="no-result">
     <mat-card class="error-card">
       <mat-card-content>
         <mat-icon color="warn">error_outline</mat-icon>
@@ -114,9 +121,11 @@
       </mat-card-content>
     </mat-card>
   </div>
+  }
 
   <!-- Error State -->
-  <div *ngIf="errorMessage" class="error-container">
+  @if (errorMessage) {
+  <div class="error-container">
     <mat-card class="error-card">
       <mat-card-content>
         <mat-icon color="warn">error</mat-icon>
@@ -126,4 +135,5 @@
       </mat-card-content>
     </mat-card>
   </div>
+  }
 </div>

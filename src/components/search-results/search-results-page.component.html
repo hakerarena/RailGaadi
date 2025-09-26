@@ -14,13 +14,16 @@
   </ng-template>
 
   <!-- Loading State -->
-  <div class="loading-section" *ngIf="isSearching">
+  @if (isSearching) {
+  <div class="loading-section">
     <app-loading-spinner message="Searching for trains..." size="large">
     </app-loading-spinner>
   </div>
+  }
 
   <!-- Search Results -->
-  <div class="results-section" *ngIf="showResults && searchResults.length > 0">
+  @if (showResults && searchResults.length > 0) {
+  <div class="results-section">
     <div class="container">
       <app-train-search-results
         [searchResults]="searchResults"
@@ -30,14 +33,16 @@
       </app-train-search-results>
     </div>
   </div>
+  }
 
   <!-- No Results Message -->
+  @if (showNoResults) {
   <app-no-results
-    *ngIf="showNoResults"
     [title]="constants.SEARCH_RESULTS.NO_TRAINS_FOUND"
     message="Sorry, no trains were found for the selected route and date."
     [actionButtonText]="constants.BUTTONS.TRY_DIFFERENT_SEARCH"
     (actionButtonClick)="onNewSearch()"
   >
   </app-no-results>
+  }
 </div>

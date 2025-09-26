@@ -2,11 +2,13 @@
   <div class="container">
     <div class="header-content">
       <h1>
-        <mat-icon *ngIf="icon" class="header-icon">{{ icon }}</mat-icon>
+        @if (icon) {
+        <mat-icon class="header-icon">{{ icon }}</mat-icon>
+        }
         {{ title }}
       </h1>
+      @if (showNewSearchButton) {
       <button
-        *ngIf="showNewSearchButton"
         mat-button
         color="primary"
         (click)="onNewSearchClick()"
@@ -14,11 +16,14 @@
       >
         {{ newSearchButtonText }}
       </button>
+      }
     </div>
 
     <!-- Additional content like search summary -->
-    <div class="additional-content" *ngIf="additionalContent">
+    @if (additionalContent) {
+    <div class="additional-content">
       <ng-container [ngTemplateOutlet]="additionalContent"></ng-container>
     </div>
+    }
   </div>
 </div>

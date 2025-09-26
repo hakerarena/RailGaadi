@@ -1,19 +1,22 @@
-<div class="search-summary" *ngIf="searchCriteria">
+@if (searchCriteria) {
+<div class="search-summary">
   <p>
     <strong>{{ searchCriteria.fromStation.name }}</strong>
     →
     <strong>{{ searchCriteria.toStation.name }}</strong>
     | {{ searchCriteria.journeyDate | date : "dd MMM yyyy" }}
-    <span *ngIf="searchCriteria.flexibleWithDate" class="flexible-indicator">
-      (±3 days flexible)
-    </span>
-    <span *ngIf="searchCriteria.trainClass">
-      | {{ searchCriteria.trainClass }}
-    </span>
+    @if (searchCriteria.flexibleWithDate) {
+    <span class="flexible-indicator"> (±3 days flexible) </span>
+    } @if (searchCriteria.trainClass) {
+    <span> | {{ searchCriteria.trainClass }} </span>
+    }
   </p>
 
   <!-- Additional features like advanced search chips -->
-  <div class="additional-features" *ngIf="additionalFeatures">
+  @if (additionalFeatures) {
+  <div class="additional-features">
     <ng-container [ngTemplateOutlet]="additionalFeatures"></ng-container>
   </div>
+  }
 </div>
+}

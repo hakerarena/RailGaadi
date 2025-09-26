@@ -123,8 +123,8 @@ Each major feature is implemented as a standalone component with focused respons
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/hakerarena/optimized-irctc.git
-   cd optimized-irctc
+   git clone https://github.com/hakerarena/RailGaadi.git
+   cd RailGaadi
    ```
 
 2. **Install dependencies**
@@ -359,8 +359,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 📞 Support & Contact
 
-- **GitHub Issues**: [Report bugs and request features](https://github.com/hakerarena/optimized-irctc/issues)
-- **Email**: [hakerarena@example.com](mailto:hakerarena@example.com)
+- **GitHub Issues**: [Report bugs and request features](https://github.com/hakerarena/RailGaadi/issues)
+- **Email**: [sachin.sarkar98@gmail.com](mailto:sachin.sarkar98@gmail.com)
 - **Documentation**: This README and inline code comments
 
 ---

@@ -10,8 +10,8 @@
     (focus)="onInputClick()"
     #autoCompleteInput
   />
+  @if (showSwapButton) {
   <button
-    *ngIf="showSwapButton"
     mat-icon-button
     matSuffix
     type="button"
@@ -21,17 +21,17 @@
   >
     <mat-icon>swap_horiz</mat-icon>
   </button>
+  }
   <mat-autocomplete
     #auto="matAutocomplete"
     [displayWith]="displayStation"
     autoActiveFirstOption="true"
   >
-    <mat-option
-      *ngFor="let station of filteredStations | async"
-      [value]="station"
-    >
+    @for (station of filteredStations | async; track station.code) {
+    <mat-option [value]="station">
       <span class="station-name">{{ station.name }}</span>
       <span class="station-code">({{ station.code }})</span>
     </mat-option>
+    }
   </mat-autocomplete>
 </mat-form-field>
