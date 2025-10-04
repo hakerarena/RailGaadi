@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "irctc-clone": {
+    "railgaadi": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/irctc-clone",
+            "outputPath": "dist/railgaadi",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "irctc-clone:build:production"
+              "buildTarget": "railgaadi:build:production"
             },
             "development": {
-              "buildTarget": "irctc-clone:build:development"
+              "buildTarget": "railgaadi:build:development"
             }
           },
           "defaultConfiguration": "development"

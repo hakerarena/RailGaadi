@@ -299,7 +299,7 @@ The application includes comprehensive mock data for development and demonstrati
 npm run build
 ```
 
-The build artifacts will be stored in the `dist/irctc-clone/` directory.
+The build artifacts will be stored in the `dist/railgaadi/` directory.
 
 ### 🏗️ Build Optimization
 
