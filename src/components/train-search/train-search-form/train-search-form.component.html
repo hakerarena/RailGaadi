@@ -1,6 +1,5 @@
 <div class="search-container" [formGroup]="searchForm">
   <div class="form-row stations-row">
-    <!-- From Station -->
     <div class="station-wrapper">
       <app-station-autocomplete
         [control]="fromStationControl"
@@ -17,7 +16,6 @@
       }
     </div>
 
-    <!-- Swap Button -->
     <button
       mat-icon-button
       class="swap-button"
@@ -27,7 +25,6 @@
       <mat-icon>swap_horiz</mat-icon>
     </button>
 
-    <!-- To Station -->
     <div class="station-wrapper">
       <app-station-autocomplete
         [control]="toStationControl"
@@ -47,7 +44,6 @@
   </div>
 
   <div class="form-row details-row">
-    <!-- Journey Date -->
     <app-date-picker
       [control]="journeyDateControl"
       [label]="'Journey Date'"
@@ -77,7 +73,6 @@
   </div>
 
   <div class="form-row options-row">
-    <!-- Additional Options -->
     <mat-checkbox formControlName="flexibleWithDate">
       Flexible with date
     </mat-checkbox>
@@ -104,7 +99,7 @@
       color="accent"
       class="advanced-search-button"
       [class.active]="isAdvancedSearch"
-      [disabled]="!canSubmitAdvanced()"
+      [disabled]="!canSubmit()"
       (click)="onAdvancedSubmit()"
     >
       Advanced Search

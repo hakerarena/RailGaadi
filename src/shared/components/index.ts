@@ -1,4 +1,3 @@
-// Shared Components
 export { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 export { PageHeaderComponent } from './page-header/page-header.component';
 export { SearchSummaryComponent } from './search-summary/search-summary.component';

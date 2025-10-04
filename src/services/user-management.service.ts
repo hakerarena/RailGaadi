@@ -6,7 +6,7 @@ export interface StoredUser {
   lastName: string;
   email: string;
   mobile: string;
-  password: string; // In a real app, this would be hashed
+  password: string;
   dateOfBirth: string;
   gender: string;
   createdAt: string;
@@ -14,7 +14,7 @@ export interface StoredUser {
 }
 
 export interface UserCredentials {
-  username: string; // email or mobile
+  username: string;
   password: string;
 }
 
@@ -28,13 +28,9 @@ export class UserManagementService {
     this.initializeDemoUser();
   }
 
-  /**
-   * Initialize demo user for testing purposes
-   */
   private initializeDemoUser(): void {
     const users = this.getAllUsers();
 
-    // Check if demo user already exists
     const demoExists = users.some((u) => u.email === 'demo@irctc.com');
 
     if (!demoExists) {
@@ -56,16 +52,12 @@ export class UserManagementService {
     }
   }
 
-  /**
-   * Register a new user
-   */
   registerUser(userData: Omit<StoredUser, 'id' | 'createdAt'>): {
     success: boolean;
     user?: StoredUser;
     error?: string;
   } {
     try {
-      // Check if user already exists
       if (this.userExists(userData.email, userData.mobile)) {
         return {
           success: false,
@@ -73,14 +65,12 @@ export class UserManagementService {
         };
       }
 
-      // Create new user
       const newUser: StoredUser = {
         ...userData,
         id: this.generateUserId(),
         createdAt: new Date().toISOString(),
       };
 
-      // Save user
       const users = this.getAllUsers();
       users.push(newUser);
       this.saveUsers(users);
@@ -97,9 +87,6 @@ export class UserManagementService {
     }
   }
 
-  /**
-   * Authenticate user with email/mobile and password
-   */
   authenticateUser(credentials: UserCredentials): {
     success: boolean;
     user?: StoredUser;
@@ -133,49 +120,32 @@ export class UserManagementService {
     }
   }
 
-  /**
-   * Check if user exists by email or mobile
-   */
   private userExists(email: string, mobile: string): boolean {
     const users = this.getAllUsers();
     return users.some((u) => u.email === email || u.mobile === mobile);
   }
 
-  /**
-   * Get all registered users
-   */
   private getAllUsers(): StoredUser[] {
     try {
       const usersData = localStorage.getItem(this.USERS_KEY);
       return usersData ? JSON.parse(usersData) : [];
     } catch (error) {
-      // Error handling
       return [];
     }
   }
 
-  /**
-   * Save users to localStorage
-   */
   private saveUsers(users: StoredUser[]): void {
     try {
       localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
     } catch (error) {
-      // Error handling
       throw error;
     }
   }
 
-  /**
-   * Generate unique user ID
-   */
   private generateUserId(): string {
     return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  /**
-   * Get user by email or mobile (for debugging/admin purposes)
-   */
   getUserByEmailOrMobile(emailOrMobile: string): StoredUser | null {
     const users = this.getAllUsers();
     return (
@@ -185,9 +155,6 @@ export class UserManagementService {
     );
   }
 
-  /**
-   * Get user by ID
-   */
   getUserById(id: string): StoredUser | null {
     const users = this.getAllUsers();
     return users.find((u) => u.id === id) || null;
@@ -200,9 +167,6 @@ export class UserManagementService {
     return this.getAllUsers().length;
   }
 
-  /**
-   * Clear all users (for testing purposes)
-   */
   clearAllUsers(): void {
     localStorage.removeItem(this.USERS_KEY);
   }

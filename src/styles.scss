@@ -1,7 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-/* Custom Material Theme Overrides */
 :root {
   --mat-accent-rgb: 255, 107, 107;
   --mat-accent-color: rgb(255, 107, 107);
@@ -12,7 +10,6 @@
   color: white;
 }
 
-/* Global styles */
 html,
 body {
   height: 100%;
@@ -27,7 +24,6 @@ body {
   line-height: 1.5;
 }
 
-/* Material Form Field Customization */
 .mat-mdc-form-field {
   display: inline-block;
   position: relative;
@@ -38,7 +34,6 @@ body {
   background-color: #fff !important;
 }
 
-/* Material Button Customization */
 .mdc-button {
   height: 45px;
   border-radius: 4px !important;
@@ -52,7 +47,6 @@ body {
   min-width: 120px;
 }
 
-/* Material Table Styles */
 .mat-mdc-table {
   width: 100% !important;
   background-color: white !important;
@@ -89,7 +83,6 @@ body {
   }
 }
 
-/* Material Select & Autocomplete */
 .mat-mdc-select,
 .mat-mdc-autocomplete-trigger {
   width: 100%;
@@ -100,7 +93,6 @@ body {
   height: 48px !important;
 }
 
-/* Enhanced Snackbar Global Positioning */
 .cdk-overlay-container {
   .cdk-overlay-pane {
     &.mat-mdc-snack-bar-container {
@@ -135,25 +127,21 @@ body {
   }
 }
 
-/* Container and Layout */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Elevation */
 .mat-elevation-z8 {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Date Picker */
 .mat-datepicker-toggle {
   color: rgba(0, 0, 0, 0.54);
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
     padding: 0 0.5rem;

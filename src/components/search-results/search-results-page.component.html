@@ -1,5 +1,4 @@
 <div class="search-results-page">
-  <!-- Page Header -->
   <app-page-header
     [title]="constants.SEARCH_RESULTS.AVAILABLE_TRAINS"
     [newSearchButtonText]="constants.BUTTONS.NEW_SEARCH"
@@ -8,21 +7,16 @@
   >
   </app-page-header>
 
-  <!-- Search Summary Template -->
   <ng-template #searchSummaryTemplate>
     <app-search-summary [searchCriteria]="searchCriteria!"></app-search-summary>
   </ng-template>
 
-  <!-- Loading State -->
   @if (isSearching) {
   <div class="loading-section">
     <app-loading-spinner message="Searching for trains..." size="large">
     </app-loading-spinner>
   </div>
-  }
-
-  <!-- Search Results -->
-  @if (showResults && searchResults.length > 0) {
+  } @if (showResults && searchResults.length > 0) {
   <div class="results-section">
     <div class="container">
       <app-train-search-results
@@ -33,10 +27,7 @@
       </app-train-search-results>
     </div>
   </div>
-  }
-
-  <!-- No Results Message -->
-  @if (showNoResults) {
+  } @if (showNoResults) {
   <app-no-results
     [title]="constants.SEARCH_RESULTS.NO_TRAINS_FOUND"
     message="Sorry, no trains were found for the selected route and date."

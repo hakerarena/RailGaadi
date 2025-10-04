@@ -1,7 +1,6 @@
 @if (searchResults && searchResults.length > 0) {
 <div class="results-container">
   <div class="results-header">
-    <!-- <h2>Available Trains</h2> -->
     <div class="filter-options">
       <mat-form-field appearance="outline" class="sort-field">
         <mat-label>Sort By</mat-label>
@@ -57,7 +56,6 @@
         </div>
 
         <div class="class-availability">
-          <!-- Show flexible date options if enabled -->
           <div
             *ngIf="
               isFlexibleSearch && getAvailableDatesForTrain(train).length > 0
@@ -141,7 +139,6 @@
             </div>
           </div>
 
-          <!-- Regular class availability for non-flexible search -->
           @if (!isFlexibleSearch) {
           <div class="regular-classes">
             @for (class of train.availableClasses; track class.code) {
